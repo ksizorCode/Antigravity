@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | IA Práctica con Antigravity</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.1) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .project-list {
+            list-style: none;
+            display: grid;
+            gap: 20px;
+        }
+
+        .project-item {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-item:hover {
+            transform: translateX(10px);
+            border-color: var(--primary-light);
+            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-info h2 {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+            color: var(--primary-light);
+        }
+
+        .project-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .btn-view {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-view:hover {
+            background: var(--primary-light);
+            transform: scale(1.05);
+        }
+
+        /* Animated background elements */
+        .decor {
+            position: fixed;
+            z-index: -1;
+            filter: blur(80px);
+            border-radius: 50%;
+        }
+
+        .decor-1 { top: 10%; left: 10%; width: 300px; height: 300px; background: rgba(79, 70, 229, 0.2); }
+        .decor-2 { bottom: 10%; right: 10%; width: 400px; height: 400px; background: rgba(129, 140, 248, 0.15); }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .project-item { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .btn-view { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="decor decor-1"></div>
+    <div class="decor decor-2"></div>
+
+    <header>
+        <p class="subtitle">PROYECTOS Y PRÁCTICAS</p>
+        <h1>51148_IA práctica para crear soluciones de negocio con Antigravity</h1>
+    </header>
+
+    <main class="dashboard-container">
+        <ul class="project-list">
+            
+            <li class="project-item">
+                <div class="project-info">
+                    <span class="project-date">Miércoles 08 de Abril — Día 01</span>
+                    <h2>Cines Manolito</h2>
+                    <p class="project-desc">Web de cartelera para un pequeño cine con diseño premium.</p>
+                </div>
+                <a href="01_cine/index.html" class="btn-view">
+                    Ver Proyecto
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </li>
+
+            <!-- Espacio para futuros proyectos -->
+            <!-- <li class="project-item" style="opacity: 0.5; border-style: dashed;">
+                <div class="project-info">
+                    <span class="project-date">Día 02 — Próximamente</span>
+                    <h2>Nuevo Desafío</h2>
+                    <p class="project-desc">Pendiente de realización.</p>
+                </div>
+            </li> -->
+
+        </ul>
+    </main>
+
+    <footer style="margin-top: auto; padding-top: 60px; color: var(--text-muted); font-size: 0.9rem;">
+        &copy; 2026 Inteligencia Artificial Aplicada a Negocios
+    </footer>
+
+</body>
+</html>
