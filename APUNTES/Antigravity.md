@@ -28,6 +28,7 @@ Modo de Activación:
 - Glob - Estas reglas se aplican a archivos de tipo plantilla o glob pattern
 
 Ejemplos:
+- Respóndeme siempre en Castellano o Español de España.
 - Código limpio, bien estructurado, escalable y reutilizable.
 - Añade coemntarios descriptivos en todas las funciones estilo javadocs, haz separadores visuales y usa emoticonos para que sea más ameno a la hora de revisar el código. Añade a readme.md el resumen con los datos importantes del proyecto por si este proyecto se hereda o hay que realizar cambios, de tal forma que pueda ser un buen índice de contenidos y mantanimiento para futuros programadores o agentes. Haz un esquema arbol de carpetas y archivos y explica para que vale cada uno. Puedes usar tablas y mermaid para que sea más visual y explicativo.
 
@@ -76,15 +77,19 @@ Instalar Figma MCP en Antigravity via terminal:
 
 
 ## Artefactos
+- Impelentacion Plan
+- Task
+- Walkthrough
 
 
 ---
 ## Skills
 
 
+## Skills / Habilidades
 
----
-## Tips Antigravity
+## Tips habituales de Antigravity
+Preguntas habituales de los alumnos
 
 Poner en Español:
 - Ctrl + Shif + P
@@ -97,13 +102,35 @@ Poner en Español:
 Desactivar Autocompletar
 - Engranajito ariba a la derecha (Settings)
 - Buscar Quick Suggestions
+ó
+- Abajo a la derecha: Antigravity-Settings / 
 
+<<<<<<< HEAD
+Botón Snooze o "No Molestar"
+=======
 Instalar Extensión de Previsualizar contenido tipo web (mini sevidor)
+>>>>>>> 22bd19ed3fd97b7a3b77e7551be8f92537d95ae1
+
+La opción Snooze (Posponer) dentro del panel de Antigravity-settings es una función diseñada para desactivar temporalmente las sugerencias automáticas de código (también conocidas como Autocomplete o Ghost Text).
+
+Aquí te detallo qué hace exactamente y por qué es útil:
+
+¿Qué hace Snooze?
+Pausa el Autocompletado: Al activarlo, dejas de ver esas sugerencias de código en color gris que aparecen mientras escribes.
+Duración Temporal: Normalmente puedes elegir por cuánto tiempo quieres "silenciar" a la IA (por ejemplo, 1 hora, 3 horas o hasta el día siguiente).
+Mantiene el Chat Activo: Aunque las sugerencias automáticas desaparezcan, puedes seguir usando el chat o los comandos de Antigravity manualmente si los necesitas.
+¿Para qué sirve?
+Concentración Profunda: Si quieres escribir código puramente por tu cuenta sin que la IA intente predecir tu siguiente línea, el Snooze te da ese espacio de silencio.
+Reducción de "Ruido": En tareas muy mecánicas o repetitivas donde las sugerencias no son útiles, activarlo evita distracciones visuales.
+Aprendizaje: Es ideal si estás practicando y no quieres que la IA te dé la solución antes de que termines de pensarla.
 
 
 
 
 
+
+
+=======
 ----
 ## Extensiones
 
@@ -121,6 +148,7 @@ Atajos teclado:
 
 ## Recordatorio de la prizarra del curso:
 https://www.figma.com/board/QdYj5wGkp6peNTQCM6G6GL/EOI---Antigravity?node-id=255-324&t=fvK9M48krRFOefwx-1
+
 
 
 
