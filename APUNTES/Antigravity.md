@@ -74,8 +74,8 @@ Poner en Español:
 
 
 Desactivar Autocompletar
-
-Engranajito ariba a la derecha (Settings)
+- Engranajito ariba a la derecha (Settings)
+- Buscar Quick Suggestions
 
 
 
