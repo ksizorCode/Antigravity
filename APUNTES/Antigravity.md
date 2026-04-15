@@ -62,6 +62,22 @@ Conexiones con otras inteligencias artificiales o sistemas de trabajo para poten
 
 
 
+---
+## Tips Antigravity
+
+Poner en Español:
+- Ctrl + Shif + P
+- Configure Display languaje
+- español
+- Trusth and Install
+- Reiniciar
+
+
+Desactivar Autocompletar
+
+Engranajito ariba a la derecha (Settings)
+
+
 
 
 
