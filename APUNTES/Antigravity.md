@@ -8,7 +8,9 @@ https://codelabs.developers.google.com/getting-started-with-antigravity-skills?h
 Ademas de dar las típicas instrucciones, también podemos:
 - Arrastrar archivos externos como referencias (JPGs, PDFs, etc..)
 - URLs de páginas web
-- Referencia a Lína de código: index.html#L16 
+- Referencia a Lína de código: index.html#L16
+- system-prompt-generator -> es un GTP que optimiza los prompts
+
 
 ## Trabajar con Agentes
 ### Personalización de Agentes
@@ -50,15 +52,34 @@ Ejemplso:
 ## MCP Server
 Conexiones con otras inteligencias artificiales o sistemas de trabajo para potenciar las funcionalidades entre herramientas.
 
+Ejemplo de MCP:
+https://stitch.withgoogle.com/docs/mcp/setup
 
+```json
+{
+  "mcpServers": {
+    "stitch": {
+      "serverUrl": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "YOUR-API-KEY"
+      }
+    }
+  }
+}
+```
+
+Instalar Figma MCP en Antigravity via terminal:
+```bach
+ npm install -g figma-dev-mode-mcp-server
+```
 
 
 
 ## Artefactos
 
 
-
-## Skills
+---
+## Skills
 
 
 
@@ -79,6 +100,27 @@ Desactivar Autocompletar
 
 Instalar Extensión de Previsualizar contenido tipo web (mini sevidor)
 
+
+
+
+
+----
+## Extensiones
+
+El peligro de las extensiones (añadir aquí video de midudev)
+
+
+
+``
+
+Atajos teclado:
+- Ctrl + Shift + P / Configure Display Languaje / Español / Aloww
+- Ctrl + L -> Panel Chat
+- Ctrl + E -> Menú gestión Agentes
+
+
+## Recordatorio de la prizarra del curso:
+https://www.figma.com/board/QdYj5wGkp6peNTQCM6G6GL/EOI---Antigravity?node-id=255-324&t=fvK9M48krRFOefwx-1
 
 
 
