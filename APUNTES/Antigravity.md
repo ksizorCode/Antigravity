@@ -41,14 +41,16 @@ Al igual que las reglas pueden ser
 
 Ejemplso:
 - Revisa la seguridad par evitar posibles ataques o hackeos, inecciones de código...
-- Añade una estética inspirada en Apple Liquid Glass y estilo Apple iOS moderno. Añade webkit donde lo veas oportuno
-- Añade una estética inspirada en Google Material Design y estilos Google Android moderno.
+- Añade una estética inspirada en Apple Liquid Glass y estilo Apple iOS moderno. Añade webkit donde lo veas oportuno. Añade modo light y dark y reducción de movimiento.
+- Añade una estética inspirada en Google Material Design y estilos Google Android moderno. Añade modo light y dark y reducción de movimiento.
 - Añade Iconos de FontAwesome y tipografías de Google Fonts
 - Revisa todo el código para optimizar el SEO, revisa el DOM, correcta gerarquía de la información, añade metaetiquetas, Opengraph
-- Añade los elementos necesarios para convertir al web en una Progresive Web Apllication (PWA) con un manifest.
+- Añade los elementos necesarios para convertir al web en una Progresive Web Apllication (PWA) con un .webmanifest. Guarda los iconos en una carpeta llamada /icons, cachea todos los archivos imprescindibles en el ServiceWorker.js
 
 ## MCP Server
-Conexiones con otras inteligencias artificiales o sistemas de trabajo para potenciar las funcionalidades entre herramientas
+Conexiones con otras inteligencias artificiales o sistemas de trabajo para potenciar las funcionalidades entre herramientas.
+
+
 
 
 
