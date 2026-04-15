@@ -77,6 +77,8 @@ Desactivar Autocompletar
 - Engranajito ariba a la derecha (Settings)
 - Buscar Quick Suggestions
 
+Instalar Extensión de Previsualizar contenido tipo web (mini sevidor)
+
 
 
 
