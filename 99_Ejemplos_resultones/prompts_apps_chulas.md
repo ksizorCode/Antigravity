@@ -19,7 +19,10 @@ Lista de ideas:
     - Presupuestador web estudio de diseño
 
 
-- 
+- Gestión:
+    - TO DO list simple
+    - TO DO List con fecha, vista de calendario y filtrado por urgencia y asignación
+    - 
 
 
 
