@@ -22,11 +22,65 @@ Lista de ideas:
 - Gestión:
     - TO DO list simple
     - TO DO List con fecha, vista de calendario y filtrado por urgencia y asignación
-    - 
+    - Chat usando Firebase / Supabase (esto lo tengo que investigar mejor)
+
+- Acceso a Apis externas
+    - Listado de personajes de los Simpson usando Simpson Api
+    - Aceder a datos climatológicos
+    - API Pockemon, Marvel..
 
 
+🎮 APIs divertidas
+
+| API                   | Temática | Qué devuelve           | Idea de ejercicio              |
+| --------------------- | -------- | ---------------------- | ------------------------------ |
+| The Simpsons API      | Series   | Frases, personajes     | Generador de frases aleatorias |
+| Pokémon API           | Juegos   | Pokémon, tipos, stats  | Pokédex interactiva            |
+| Rick and Morty API    | Series   | Personajes y episodios | Buscador de personajes         |
+| Star Wars API (SWAPI) | Cine     | Planetas, personajes   | Explorador galáctico           |
+| Harry Potter API      | Cine     | Hechizos, personajes   | Generador de hechizos          |
+| Breaking Bad API      | Series   | Personajes             | Listado + filtros              |
+
+🌍 APIs útiles (vida real)
+| API                  | Temática | Qué devuelve            | Idea de ejercicio       |
+| -------------------- | -------- | ----------------------- | ----------------------- |
+| OpenWeatherMap       | Tiempo   | Clima actual y forecast | App del tiempo          |
+| REST Countries       | Países   | Info de países          | Buscador por continente |
+| Google Maps Platform | Mapas    | Geolocalización         | Mapa interactivo        |
+| ExchangeRate API     | Finanzas | Cambio divisas          | Conversor €/$           |
+| NewsAPI              | Noticias | Titulares               | App tipo periódico      |
+
+😂 APIs curiosas (para motivar)
+| API              | Temática | Qué devuelve      | Idea de ejercicio     |
+| ---------------- | -------- | ----------------- | --------------------- |
+| Chuck Norris API | Humor    | Chistes           | Bot de chistes        |
+| Cat Facts API    | Animales | Datos curiosos    | App random facts      |
+| Bored API        | Ocio     | Actividades       | “No sé qué hacer” app |
+| Advice Slip API  | Consejos | Frases tipo coach | Generador de consejos |
+| Dad Jokes API    | Humor    | Chistes malos     | Bot humorístico       |
+   
+🎬 APIs cine / cultura pop
+| API                           | Temática | Qué devuelve     | Idea de ejercicio     |
+| ----------------------------- | -------- | ---------------- | --------------------- |
+| OMDb API                      | Cine     | Películas        | Buscador tipo IMDb    |
+| TMDb                          | Cine     | Posters, ratings | Catálogo tipo Netflix |
+| Marvel Cinematic Universe API | Marvel   | Personajes       | Fichas de superhéroes |
 
 
+Más: https://github.com/public-apis/public-apis
+
+Emeplo de Uso:
+
+🔹 Fetch simple con Pokémon
+```
+// Obtener un Pokémon aleatorio
+fetch("https://pokeapi.co/api/v2/pokemon/25")
+    .then(res => res.json())
+    .then(data => {
+        console.log("Nombre:", data.name);
+        console.log("Imagen:", data.sprites.front_default);
+    });
+    ``
 
 
 ## Dashboard BoxOffice de Películas
