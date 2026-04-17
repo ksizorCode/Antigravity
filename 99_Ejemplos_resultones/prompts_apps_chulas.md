@@ -76,7 +76,8 @@ https://api.generadordni.es/holidays
 Emeplo de Uso:
 
 🔹 Fetch simple con Pokémon
-```
+
+````js
 // Obtener un Pokémon aleatorio
 fetch("https://pokeapi.co/api/v2/pokemon/25")
     .then(res => res.json())
@@ -84,7 +85,41 @@ fetch("https://pokeapi.co/api/v2/pokemon/25")
         console.log("Nombre:", data.name);
         console.log("Imagen:", data.sprites.front_default);
     });
-    ``
+```
+
+Ejemplo 2:
+
+````html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pokemon Card</title>
+</head>
+<body>
+
+<div id="pokemon"></div>
+
+<script>
+fetch("https://pokeapi.co/api/v2/pokemon/25")
+.then(res => res.json())
+.then(data => {
+
+    const html = `
+        <h2>${data.name}</h2>
+        <img src="${data.sprites.front_default}">
+        <p>Peso: ${data.weight / 10} kg</p>
+        <p>Altura: ${data.height / 10} m</p>
+    `;
+
+    document.getElementById("pokemon").innerHTML = html;
+
+});
+</script>
+
+</body>
+</html>
+``
 
 
 ## Dashboard BoxOffice de Películas
