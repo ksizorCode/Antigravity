@@ -15,6 +15,7 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #10b981;
         }
 
         * {
@@ -39,7 +40,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             max-width: 800px;
         }
 
@@ -58,6 +59,96 @@
             font-size: 1.1rem;
             font-weight: 300;
             letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Toolbar Styles */
+        .toolbar {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            padding: 12px 15px;
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-light);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .view-toggle {
+            display: flex;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 5px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn.active {
+            background: var(--bg-card);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .dashboard-container {
@@ -65,6 +156,7 @@
             max-width: 900px;
         }
 
+        /* Project List / Cards View */
         .project-list {
             list-style: none;
             display: grid;
@@ -90,17 +182,42 @@
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .project-emoji {
+            font-size: 1.5rem;
+        }
+
         .project-info h2 {
             font-size: 1.25rem;
-            margin-bottom: 4px;
             color: var(--primary-light);
         }
 
-        .project-date {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            display: block;
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 8px;
+        }
+
+        .project-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .category-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: rgba(79, 70, 229, 0.2);
+            border: 1px solid var(--primary-light);
+            color: var(--primary-light);
+            border-radius: 20px;
+            font-weight: 600;
         }
 
         .project-desc {
@@ -120,6 +237,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
 
         .btn-view:hover {
@@ -127,7 +245,52 @@
             transform: scale(1.05);
         }
 
-        /* Animated background elements */
+        /* Calendar View Styles */
+        .calendar-view {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            display: none;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .calendar-day {
+            min-height: 100px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 0.8rem;
+        }
+
+        .calendar-day.header-day {
+            min-height: auto;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-light);
+            background: transparent;
+            border: none;
+        }
+
+        .calendar-event {
+            background: var(--primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .decor {
             position: fixed;
             z-index: -1;
@@ -142,6 +305,8 @@
             h1 { font-size: 1.8rem; }
             .project-item { flex-direction: column; align-items: flex-start; gap: 20px; }
             .btn-view { width: 100%; justify-content: center; }
+            .toolbar { flex-direction: column; }
+            .filter-group { justify-content: center; }
         }
     </style>
 </head>
@@ -151,53 +316,245 @@
     <div class="decor decor-2"></div>
 
     <header>
-        <p class="subtitle">PROYECTOS Y PRÁCTICAS</p>
-        <h1>51148_IA práctica para crear soluciones de negocio con Antigravity</h1>
+        <p class="subtitle">Proyectos y Prácticas</p>
+        <h1>51148 IA práctica para crear soluciones de negocio con Antigravity</h1>
     </header>
 
+    <section class="toolbar">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar proyecto por nombre o descripción...">
+        </div>
+        
+        <div class="filter-group" id="category-filters">
+            <button class="filter-btn active" data-category="all">Todos</button>
+            <!-- Categorías dinámicas -->
+        </div>
+
+        <div class="view-toggle">
+            <button class="toggle-btn active" id="btn-cards">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Cards
+            </button>
+            <button class="toggle-btn" id="btn-calendar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Calendar
+            </button>
+        </div>
+    </section>
+
     <main class="dashboard-container">
-        <ul class="project-list">
-            
-            <li class="project-item">
-                <div class="project-info">
-                    <span class="project-date">Miércoles 08 de Abril — Día 02</span>
-                    <h2>Cines Manolito</h2>
-                    <p class="project-desc">Web de cartelera para un pequeño cine con diseño premium.</p>
-                </div>
-                <a href="01_cine/index.html" class="btn-view">
-                    Ver Proyecto
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </li>
-
-
-                <li class="project-item">
-                <div class="project-info">
-                    <span class="project-date">Lunes 13 de Abril — Día 03</span>
-                    <h2>Restaurante Mejicano</h2>
-                    <p class="project-desc">Web de restaurante mejicano</p>
-                </div>
-                <a href="02_RestauranteMejicano/index.html" class="btn-view">
-                    Ver Proyecto
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </li>
-
-            <!-- Espacio para futuros proyectos -->
-            <!-- <li class="project-item" style="opacity: 0.5; border-style: dashed;">
-                <div class="project-info">
-                    <span class="project-date">Día 02 — Próximamente</span>
-                    <h2>Nuevo Desafío</h2>
-                    <p class="project-desc">Pendiente de realización.</p>
-                </div>
-            </li> -->
-
+        <!-- Vista de Tarjetas -->
+        <ul id="project-list" class="project-list">
+            <!-- Los proyectos se cargarán aquí -->
         </ul>
+
+        <!-- Vista de Calendario (Simplificada) -->
+        <div id="calendar-view" class="calendar-view">
+            <div class="calendar-grid" id="calendar-grid">
+                <!-- Se generará dinámicamente -->
+            </div>
+        </div>
     </main>
 
-    <footer style="margin-top: auto; padding-top: 60px; color: var(--text-muted); font-size: 0.9rem;">
+    <footer style="margin-top: auto; padding-top: 60px; color: var(--text-muted); font-size: 0.9rem; text-align: center; padding-bottom: 20px;">
         &copy; 2026 Inteligencia Artificial Aplicada a Negocios
     </footer>
 
+    <script>
+        const projectsData = [
+            {
+                "title": "Cines Manolito",
+                "date": "2026-04-08", // Formato ISO para el calendario
+                "dateText": "Miércoles 08 de Abril — Día 02",
+                "description": "Web de cartelera para un pequeño cine con diseño premium.",
+                "url": "01_cine/index.html",
+                "categoria": "Apps",
+                "emoji": "🎬"
+            },
+            {
+                "title": "Restaurante Mejicano",
+                "date": "2026-04-13",
+                "dateText": "Lunes 13 de Abril — Día 03",
+                "description": "Web de restaurante mejicano con menú interactivo.",
+                "url": "02_RestauranteMejicano/index.html",
+                "categoria": "En Clase",
+                "emoji": "🌮"
+            }
+            ,
+            {
+                "title": "Dashboard BoxOffice Fantasy Movies",
+                "date": "2026-04-17",
+                "dateText": "Viernes 17 de Abril",
+                "description": "Panel con recaudación de películas de fantasía",
+                "url": "99_Ejemplos_resultones/dashboard_fantasyMovie.html",
+                "categoria": "App",
+                "emoji": "🧙‍♂️"
+            }
+            ,
+            {
+                "title": "Dashboard F1 0.1",
+                "date": "2026-04-17",
+                "dateText": "Versión A (Gemini)",
+                "description": "Panel Informativo con datos de Fórmula 1",
+                "url": "99_Ejemplos_resultones/dashboard_f1.html.html",
+                "categoria": "App",
+                "emoji": "🏎"
+            }
+            ,
+            {
+                "title": "Dashboard F1 0.2",
+                "date": "2026-04-17",
+                "dateText": "Versión B (Claude)",
+                "description": "Otro panel Informativo con datos de Fórmula 1 (Desarrollado en Claude)",
+                "url": "99_Ejemplos_resultones/dashboard_f1.html.html",
+                "categoria": "App",
+                "emoji": "🏎"
+            }
+        ];
+
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let currentView = 'cards';
+
+        // Inicialización de filtros de categoría
+        function initFilters() {
+            const categories = ['all', ...new Set(projectsData.map(p => p.categoria))];
+            const filterContainer = document.getElementById('category-filters');
+            filterContainer.innerHTML = categories.map(cat => `
+                <button class="filter-btn ${cat === 'all' ? 'active' : ''}" data-category="${cat}">
+                    ${cat === 'all' ? 'Todos' : cat}
+                </button>
+            `).join('');
+
+            // Event Listeners para filtros
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentCategory = e.target.dataset.category;
+                    render();
+                });
+            });
+        }
+
+        // Función de Filtrado
+        function getFilteredProjects() {
+            return projectsData.filter(project => {
+                const matchesCategory = currentCategory === 'all' || project.categoria === currentCategory;
+                const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                    project.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+        }
+
+        // Renderizar Vista de Tarjetas
+        function renderCards(filtered) {
+            const listContainer = document.getElementById('project-list');
+            listContainer.style.display = 'grid';
+            document.getElementById('calendar-view').style.display = 'none';
+
+            if (filtered.length === 0) {
+                listContainer.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding: 40px;">No se encontraron proyectos que coincidan.</p>`;
+                return;
+            }
+
+            listContainer.innerHTML = filtered.map(project => `
+                <li class="project-item">
+                    <div class="project-info">
+                        <div class="project-meta">
+                            <span class="project-date">${project.dateText}</span>
+                            <span class="category-badge">${project.categoria}</span>
+                        </div>
+                        <div class="project-header">
+                            <span class="project-emoji">${project.emoji}</span>
+                            <h2>${project.title}</h2>
+                        </div>
+                        <p class="project-desc">${project.description}</p>
+                    </div>
+                    <a href="${project.url}" class="btn-view">
+                        Ver Proyecto
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </li>
+            `).join('');
+        }
+
+        // Renderizar Vista de Calendario (Abril 2026 como ejemplo)
+        function renderCalendar(filtered) {
+            const calendarGrid = document.getElementById('calendar-grid');
+            const calendarView = document.getElementById('calendar-view');
+            const listContainer = document.getElementById('project-list');
+            
+            listContainer.style.display = 'none';
+            calendarView.style.display = 'block';
+
+            const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            let html = days.map(d => `<div class="calendar-day header-day">${d}</div>`).join('');
+
+            // Abril 2026 empieza en Miércoles (3)
+            const firstDayIndex = 3; 
+            const daysInMonth = 30;
+
+            for (let i = 0; i < firstDayIndex; i++) {
+                html += `<div class="calendar-day" style="opacity: 0.2"></div>`;
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `2026-04-${day.toString().padStart(2, '0')}`;
+                const projectsToday = filtered.filter(p => p.date === dateStr);
+                
+                html += `
+                    <div class="calendar-day">
+                        <strong>${day}</strong>
+                        ${projectsToday.map(p => `
+                            <div class="calendar-event" title="${p.title}" onclick="window.location.href='${p.url}'">
+                                ${p.emoji} ${p.title}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            calendarGrid.innerHTML = html;
+        }
+
+        // Función Principal de Renderizado
+        function render() {
+            const filtered = getFilteredProjects();
+            if (currentView === 'cards') {
+                renderCards(filtered);
+            } else {
+                renderCalendar(filtered);
+            }
+        }
+
+        // Controladores de Eventos
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            render();
+        });
+
+        document.getElementById('btn-cards').addEventListener('click', () => {
+            currentView = 'cards';
+            document.getElementById('btn-cards').classList.add('active');
+            document.getElementById('btn-calendar').classList.remove('active');
+            render();
+        });
+
+        document.getElementById('btn-calendar').addEventListener('click', () => {
+            currentView = 'calendar';
+            document.getElementById('btn-calendar').classList.add('active');
+            document.getElementById('btn-cards').classList.remove('active');
+            render();
+        });
+
+        // Inicio
+        document.addEventListener('DOMContentLoaded', () => {
+            initFilters();
+            render();
+        });
+    </script>
 </body>
 </html>

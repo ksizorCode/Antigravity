@@ -3,6 +3,29 @@ Entendidas como Apps Web en formato Progresive Web Aplication (PWA)
 
 
 
+Lista de ideas:
+
+- Dashboard:
+    - Box Office de Películas
+    - Temporada de F1
+    - Juegos Olímpicos de Invierno
+    - Asistencia Alumnos a un curso
+
+
+
+- Calculadoras:
+    - App de calculadora
+    - Calculadora de peso ideal
+    - Presupuestador web estudio de diseño
+
+
+- 
+
+
+
+
+
+
 ## Dashboard BoxOffice de Películas
 **Prompt**
 ```
@@ -23,6 +46,8 @@ HTML y JS
 F1 Dashboard
 interactive  charts
 
-Equipos, Pilotos, Puntos, Carreras, Clasificación, Circuitos, Paises, Mapas
+Equipos, Pilotos, Puntos, Carreras, Clasificación, Circuitos, Paises
+
+Añade mapa mundo interactivo con lugares donde hay circuitos
 ```
 

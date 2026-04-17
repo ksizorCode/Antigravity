@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F1 2025 — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #252535;
+    --red: #e8002d;
+    --red2: #ff1e00;
+    --gold: #ffd700;
+    --silver: #c0c0c0;
+    --bronze: #cd7f32;
+    --text: #f0f0f0;
+    --muted: #888;
+    --accent: #e8002d;
+
+    --mclaren: #ff8000;
+    --mercedes: #00d2be;
+    --redbull: #3671c6;
+    --ferrari: #e8002d;
+    --williams: #005aff;
+    --aston: #358c75;
+    --racingbulls: #6692ff;
+    --haas: #b6babd;
+    --sauber: #00e701;
+    --alpine: #0090ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────── */
+  header {
+    position: relative;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0010 50%, #0a0a0f 100%);
+    border-bottom: 2px solid var(--red);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -50%; width: 200%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--red), var(--gold), var(--red), transparent);
+    animation: scanline 3s linear infinite;
+  }
+  @keyframes scanline { from { transform: translateX(-50%); } to { transform: translateX(50%); } }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: var(--red);
+    clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 4px; color: #fff; }
+  .logo-year { font-size: 13px; letter-spacing: 8px; color: var(--red); text-transform: uppercase; margin-top: -6px; }
+
+  .header-stats {
+    display: flex;
+    gap: 32px;
+  }
+  .hstat { text-align: center; }
+  .hstat-val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--gold); }
+  .hstat-lbl { font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+
+  /* ─── NAV ─────────────────────────────────────────────── */
+  nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 14px 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all .2s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--red); border-bottom-color: var(--red); }
+
+  /* ─── MAIN ────────────────────────────────────────────── */
+  main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ─── SECTION TITLE ──────────────────────────────────── */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 4px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  /* ─── GRID HELPERS ───────────────────────────────────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* ─── CARD ───────────────────────────────────────────── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--red);
+  }
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  /* ─── PODIUM HERO (overview) ─────────────────────────── */
+  .podium-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px 0;
+  }
+  .podium-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .podium-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    border: 3px solid;
+  }
+  .podium-slot:nth-child(1) .podium-avatar { border-color: var(--gold); color: var(--gold); background: #ffd70015; }
+  .podium-slot:nth-child(2) .podium-avatar { border-color: var(--silver); color: var(--silver); background: #c0c0c015; }
+  .podium-slot:nth-child(3) .podium-avatar { border-color: var(--bronze); color: var(--bronze); background: #cd7f3215; }
+  .podium-name { font-weight: 700; font-size: 14px; text-align: center; }
+  .podium-pts { font-family: 'Bebas Neue', sans-serif; font-size: 22px; }
+  .podium-slot:nth-child(1) .podium-pts { color: var(--gold); }
+  .podium-slot:nth-child(2) .podium-pts { color: var(--silver); }
+  .podium-slot:nth-child(3) .podium-pts { color: var(--bronze); }
+  .podium-base {
+    width: 80px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    border-radius: 4px 4px 0 0;
+    padding-bottom: 6px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+  }
+  .p1 .podium-base { height: 60px; background: #ffd70033; color: var(--gold); }
+  .p2 .podium-base { height: 40px; background: #c0c0c020; color: var(--silver); }
+  .p3 .podium-base { height: 28px; background: #cd7f3220; color: var(--bronze); }
+  .podium-slot:nth-child(1) { order: 2; }
+  .podium-slot:nth-child(2) { order: 1; }
+  .podium-slot:nth-child(3) { order: 3; }
+
+  /* ─── STAT KPIS ──────────────────────────────────────── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0; width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--red);
+    opacity: .05;
+    transform: translate(20px, 20px);
+  }
+  .kpi-val { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--red); }
+  .kpi-lbl { font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+
+  /* ─── DRIVER TABLE ───────────────────────────────────── */
+  .driver-table { width: 100%; border-collapse: collapse; }
+  .driver-table th {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+  }
+  .driver-table td { padding: 11px 12px; border-bottom: 1px solid #1c1c26; font-size: 14px; }
+  .driver-table tr:hover td { background: #1c1c26; }
+  .driver-table tr:last-child td { border-bottom: none; }
+  .pos-badge {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+  }
+  .pos-1 { background: var(--gold); color: #000; }
+  .pos-2 { background: var(--silver); color: #000; }
+  .pos-3 { background: var(--bronze); color: #fff; }
+  .pos-n { background: var(--border); color: var(--muted); }
+  .team-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  .pts-bar-wrap { background: #1e1e28; border-radius: 4px; overflow: hidden; height: 6px; width: 160px; }
+  .pts-bar { height: 100%; border-radius: 4px; background: var(--red); transition: width .6s; }
+  .flag { font-size: 20px; }
+
+  /* ─── TEAM CARD ──────────────────────────────────────── */
+  .team-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s, border-color .2s;
+    cursor: pointer;
+  }
+  .team-card:hover { transform: translateY(-3px); border-color: var(--red); }
+  .team-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+  }
+  .team-rank { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--border); position: absolute; right: 16px; top: 8px; }
+  .team-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; margin: 8px 0 4px; }
+  .team-pts-big { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--text); }
+  .team-pts-lbl { font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  .team-drivers { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.7; }
+
+  /* ─── CIRCUIT TABLE ──────────────────────────────────── */
+  .circuit-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    transition: background .15s;
+    cursor: pointer;
+  }
+  .circuit-row:hover { background: #1c1c26; }
+  .circuit-num { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--border); width: 32px; }
+  .circuit-info { flex: 1; }
+  .circuit-name { font-weight: 600; font-size: 15px; }
+  .circuit-loc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .circuit-winner { font-size: 13px; color: var(--muted); text-align: right; }
+  .circuit-winner strong { color: var(--text); }
+
+  /* ─── WORLD MAP ──────────────────────────────────────── */
+  #map-container {
+    position: relative;
+    background: #0d1117;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-top: 8px;
+  }
+  #world-map {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .circuit-pin {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    cursor: pointer;
+    z-index: 10;
+  }
+  .pin-dot {
+    width: 14px; height: 14px;
+    background: var(--red);
+    border: 2px solid rgba(255,255,255,0.6);
+    border-radius: 50%;
+    transition: transform .2s, background .2s;
+    box-shadow: 0 0 8px var(--red);
+  }
+  .circuit-pin:hover .pin-dot { transform: scale(1.6); background: var(--gold); }
+  .pin-label {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10,10,15,.95);
+    border: 1px solid var(--red);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    display: none;
+    pointer-events: none;
+    color: var(--text);
+    font-weight: 600;
+    z-index: 20;
+  }
+  .circuit-pin:hover .pin-label { display: block; }
+
+  /* Chart containers */
+  .chart-wrap { position: relative; width: 100%; }
+
+  /* ─── RACE CALENDAR ──────────────────────────────────── */
+  .race-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .race-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    transition: border-color .2s;
+    cursor: pointer;
+  }
+  .race-card:hover { border-color: var(--red); }
+  .race-round { font-size: 10px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; }
+  .race-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; margin: 4px 0; }
+  .race-circuit { font-size: 12px; color: var(--muted); }
+  .race-winner { margin-top: 10px; font-size: 13px; }
+  .race-winner-label { font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  .race-winner-name { font-weight: 600; color: var(--gold); }
+
+  /* ─── OVERVIEW ───────────────────────────────────────── */
+  .champion-banner {
+    background: linear-gradient(135deg, #1a0d00 0%, #2a1000 50%, #1a0800 100%);
+    border: 1px solid var(--mclaren);
+    border-radius: 8px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .champion-banner::before {
+    content: 'CAMPEÓN';
+    position: absolute;
+    right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px;
+    color: rgba(255,128,0,.04);
+    letter-spacing: 8px;
+  }
+  .champion-num { font-family: 'Bebas Neue', sans-serif; font-size: 96px; color: var(--mclaren); line-height: 1; }
+  .champion-info h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 4px; color: #fff; }
+  .champion-info p { font-size: 14px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .champion-pts { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--gold); }
+  .champion-pts-lbl { font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; }
+
+  @media (max-width: 768px) {
+    header { padding: 0 16px; }
+    .header-stats { display: none; }
+    main { padding: 16px; }
+    .grid-2, .grid-3, .grid-4, .kpi-row { grid-template-columns: 1fr 1fr; }
+    .champion-banner { flex-direction: column; text-align: center; }
+    .champion-num { font-size: 60px; }
+    .champion-info h2 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────────────── -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">F1</div>
+    <div>
+      <div class="logo-text">FÓRMULA 1</div>
+      <div class="logo-year">Temporada 2025</div>
+    </div>
+  </div>
+  <div class="header-stats">
+    <div class="hstat"><div class="hstat-val">24</div><div class="hstat-lbl">Carreras</div></div>
+    <div class="hstat"><div class="hstat-val">20</div><div class="hstat-lbl">Pilotos</div></div>
+    <div class="hstat"><div class="hstat-val">10</div><div class="hstat-lbl">Equipos</div></div>
+    <div class="hstat"><div class="hstat-val">21</div><div class="hstat-lbl">Países</div></div>
+  </div>
+</header>
+
+<!-- ─── NAV ─────────────────────────────────────────── -->
+<nav>
+  <div class="nav-tab active" onclick="showTab('overview')">🏆 General</div>
+  <div class="nav-tab" onclick="showTab('drivers')">👨‍🏎️ Pilotos</div>
+  <div class="nav-tab" onclick="showTab('teams')">🏎️ Equipos</div>
+  <div class="nav-tab" onclick="showTab('races')">🏁 Carreras</div>
+  <div class="nav-tab" onclick="showTab('circuits')">🗺️ Circuitos</div>
+  <div class="nav-tab" onclick="showTab('map')">🌍 Mapa Mundial</div>
+  <div class="nav-tab" onclick="showTab('charts')">📊 Estadísticas</div>
+</nav>
+
+<!-- ─── MAIN ─────────────────────────────────────────── -->
+<main>
+
+<!-- ══════════════════════════════════════════════════
+     OVERVIEW
+════════════════════════════════════════════════════ -->
+<div class="section active" id="tab-overview">
+  <div class="section-title">Temporada 2025</div>
+  <div class="section-sub">Resumen · Formula 1 World Championship</div>
+
+  <div class="champion-banner">
+    <div class="champion-num">4</div>
+    <div class="champion-info">
+      <h2>Lando Norris</h2>
+      <p>🇬🇧 McLaren · Campeón Mundial 2025</p>
+    </div>
+    <div style="margin-left:auto; text-align:right">
+      <div class="champion-pts">423</div>
+      <div class="champion-pts-lbl">Puntos Finales</div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">7</div><div class="kpi-lbl">Victorias Norris</div></div>
+    <div class="kpi"><div class="kpi-val">833</div><div class="kpi-lbl">Pts McLaren (Constructores)</div></div>
+    <div class="kpi"><div class="kpi-val">24</div><div class="kpi-lbl">Grandes Premios</div></div>
+    <div class="kpi"><div class="kpi-val">2 pts</div><div class="kpi-lbl">Diferencia con Verstappen</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Podio Pilotos · Final</div>
+      <div class="podium-hero">
+        <div class="podium-slot p1">
+          <div class="podium-avatar">LN</div>
+          <div class="podium-name">Lando Norris<br><small style="color:var(--muted)">🇬🇧 McLaren</small></div>
+          <div class="podium-pts">423</div>
+          <div class="podium-base">1°</div>
+        </div>
+        <div class="podium-slot p2">
+          <div class="podium-avatar">MV</div>
+          <div class="podium-name">Max Verstappen<br><small style="color:var(--muted)">🇳🇱 Red Bull</small></div>
+          <div class="podium-pts">421</div>
+          <div class="podium-base">2°</div>
+        </div>
+        <div class="podium-slot p3">
+          <div class="podium-avatar">OP</div>
+          <div class="podium-name">Oscar Piastri<br><small style="color:var(--muted)">🇦🇺 McLaren</small></div>
+          <div class="podium-pts">410</div>
+          <div class="podium-base">3°</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Top 3 Constructores</div>
+      <div style="padding-top:10px">
+        <div style="margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span><span class="team-dot" style="background:var(--mclaren)"></span><strong>McLaren</strong></span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold)">833</span>
+          </div>
+          <div class="pts-bar-wrap" style="width:100%"><div class="pts-bar" style="width:100%;background:var(--mclaren)"></div></div>
+        </div>
+        <div style="margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span><span class="team-dot" style="background:var(--mercedes)"></span><strong>Mercedes</strong></span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--silver)">469</span>
+          </div>
+          <div class="pts-bar-wrap" style="width:100%"><div class="pts-bar" style="width:56%;background:var(--mercedes)"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span><span class="team-dot" style="background:var(--redbull)"></span><strong>Red Bull</strong></span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--bronze)">451</span>
+          </div>
+          <div class="pts-bar-wrap" style="width:100%"><div class="pts-bar" style="width:54%;background:var(--redbull)"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     DRIVERS
+════════════════════════════════════════════════════ -->
+<div class="section" id="tab-drivers">
+  <div class="section-title">Pilotos</div>
+  <div class="section-sub">Clasificación Final · 2025 Drivers Championship</div>
+  <div class="card" style="padding: 0; overflow: visible;">
+    <table class="driver-table">
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th>Piloto</th>
+          <th>Equipo</th>
+          <th>Pts</th>
+          <th style="min-width:180px">Progreso</th>
+          <th>Victorias</th>
+        </tr>
+      </thead>
+      <tbody id="drivers-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     TEAMS
+════════════════════════════════════════════════════ -->
+<div class="section" id="tab-teams">
+  <div class="section-title">Equipos</div>
+  <div class="section-sub">Clasificación Constructores · 2025</div>
+  <div class="grid-2" id="teams-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     RACES
+════════════════════════════════════════════════════ -->
+<div class="section" id="tab-races">
+  <div class="section-title">Carreras 2025</div>
+  <div class="section-sub">24 Grandes Premios · Todos los resultados</div>
+  <div class="race-grid" id="races-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     CIRCUITS
+════════════════════════════════════════════════════ -->
+<div class="section" id="tab-circuits">
+  <div class="section-title">Circuitos</div>
+  <div class="section-sub">Trazados · Países · Información</div>
+  <div class="grid-2">
+    <div class="card" style="padding:0">
+      <div id="circuits-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Detalles del Circuito</div>
+      <div id="circuit-detail">
+        <p style="color:var(--muted);text-align:center;margin-top:40px">Selecciona un circuito de la lista</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MAP
+════════════════════════════════════════════════════ -->
+<div class="section" id="tab-map">
+  <div class="section-title">Mapa Mundial</div>
+  <div class="section-sub">Circuitos F1 2025 · 21 Países</div>
+  <div id="map-container">
+    <svg id="world-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="map-pins"></div>
+  </div>
+  <div id="map-tooltip" style="display:none;position:fixed;background:rgba(10,10,15,.97);border:1px solid var(--red);border-radius:6px;padding:12px 16px;font-size:13px;z-index:1000;pointer-events:none;min-width:180px;"></div>
+  <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px" id="map-legend"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     CHARTS
+════════════════════════════════════════════════════ -->
+<div class="section" id="tab-charts">
+  <div class="section-title">Estadísticas</div>
+  <div class="section-sub">Análisis Visual · Temporada 2025</div>
+  <div class="grid-2" style="margin-bottom:20px">
+    <div class="card">
+      <div class="card-title">Puntos Top 10 Pilotos</div>
+      <div class="chart-wrap" style="height:260px">
+        <canvas id="chart-drivers"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Puntos por Equipo (Constructores)</div>
+      <div class="chart-wrap" style="height:260px">
+        <canvas id="chart-teams"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Victorias por Piloto (Top 8)</div>
+      <div class="chart-wrap" style="height:240px">
+        <canvas id="chart-wins"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Distribución de Puntos por Equipo</div>
+      <div class="chart-wrap" style="height:240px">
+        <canvas id="chart-pie"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ─── SCRIPTS ─────────────────────────────────────── -->
+<script>
+// ══════════════════════════════════════
+// DATA
+// ══════════════════════════════════════
+const DRIVERS = [
+  { pos:1,  code:'LN',  name:'Lando Norris',      flag:'🇬🇧', team:'McLaren',       pts:423, wins:7,  color:'#ff8000' },
+  { pos:2,  code:'MV',  name:'Max Verstappen',    flag:'🇳🇱', team:'Red Bull',      pts:421, wins:9,  color:'#3671c6' },
+  { pos:3,  code:'OP',  name:'Oscar Piastri',     flag:'🇦🇺', team:'McLaren',       pts:410, wins:7,  color:'#ff8000' },
+  { pos:4,  code:'GR',  name:'George Russell',    flag:'🇬🇧', team:'Mercedes',      pts:319, wins:2,  color:'#00d2be' },
+  { pos:5,  code:'CL',  name:'Charles Leclerc',   flag:'🇲🇨', team:'Ferrari',       pts:242, wins:1,  color:'#e8002d' },
+  { pos:6,  code:'LH',  name:'Lewis Hamilton',    flag:'🇬🇧', team:'Ferrari',       pts:156, wins:0,  color:'#e8002d' },
+  { pos:7,  code:'KA',  name:'Kimi Antonelli',    flag:'🇮🇹', team:'Mercedes',      pts:150, wins:0,  color:'#00d2be' },
+  { pos:8,  code:'AA',  name:'Alex Albon',        flag:'🇹🇭', team:'Williams',      pts:137, wins:0,  color:'#005aff' },
+  { pos:9,  code:'IH',  name:'Isack Hadjar',      flag:'🇫🇷', team:'Racing Bulls',  pts:92,  wins:0,  color:'#6692ff' },
+  { pos:10, code:'NH',  name:'Nico Hülkenberg',   flag:'🇩🇪', team:'Sauber',        pts:70,  wins:0,  color:'#00e701' },
+  { pos:11, code:'CS',  name:'Carlos Sainz',      flag:'🇪🇸', team:'Williams',      pts:73,  wins:0,  color:'#005aff' },
+  { pos:12, code:'YT',  name:'Yuki Tsunoda',      flag:'🇯🇵', team:'Red Bull',      pts:40,  wins:0,  color:'#3671c6' },
+  { pos:13, code:'LL',  name:'Liam Lawson',       flag:'🇳🇿', team:'Racing Bulls',  pts:34,  wins:0,  color:'#6692ff' },
+  { pos:14, code:'FA',  name:'Fernando Alonso',   flag:'🇪🇸', team:'Aston Martin',  pts:28,  wins:0,  color:'#358c75' },
+  { pos:15, code:'EO',  name:'Esteban Ocon',      flag:'🇫🇷', team:'Haas',          pts:22,  wins:0,  color:'#b6babd' },
+  { pos:16, code:'PG',  name:'Pierre Gasly',      flag:'🇫🇷', team:'Alpine',        pts:22,  wins:0,  color:'#0090ff' },
+  { pos:17, code:'LS',  name:'Lance Stroll',      flag:'🇨🇦', team:'Aston Martin',  pts:14,  wins:0,  color:'#358c75' },
+  { pos:18, code:'OB',  name:'Oliver Bearman',    flag:'🇬🇧', team:'Haas',          pts:6,   wins:0,  color:'#b6babd' },
+  { pos:19, code:'JD',  name:'Jack Doohan',       flag:'🇦🇺', team:'Alpine',        pts:4,   wins:0,  color:'#0090ff' },
+  { pos:20, code:'FC',  name:'Franco Colapinto',  flag:'🇦🇷', team:'Alpine',        pts:0,   wins:0,  color:'#0090ff' },
+];
+
+const TEAMS = [
+  { pos:1, name:'McLaren',       pts:833, color:'#ff8000', drivers:['Lando Norris','Oscar Piastri'],           country:'🇬🇧' },
+  { pos:2, name:'Mercedes',      pts:469, color:'#00d2be', drivers:['George Russell','Kimi Antonelli'],         country:'🇩🇪' },
+  { pos:3, name:'Red Bull',      pts:451, color:'#3671c6', drivers:['Max Verstappen','Yuki Tsunoda'],           country:'🇦🇹' },
+  { pos:4, name:'Ferrari',       pts:398, color:'#e8002d', drivers:['Charles Leclerc','Lewis Hamilton'],        country:'🇮🇹' },
+  { pos:5, name:'Williams',      pts:210, color:'#005aff', drivers:['Alex Albon','Carlos Sainz'],               country:'🇬🇧' },
+  { pos:6, name:'Racing Bulls',  pts:126, color:'#6692ff', drivers:['Isack Hadjar','Liam Lawson'],              country:'🇮🇹' },
+  { pos:7, name:'Aston Martin',  pts:89,  color:'#358c75', drivers:['Fernando Alonso','Lance Stroll'],          country:'🇬🇧' },
+  { pos:8, name:'Haas',          pts:79,  color:'#b6babd', drivers:['Esteban Ocon','Oliver Bearman'],           country:'🇺🇸' },
+  { pos:9, name:'Sauber',        pts:70,  color:'#00e701', drivers:['Nico Hülkenberg','Guanyu Zhou'],           country:'🇨🇭' },
+  { pos:10,name:'Alpine',        pts:65,  color:'#0090ff', drivers:['Pierre Gasly','Jack Doohan','F.Colapinto'],country:'🇫🇷' },
+];
+
+const RACES = [
+  { r:1,  gp:'Australia',        circuit:'Albert Park',          country:'🇦🇺', winner:'Lando Norris',    team:'McLaren' },
+  { r:2,  gp:'China',            circuit:'Shanghai',             country:'🇨🇳', winner:'Max Verstappen',  team:'Red Bull' },
+  { r:3,  gp:'Japón',            circuit:'Suzuka',               country:'🇯🇵', winner:'Max Verstappen',  team:'Red Bull' },
+  { r:4,  gp:'Bahréin',          circuit:'Sakhir',               country:'🇧🇭', winner:'Oscar Piastri',   team:'McLaren' },
+  { r:5,  gp:'Arabia Saudí',     circuit:'Jeddah',               country:'🇸🇦', winner:'Oscar Piastri',   team:'McLaren' },
+  { r:6,  gp:'Miami',            circuit:'Miami Int. Autodrome', country:'🇺🇸', winner:'Lando Norris',    team:'McLaren' },
+  { r:7,  gp:'Emilia Romagna',   circuit:'Imola',                country:'🇮🇹', winner:'Oscar Piastri',   team:'McLaren' },
+  { r:8,  gp:'Mónaco',           circuit:'Circuit de Monaco',    country:'🇲🇨', winner:'Charles Leclerc', team:'Ferrari' },
+  { r:9,  gp:'España',           circuit:'Circuit de Catalunya', country:'🇪🇸', winner:'Lando Norris',    team:'McLaren' },
+  { r:10, gp:'Canadá',           circuit:'Gilles Villeneuve',    country:'🇨🇦', winner:'Max Verstappen',  team:'Red Bull' },
+  { r:11, gp:'Austria',          circuit:'Red Bull Ring',        country:'🇦🇹', winner:'Lando Norris',    team:'McLaren' },
+  { r:12, gp:'Gran Bretaña',     circuit:'Silverstone',          country:'🇬🇧', winner:'George Russell',  team:'Mercedes' },
+  { r:13, gp:'Bélgica',          circuit:'Spa-Francorchamps',    country:'🇧🇪', winner:'Max Verstappen',  team:'Red Bull' },
+  { r:14, gp:'Hungría',          circuit:'Hungaroring',          country:'🇭🇺', winner:'Oscar Piastri',   team:'McLaren' },
+  { r:15, gp:'Países Bajos',     circuit:'Zandvoort',            country:'🇳🇱', winner:'Max Verstappen',  team:'Red Bull' },
+  { r:16, gp:'Italia',           circuit:'Monza',                country:'🇮🇹', winner:'Lando Norris',    team:'McLaren' },
+  { r:17, gp:'Azerbaiyán',       circuit:'Baku City Circuit',    country:'🇦🇿', winner:'Oscar Piastri',   team:'McLaren' },
+  { r:18, gp:'Singapur',         circuit:'Marina Bay',           country:'🇸🇬', winner:'George Russell',  team:'Mercedes' },
+  { r:19, gp:'Estados Unidos',   circuit:'Circuit of Americas',  country:'🇺🇸', winner:'Max Verstappen',  team:'Red Bull' },
+  { r:20, gp:'México',           circuit:'Autodromo H. Rodriguez',country:'🇲🇽', winner:'Max Verstappen',  team:'Red Bull' },
+  { r:21, gp:'São Paulo',        circuit:'Interlagos',           country:'🇧🇷', winner:'Lando Norris',    team:'McLaren' },
+  { r:22, gp:'Las Vegas',        circuit:'Las Vegas Strip',      country:'🇺🇸', winner:'Oscar Piastri',   team:'McLaren' },
+  { r:23, gp:'Catar',            circuit:'Lusail',               country:'🇶🇦', winner:'Lando Norris',    team:'McLaren' },
+  { r:24, gp:'Abu Dabi',         circuit:'Yas Marina',           country:'🇦🇪', winner:'Max Verstappen',  team:'Red Bull' },
+];
+
+const CIRCUITS = [
+  { name:'Albert Park',          country:'Australia',     city:'Melbourne',        lap:'5.278 km', laps:58,  record:'1:20.235', year:1996, lat:37.84, lng:144.97 },
+  { name:'Shanghai',             country:'China',         city:'Shanghai',         lap:'5.451 km', laps:56,  record:'1:32.238', year:2004, lat:31.34, lng:121.22 },
+  { name:'Suzuka',               country:'Japón',         city:'Suzuka',           lap:'5.807 km', laps:53,  record:'1:30.983', year:1987, lat:34.84, lng:136.54 },
+  { name:'Sakhir',               country:'Bahréin',       city:'Manama',           lap:'5.412 km', laps:57,  record:'1:31.447', year:2004, lat:26.03, lng:50.51 },
+  { name:'Jeddah Corniche',      country:'Arabia Saudí',  city:'Jeddah',           lap:'6.174 km', laps:50,  record:'1:30.734', year:2021, lat:21.63, lng:39.10 },
+  { name:'Miami Int. Autodrome', country:'EE.UU.',        city:'Miami',            lap:'5.412 km', laps:57,  record:'1:29.708', year:2022, lat:25.96, lng:-80.24 },
+  { name:'Imola',                country:'Italia',        city:'Imola',            lap:'4.909 km', laps:63,  record:'1:15.484', year:1980, lat:44.34, lng:11.71 },
+  { name:'Circuit de Monaco',    country:'Mónaco',        city:'Monte Carlo',      lap:'3.337 km', laps:78,  record:'1:12.909', year:1950, lat:43.74, lng:7.43 },
+  { name:'Circuit de Catalunya', country:'España',        city:'Barcelona',        lap:'4.657 km', laps:66,  record:'1:18.149', year:1991, lat:41.57, lng:2.26 },
+  { name:'Gilles Villeneuve',    country:'Canadá',        city:'Montreal',         lap:'4.361 km', laps:70,  record:'1:13.078', year:1978, lat:45.50, lng:-73.52 },
+  { name:'Red Bull Ring',        country:'Austria',       city:'Spielberg',        lap:'4.318 km', laps:71,  record:'1:05.619', year:1970, lat:47.22, lng:14.76 },
+  { name:'Silverstone',          country:'Gran Bretaña',  city:'Northamptonshire', lap:'5.891 km', laps:52,  record:'1:27.097', year:1950, lat:52.07, lng:-1.02 },
+  { name:'Spa-Francorchamps',    country:'Bélgica',       city:'Stavelot',         lap:'7.004 km', laps:44,  record:'1:46.286', year:1950, lat:50.44, lng:5.97 },
+  { name:'Hungaroring',          country:'Hungría',       city:'Budapest',         lap:'4.381 km', laps:70,  record:'1:16.627', year:1986, lat:47.58, lng:19.25 },
+  { name:'Zandvoort',            country:'Países Bajos',  city:'Zandvoort',        lap:'4.259 km', laps:72,  record:'1:11.097', year:1952, lat:52.39, lng:4.54 },
+  { name:'Monza',                country:'Italia',        city:'Monza',            lap:'5.793 km', laps:53,  record:'1:21.046', year:1950, lat:45.62, lng:9.29 },
+  { name:'Baku City Circuit',    country:'Azerbaiyán',    city:'Bakú',             lap:'6.003 km', laps:51,  record:'1:43.009', year:2016, lat:40.37, lng:49.85 },
+  { name:'Marina Bay',           country:'Singapur',      city:'Singapur',         lap:'4.940 km', laps:62,  record:'1:35.867', year:2008, lat:1.29, lng:103.86 },
+  { name:'Circuit of Americas',  country:'EE.UU.',        city:'Austin, TX',       lap:'5.513 km', laps:56,  record:'1:36.169', year:2012, lat:30.13, lng:-97.64 },
+  { name:'Autodromo H. Rodriguez',country:'México',       city:'México D.F.',      lap:'4.304 km', laps:71,  record:'1:17.774', year:1963, lat:19.41, lng:-99.09 },
+  { name:'Interlagos',           country:'Brasil',        city:'São Paulo',        lap:'4.309 km', laps:71,  record:'1:10.540', year:1973, lat:-23.70, lng:-46.70 },
+  { name:'Las Vegas Strip',      country:'EE.UU.',        city:'Las Vegas',        lap:'6.201 km', laps:50,  record:'1:35.490', year:2023, lat:36.12, lng:-115.17 },
+  { name:'Lusail',               country:'Catar',         city:'Lusail',           lap:'5.380 km', laps:57,  record:'1:24.319', year:2021, lat:25.49, lng:51.45 },
+  { name:'Yas Marina',           country:'Abu Dabi',      city:'Abu Dabi',         lap:'5.281 km', laps:58,  record:'1:26.103', year:2009, lat:24.47, lng:54.60 },
+];
+
+// Lat/Lng projected to SVG 1000x500 (equirectangular)
+function lnglatToXY(lng, lat) {
+  const x = (lng + 180) / 360 * 1000;
+  const y = (90 - lat) / 180 * 500;
+  return { x, y };
+}
+
+// ══════════════════════════════════════
+// TAB NAVIGATION
+// ══════════════════════════════════════
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'charts') setTimeout(renderCharts, 50);
+  if (name === 'map') setTimeout(renderMap, 50);
+}
+
+// ══════════════════════════════════════
+// DRIVERS TABLE
+// ══════════════════════════════════════
+function renderDrivers() {
+  const max = DRIVERS[0].pts;
+  const tbody = document.getElementById('drivers-tbody');
+  tbody.innerHTML = DRIVERS.map(d => {
+    const posClass = d.pos <= 3 ? `pos-${d.pos}` : 'pos-n';
+    const barW = Math.round(d.pts / max * 100);
+    return `<tr>
+      <td><span class="pos-badge ${posClass}">${d.pos}</span></td>
+      <td><span class="flag">${d.flag}</span>&nbsp; <strong>${d.name}</strong></td>
+      <td><span class="team-dot" style="background:${d.color}"></span>${d.team}</td>
+      <td style="font-family:'Bebas Neue',sans-serif;font-size:20px">${d.pts}</td>
+      <td><div class="pts-bar-wrap"><div class="pts-bar" style="width:${barW}%;background:${d.color}"></div></div></td>
+      <td style="text-align:center">${d.wins > 0 ? `<strong style="color:var(--gold)">${d.wins}</strong>` : '<span style="color:var(--border)">—</span>'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════
+// TEAMS GRID
+// ══════════════════════════════════════
+function renderTeams() {
+  const max = TEAMS[0].pts;
+  document.getElementById('teams-grid').innerHTML = TEAMS.map(t => {
+    const pos = t.pos <= 3 ? ['🥇','🥈','🥉'][t.pos-1] : `#${t.pos}`;
+    return `<div class="team-card">
+      <div class="team-stripe" style="background:${t.color}"></div>
+      <div class="team-rank">${t.pos}</div>
+      <div style="margin-top:12px;font-size:22px">${t.country}</div>
+      <div class="team-name" style="color:${t.color}">${t.name}</div>
+      <div class="team-pts-big">${t.pts}</div>
+      <div class="team-pts-lbl">Puntos</div>
+      <div style="margin:12px 0 6px">
+        <div class="pts-bar-wrap" style="width:100%">
+          <div class="pts-bar" style="width:${Math.round(t.pts/max*100)}%;background:${t.color}"></div>
+        </div>
+      </div>
+      <div class="team-drivers">${t.drivers.map(d => `• ${d}`).join('<br>')}</div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════
+// RACES
+// ══════════════════════════════════════
+function renderRaces() {
+  const teamColor = name => TEAMS.find(t => t.name === name)?.color || '#888';
+  document.getElementById('races-grid').innerHTML = RACES.map(r =>
+    `<div class="race-card">
+      <div class="race-round">Ronda ${r.r}</div>
+      <div class="race-flag" style="font-size:24px;margin:4px 0">${r.country}</div>
+      <div class="race-name">GP ${r.gp}</div>
+      <div class="race-circuit">${r.circuit}</div>
+      <div class="race-winner">
+        <div class="race-winner-label">Ganador</div>
+        <div class="race-winner-name" style="color:${teamColor(r.team)}">${r.winner}</div>
+        <div style="font-size:11px;color:var(--muted)">${r.team}</div>
+      </div>
+    </div>`
+  ).join('');
+}
+
+// ══════════════════════════════════════
+// CIRCUITS LIST
+// ══════════════════════════════════════
+let selectedCircuit = null;
+function renderCircuits() {
+  document.getElementById('circuits-list').innerHTML = CIRCUITS.map((c, i) =>
+    `<div class="circuit-row" onclick="showCircuitDetail(${i})">
+      <div class="circuit-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="circuit-info">
+        <div class="circuit-name">${c.name}</div>
+        <div class="circuit-loc">${c.city} · ${c.country}</div>
+      </div>
+      <div class="circuit-winner">
+        <div style="font-size:11px;color:var(--muted)">Vuelta</div>
+        <strong>${c.lap}</strong>
+      </div>
+    </div>`
+  ).join('');
+}
+function showCircuitDetail(i) {
+  const c = CIRCUITS[i];
+  const race = RACES[i];
+  document.getElementById('circuit-detail').innerHTML = `
+    <div style="font-size:40px;margin-bottom:8px">${race?.country || ''}</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px">${c.name}</div>
+    <div style="color:var(--muted);margin-bottom:20px">${c.city} · ${c.country}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="kpi" style="padding:14px 16px">
+        <div class="kpi-val" style="font-size:26px">${c.lap}</div>
+        <div class="kpi-lbl">Longitud</div>
+      </div>
+      <div class="kpi" style="padding:14px 16px">
+        <div class="kpi-val" style="font-size:26px">${c.laps}</div>
+        <div class="kpi-lbl">Vueltas</div>
+      </div>
+      <div class="kpi" style="padding:14px 16px">
+        <div class="kpi-val" style="font-size:26px">${c.record}</div>
+        <div class="kpi-lbl">Récord Vuelta</div>
+      </div>
+      <div class="kpi" style="padding:14px 16px">
+        <div class="kpi-val" style="font-size:26px">${c.year}</div>
+        <div class="kpi-lbl">1er GP</div>
+      </div>
+    </div>
+    ${race ? `<div style="margin-top:16px;padding:14px;background:var(--surface);border-radius:4px;border:1px solid var(--border)">
+      <div style="font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Ganador 2025</div>
+      <div style="font-size:18px;font-weight:700;color:var(--gold)">${race.winner}</div>
+      <div style="font-size:12px;color:var(--muted)">${race.team}</div>
+    </div>` : ''}
+  `;
+}
+
+// ══════════════════════════════════════
+// WORLD MAP
+// ══════════════════════════════════════
+function renderMap() {
+  const container = document.getElementById('map-container');
+  const svg = document.getElementById('world-map');
+  const pinsDiv = document.getElementById('map-pins');
+
+  // Simple world SVG paths (simplified continents)
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="oceangrd" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0d1520"/>
+        <stop offset="100%" stop-color="#050c14"/>
+      </linearGradient>
+    </defs>
+    <rect width="1000" height="500" fill="url(#oceangrd)"/>
+    <!-- Grid lines -->
+    <g stroke="#1a2030" stroke-width="0.5">
+      <line x1="0" y1="125" x2="1000" y2="125"/>
+      <line x1="0" y1="250" x2="1000" y2="250"/>
+      <line x1="0" y1="375" x2="1000" y2="375"/>
+      <line x1="250" y1="0" x2="250" y2="500"/>
+      <line x1="500" y1="0" x2="500" y2="500"/>
+      <line x1="750" y1="0" x2="750" y2="500"/>
+    </g>
+    <!-- Continents (simplified polygons) -->
+    <!-- North America -->
+    <path d="M 30 50 L 230 50 L 260 100 L 250 160 L 220 200 L 200 240 L 160 260 L 120 250 L 80 200 L 60 150 L 30 100 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- South America -->
+    <path d="M 170 270 L 240 260 L 270 290 L 280 360 L 260 420 L 220 450 L 180 440 L 160 400 L 155 340 L 160 290 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- Europe -->
+    <path d="M 440 60 L 540 55 L 560 80 L 550 110 L 530 120 L 510 115 L 490 130 L 460 125 L 440 110 L 435 85 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- Africa -->
+    <path d="M 450 150 L 560 145 L 580 180 L 570 250 L 550 320 L 520 380 L 490 400 L 460 390 L 440 350 L 430 280 L 435 210 L 440 170 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- Asia -->
+    <path d="M 550 50 L 870 45 L 920 80 L 910 130 L 880 160 L 840 170 L 800 155 L 760 160 L 720 180 L 680 170 L 640 155 L 600 160 L 570 150 L 555 130 L 545 100 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- Middle East -->
+    <path d="M 570 150 L 640 155 L 660 180 L 640 210 L 600 220 L 570 200 L 560 175 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- South/SE Asia -->
+    <path d="M 640 170 L 760 160 L 800 190 L 820 220 L 800 250 L 760 260 L 720 255 L 690 240 L 670 210 L 645 190 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- Australia -->
+    <path d="M 760 300 L 880 295 L 920 330 L 910 390 L 870 420 L 820 425 L 775 410 L 750 380 L 745 340 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- Japan -->
+    <path d="M 855 105 L 880 100 L 888 115 L 878 130 L 858 128 L 850 115 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+    <!-- UK -->
+    <path d="M 454 70 L 466 66 L 470 80 L 462 88 L 452 82 Z" fill="#1a2535" stroke="#2a3545" stroke-width="0.8"/>
+  `;
+
+  // Render pins
+  pinsDiv.innerHTML = '';
+  const rect = container.getBoundingClientRect();
+  const svgEl = document.getElementById('world-map');
+
+  CIRCUITS.forEach((c, i) => {
+    const { x, y } = lnglatToXY(c.lng, c.lat);
+    const xPct = x / 1000 * 100;
+    const yPct = y / 500 * 100;
+
+    const pin = document.createElement('div');
+    pin.className = 'circuit-pin';
+    pin.style.left = xPct + '%';
+    pin.style.top = yPct + '%';
+    const race = RACES[i];
+    const winnerColor = TEAMS.find(t => t.name === race?.team)?.color || '#e8002d';
+    pin.innerHTML = `
+      <div class="pin-label">
+        <div style="font-size:16px">${race?.country || ''}</div>
+        <strong>GP ${RACES[i]?.gp || c.country}</strong><br>
+        <span style="color:var(--muted)">${c.name}</span><br>
+        <span style="color:${winnerColor}">${race?.winner || ''}</span>
+      </div>
+      <div class="pin-dot"></div>
+    `;
+    pinsDiv.appendChild(pin);
+  });
+
+  // Legend
+  const legendDiv = document.getElementById('map-legend');
+  const regions = [
+    { name: 'Europa', color: '#4a9eff', count: 9 },
+    { name: 'América', color: '#ff6b35', count: 6 },
+    { name: 'Asia-Pacífico', color: '#00d2be', count: 6 },
+    { name: 'Oriente Medio', color: '#ffd700', count: 3 },
+  ];
+  legendDiv.innerHTML = regions.map(r =>
+    `<div style="display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);padding:8px 14px;border-radius:4px">
+      <div style="width:10px;height:10px;border-radius:50%;background:${r.color}"></div>
+      <span style="font-size:13px">${r.name}</span>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:${r.color}">${r.count}</span>
+    </div>`
+  ).join('');
+}
+
+// ══════════════════════════════════════
+// CHARTS
+// ══════════════════════════════════════
+let chartsRendered = false;
+function renderCharts() {
+  if (chartsRendered) return;
+  chartsRendered = true;
+
+  const chartDefaults = {
+    plugins: {
+      legend: { labels: { color: '#888', font: { family: 'Rajdhani', size: 12 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#888', font: { family: 'Rajdhani' } }, grid: { color: '#1e1e28' } },
+      y: { ticks: { color: '#888', font: { family: 'Rajdhani' } }, grid: { color: '#1e1e28' } }
+    }
+  };
+
+  // Drivers bar
+  const top10 = DRIVERS.slice(0, 10);
+  new Chart(document.getElementById('chart-drivers'), {
+    type: 'bar',
+    data: {
+      labels: top10.map(d => d.name.split(' ').pop()),
+      datasets: [{
+        label: 'Puntos',
+        data: top10.map(d => d.pts),
+        backgroundColor: top10.map(d => d.color + 'cc'),
+        borderColor: top10.map(d => d.color),
+        borderWidth: 1,
+        borderRadius: 4,
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, ...chartDefaults }
+  });
+
+  // Teams bar
+  new Chart(document.getElementById('chart-teams'), {
+    type: 'bar',
+    data: {
+      labels: TEAMS.map(t => t.name),
+      datasets: [{
+        label: 'Puntos',
+        data: TEAMS.map(t => t.pts),
+        backgroundColor: TEAMS.map(t => t.color + 'cc'),
+        borderColor: TEAMS.map(t => t.color),
+        borderWidth: 1,
+        borderRadius: 4,
+      }]
+    },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#888', font: { family: 'Rajdhani' } }, grid: { color: '#1e1e28' } },
+        y: { ticks: { color: '#ccc', font: { family: 'Rajdhani', size: 12 } }, grid: { color: '#1e1e28' } }
+      }
+    }
+  });
+
+  // Wins horizontal bar
+  const winsData = DRIVERS.filter(d => d.wins > 0).sort((a,b) => b.wins - a.wins);
+  new Chart(document.getElementById('chart-wins'), {
+    type: 'bar',
+    data: {
+      labels: winsData.map(d => d.name.split(' ').pop()),
+      datasets: [{
+        label: 'Victorias',
+        data: winsData.map(d => d.wins),
+        backgroundColor: winsData.map(d => d.color + 'cc'),
+        borderColor: winsData.map(d => d.color),
+        borderWidth: 1,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#888', font:{family:'Rajdhani'} }, grid: { color: '#1e1e28' } },
+        y: { ticks: { color: '#888', font:{family:'Rajdhani'} }, grid: { color: '#1e1e28' } }
+      }
+    }
+  });
+
+  // Pie
+  new Chart(document.getElementById('chart-pie'), {
+    type: 'doughnut',
+    data: {
+      labels: TEAMS.map(t => t.name),
+      datasets: [{
+        data: TEAMS.map(t => t.pts),
+        backgroundColor: TEAMS.map(t => t.color + 'bb'),
+        borderColor: TEAMS.map(t => t.color),
+        borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { color: '#aaa', font: { family: 'Rajdhani', size: 11 }, boxWidth: 12, padding: 8 } }
+      }
+    }
+  });
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+renderDrivers();
+renderTeams();
+renderRaces();
+renderCircuits();
+</script>
+</body>
+</html>
