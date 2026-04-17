@@ -95,6 +95,21 @@ Ejemplo 2:
 <head>
 <meta charset="UTF-8">
 <title>Pokemon Async</title>
+  <style>
+    html{
+      background-color:coral;
+    }
+    body{
+      font-family:sans-serif;
+      text-align:center;
+      background:white;
+                 
+      max-width:260px;
+      margin:20px auto;
+      padding: 20px;
+      border-radius:30px;
+    }
+  </style>
 </head>
 <body>
 
