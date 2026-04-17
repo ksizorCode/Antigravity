@@ -94,27 +94,27 @@ Ejemplo 2:
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Pokemon Card</title>
+<title>Pokemon Async</title>
 </head>
 <body>
 
 <div id="pokemon"></div>
 
 <script>
-fetch("https://pokeapi.co/api/v2/pokemon/25")
-.then(res => res.json())
-.then(data => {
+async function cargarPokemon() {
 
-    const html = `
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/25");
+    const data = await res.json();
+
+    document.getElementById("pokemon").innerHTML = `
         <h2>${data.name}</h2>
         <img src="${data.sprites.front_default}">
         <p>Peso: ${data.weight / 10} kg</p>
         <p>Altura: ${data.height / 10} m</p>
     `;
+}
 
-    document.getElementById("pokemon").innerHTML = html;
-
-});
+cargarPokemon();
 </script>
 
 </body>
