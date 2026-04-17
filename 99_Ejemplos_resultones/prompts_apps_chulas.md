@@ -69,6 +69,9 @@ Lista de ideas:
 
 Más: https://github.com/public-apis/public-apis
 
+Api fiestas locales:
+https://api.generadordni.es/v2/holidays/holidays?country=ES&state=CN&region=FU&year=2025
+
 Emeplo de Uso:
 
 🔹 Fetch simple con Pokémon
