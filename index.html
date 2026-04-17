@@ -65,7 +65,7 @@
         /* Toolbar Styles */
         .toolbar {
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             margin-bottom: 30px;
             display: flex;
             flex-wrap: wrap;
@@ -75,19 +75,19 @@
             border-radius: 20px;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
+            align-items: center;
         }
 
         .search-box {
-            flex: 1;
-            min-width: 250px;
-            position: relative;
+            flex: 2;
+            min-width: 200px;
         }
 
-        .search-box input {
+        .search-box input, .filter-select {
             width: 100%;
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid var(--glass-border);
-            padding: 12px 15px;
+            padding: 10px 15px;
             border-radius: 12px;
             color: white;
             font-family: inherit;
@@ -95,32 +95,14 @@
             transition: border-color 0.3s;
         }
 
-        .search-box input:focus {
-            border-color: var(--primary-light);
-        }
-
-        .filter-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            padding: 8px 16px;
-            border-radius: 10px;
+        .filter-select {
+            flex: 1;
+            min-width: 150px;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
         }
 
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+        .filter-select option {
+            background: var(--bg-dark);
         }
 
         .view-toggle {
@@ -135,13 +117,13 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 8px 15px;
+            padding: 8px 12px;
             border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.3s;
         }
 
@@ -153,10 +135,10 @@
 
         .dashboard-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
         }
 
-        /* Project List / Cards View */
+        /* Cards View */
         .project-list {
             list-style: none;
             display: grid;
@@ -173,13 +155,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
 
         .project-item:hover {
-            transform: translateX(10px);
+            transform: translateY(-5px);
             border-color: var(--primary-light);
             background: rgba(30, 41, 59, 0.9);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         .project-header {
@@ -187,10 +169,6 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 4px;
-        }
-
-        .project-emoji {
-            font-size: 1.5rem;
         }
 
         .project-info h2 {
@@ -201,17 +179,18 @@
         .project-meta {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 8px;
+            flex-wrap: wrap;
         }
 
-        .project-date {
+        .project-subtitle {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         .category-badge {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             padding: 2px 8px;
             background: rgba(79, 70, 229, 0.2);
             border: 1px solid var(--primary-light);
@@ -220,30 +199,92 @@
             font-weight: 600;
         }
 
-        .project-desc {
-            font-size: 1.05rem;
-            color: var(--text-main);
+        .tech-pill {
+            font-size: 0.65rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-muted);
         }
 
-        .btn-view {
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 18px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.2s, transform 0.2s;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap;
+            border: none;
         }
 
-        .btn-view:hover {
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
             background: var(--primary-light);
             transform: scale(1.05);
         }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-main);
+            color: var(--text-main);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid var(--glass-border);
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            border-radius: 24px;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .modal-section { margin-bottom: 25px; }
+        .modal-section h3 { color: var(--primary-light); margin-bottom: 10px; font-size: 1rem; text-transform: uppercase; }
+        .prompt-box { background: #0f172a; padding: 15px; border-radius: 12px; font-family: monospace; font-size: 0.9rem; color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
 
         /* Calendar View Styles */
         .calendar-view {
@@ -269,14 +310,7 @@
             font-size: 0.8rem;
         }
 
-        .calendar-day.header-day {
-            min-height: auto;
-            text-align: center;
-            font-weight: 600;
-            color: var(--primary-light);
-            background: transparent;
-            border: none;
-        }
+        .calendar-day.header-day { min-height: auto; text-align: center; font-weight: 600; color: var(--primary-light); background: transparent; border: none; }
 
         .calendar-event {
             background: var(--primary);
@@ -291,22 +325,10 @@
             text-overflow: ellipsis;
         }
 
-        .decor {
-            position: fixed;
-            z-index: -1;
-            filter: blur(80px);
-            border-radius: 50%;
-        }
-
-        .decor-1 { top: 10%; left: 10%; width: 300px; height: 300px; background: rgba(79, 70, 229, 0.2); }
-        .decor-2 { bottom: 10%; right: 10%; width: 400px; height: 400px; background: rgba(129, 140, 248, 0.15); }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .project-item { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .btn-view { width: 100%; justify-content: center; }
+        @media (max-width: 800px) {
+            .project-item { flex-direction: column; align-items: stretch; }
             .toolbar { flex-direction: column; }
-            .filter-group { justify-content: center; }
+            .actions { flex-direction: column; }
         }
     </style>
 </head>
@@ -322,41 +344,43 @@
 
     <section class="toolbar">
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar proyecto por nombre o descripción...">
+            <input type="text" id="search-input" placeholder="Buscar proyecto o descripción...">
         </div>
         
-        <div class="filter-group" id="category-filters">
-            <button class="filter-btn active" data-category="all">Todos</button>
-            <!-- Categorías dinámicas -->
-        </div>
+        <select id="cat-select" class="filter-select">
+            <option value="all">Categorías: Todas</option>
+        </select>
+
+        <select id="tech-select" class="filter-select">
+            <option value="all">Tecnologías: Todas</option>
+        </select>
+
+        <select id="ia-select" class="filter-select">
+            <option value="all">IA: Todas</option>
+        </select>
 
         <div class="view-toggle">
-            <button class="toggle-btn active" id="btn-cards">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                Cards
-            </button>
-            <button class="toggle-btn" id="btn-calendar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                Calendar
-            </button>
+            <button class="toggle-btn active" id="btn-cards">Cards</button>
+            <button class="toggle-btn" id="btn-calendar">Calendar</button>
         </div>
     </section>
 
     <main class="dashboard-container">
-        <!-- Vista de Tarjetas -->
-        <ul id="project-list" class="project-list">
-            <!-- Los proyectos se cargarán aquí -->
-        </ul>
-
-        <!-- Vista de Calendario (Simplificada) -->
+        <ul id="project-list" class="project-list"></ul>
         <div id="calendar-view" class="calendar-view">
-            <div class="calendar-grid" id="calendar-grid">
-                <!-- Se generará dinámicamente -->
-            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
         </div>
     </main>
 
-    <footer style="margin-top: auto; padding-top: 60px; color: var(--text-muted); font-size: 0.9rem; text-align: center; padding-bottom: 20px;">
+    <!-- Modal Detalle -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer style="margin-top: auto; padding: 40px 0; color: var(--text-muted); font-size: 0.9rem; text-align: center;">
         &copy; 2026 Inteligencia Artificial Aplicada a Negocios
     </footer>
 
@@ -364,196 +388,197 @@
         const projectsData = [
             {
                 "title": "Cines Manolito",
-                "date": "2026-04-08", // Formato ISO para el calendario
-                "dateText": "Miércoles 08 de Abril — Día 02",
+                "subtitulo": "Miércoles 08 de Abril — Día 02",
+                "date": "2026-04-08",
                 "description": "Web de cartelera para un pequeño cine con diseño premium.",
+                "longdesk": "Una solución completa para gestión de cartelera cinematográfica. Incluye <b>maquetación responsive</b>, sistema de filtros por género y una estética inspirada en plataformas de streaming modernas.",
                 "url": "01_cine/index.html",
-                "categoria": "Apps",
-                "emoji": "🎬"
+                "categoria": "App",
+                "tecnologías": ["HTML", "CSS", "JS"],
+                "iA": "Google Gemini",
+                "prompt": "Crea una web de cine moderna con colores oscuros y tarjetas elegantes para las películas...",
+                "doc": "https://github.com/ksizorCode/cine-manolito",
+                "emoji": "🎬",
+                "refLinks": ["Documentación de UI", "Paleta de colores"]
             },
             {
                 "title": "Restaurante Mejicano",
+                "subtitulo": "Lunes 13 de Abril — Día 03",
                 "date": "2026-04-13",
-                "dateText": "Lunes 13 de Abril — Día 03",
                 "description": "Web de restaurante mejicano con menú interactivo.",
+                "longdesk": "Proyecto enfocado en la experiencia de usuario (UX) para hostelería. Presenta un menú visualmente atractivo con animaciones suaves y optimización para dispositivos móviles.",
                 "url": "02_RestauranteMejicano/index.html",
                 "categoria": "En Clase",
-                "emoji": "🌮"
-            }
-            ,
+                "tecnologías": ["HTML", "Tailwind"],
+                "iA": "Claude 3.5",
+                "prompt": "Genera el código para una landing page de un restaurante mejicano llamado 'El Taco Feliz'...",
+                "doc": "https://github.com/ksizorCode/mexican-rest",
+                "emoji": "🌮",
+                "video": "https://youtube.com/watch?v=demo-rest"
+            },
             {
                 "title": "Dashboard BoxOffice Fantasy Movies",
+                "subtitulo": "Viernes 17 de Abril",
                 "date": "2026-04-17",
-                "dateText": "Viernes 17 de Abril",
                 "description": "Panel con recaudación de películas de fantasía",
+                "longdesk": "Un dashboard analítico que simula la recaudación en taquilla de universos de fantasía. Utiliza <b>gráficos dinámicos</b> y una interfaz mágica.",
                 "url": "99_Ejemplos_resultones/dashboard_fantasyMovie.html",
                 "categoria": "App",
+                "tecnologías": ["HTML", "CSS", "JS"],
+                "iA": "Google Gemini",
+                "prompt": "Crea un panel administrativo estilo fantástico con barras de progreso brillantes y fuentes góticas...",
+                "doc": "https://github.com/ksizorCode/boxoffice-fantasy",
                 "emoji": "🧙‍♂️"
-            }
-            ,
-            {
-                "title": "Dashboard F1 0.1",
-                "date": "2026-04-17",
-                "dateText": "Versión A (Gemini)",
-                "description": "Panel Informativo con datos de Fórmula 1",
-                "url": "99_Ejemplos_resultones/dashboard_f1.html.html",
-                "categoria": "App",
-                "emoji": "🏎"
-            }
-            ,
-            {
-                "title": "Dashboard F1 0.2",
-                "date": "2026-04-17",
-                "dateText": "Versión B (Claude)",
-                "description": "Otro panel Informativo con datos de Fórmula 1 (Desarrollado en Claude)",
-                "url": "99_Ejemplos_resultones/dashboard_f1.html.html",
-                "categoria": "App",
-                "emoji": "🏎"
             }
         ];
 
-        let currentCategory = 'all';
-        let searchQuery = '';
+        let filters = { search: '', cat: 'all', tech: 'all', ia: 'all' };
         let currentView = 'cards';
 
-        // Inicialización de filtros de categoría
-        function initFilters() {
-            const categories = ['all', ...new Set(projectsData.map(p => p.categoria))];
-            const filterContainer = document.getElementById('category-filters');
-            filterContainer.innerHTML = categories.map(cat => `
-                <button class="filter-btn ${cat === 'all' ? 'active' : ''}" data-category="${cat}">
-                    ${cat === 'all' ? 'Todos' : cat}
-                </button>
-            `).join('');
-
-            // Event Listeners para filtros
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    e.target.classList.add('active');
-                    currentCategory = e.target.dataset.category;
-                    render();
+        function initToolbar() {
+            const populate = (id, key, label) => {
+                const select = document.getElementById(id);
+                let items = [];
+                projectsData.forEach(p => {
+                    if(Array.isArray(p[key])) items.push(...p[key]);
+                    else items.push(p[key]);
                 });
+                [...new Set(items)].forEach(item => {
+                    const opt = document.createElement('option');
+                    opt.value = item;
+                    opt.textContent = item;
+                    select.appendChild(opt);
+                });
+                select.addEventListener('change', (e) => { filters[key === 'tecnologías' ? 'tech' : key === 'iA' ? 'ia' : 'cat'] = e.target.value; render(); });
+            };
+            
+            populate('cat-select', 'categoria');
+            populate('tech-select', 'tecnologías');
+            populate('ia-select', 'iA');
+
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                filters.search = e.target.value;
+                render();
             });
         }
 
-        // Función de Filtrado
-        function getFilteredProjects() {
-            return projectsData.filter(project => {
-                const matchesCategory = currentCategory === 'all' || project.categoria === currentCategory;
-                const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                    project.description.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchesCategory && matchesSearch;
+        function getFiltered() {
+            return projectsData.filter(p => {
+                const mSearch = p.title.toLowerCase().includes(filters.search.toLowerCase()) || p.description.toLowerCase().includes(filters.search.toLowerCase());
+                const mCat = filters.cat === 'all' || p.categoria === filters.cat;
+                const mTech = filters.tech === 'all' || (Array.isArray(p.tecnologías) ? p.tecnologías.includes(filters.tech) : p.tecnologías === filters.tech);
+                const mIa = filters.ia === 'all' || p.iA === filters.ia;
+                return mSearch && mCat && mTech && mIa;
             });
         }
 
-        // Renderizar Vista de Tarjetas
-        function renderCards(filtered) {
-            const listContainer = document.getElementById('project-list');
-            listContainer.style.display = 'grid';
+        function showModal(title) {
+            const p = projectsData.find(x => x.title === title);
+            const body = document.getElementById('modal-body');
+            body.innerHTML = `
+                <div class="project-header" style="margin-bottom: 20px;">
+                    <span style="font-size: 3rem;">${p.emoji}</span>
+                    <div>
+                        <h2 style="color: var(--primary-light);">${p.title}</h2>
+                        <p style="color: var(--text-muted);">${p.subtitulo}</p>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Descripción</h3>
+                    <p style="line-height: 1.6;">${p.longdesk || p.description}</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Inteligencia Artificial</h3>
+                    <p><b>Modelo:</b> ${p.iA}</p>
+                    <div style="margin-top:10px;">
+                        <b>Prompt utilizado:</b>
+                        <div class="prompt-box">${p.prompt || 'No especificado'}</div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Recursos</h3>
+                    <div style="display:flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="${p.doc}" target="_blank" class="btn btn-secondary">📦 GitHub / Doc</a>
+                        ${p.video ? `<a href="${p.video}" target="_blank" class="btn btn-secondary">📺 Ver Vídeo</a>` : ''}
+                        ${p.refLinks ? p.refLinks.map(l => `<span class="category-badge">${l}</span>`).join('') : ''}
+                    </div>
+                </div>
+            `;
+            document.getElementById('project-modal').style.display = 'flex';
+        }
+
+        function renderCards(data) {
+            const container = document.getElementById('project-list');
+            container.style.display = 'grid';
             document.getElementById('calendar-view').style.display = 'none';
-
-            if (filtered.length === 0) {
-                listContainer.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding: 40px;">No se encontraron proyectos que coincidan.</p>`;
-                return;
-            }
-
-            listContainer.innerHTML = filtered.map(project => `
+            
+            container.innerHTML = data.map(p => `
                 <li class="project-item">
                     <div class="project-info">
                         <div class="project-meta">
-                            <span class="project-date">${project.dateText}</span>
-                            <span class="category-badge">${project.categoria}</span>
+                            <span class="project-subtitle">${p.subtitulo}</span>
+                            <span class="category-badge">${p.categoria}</span>
+                            ${(p.tecnologías || []).map(t => `<span class="tech-pill">${t}</span>`).join('')}
                         </div>
                         <div class="project-header">
-                            <span class="project-emoji">${project.emoji}</span>
-                            <h2>${project.title}</h2>
+                            <span class="project-emoji">${p.emoji}</span>
+                            <h2>${p.title}</h2>
                         </div>
-                        <p class="project-desc">${project.description}</p>
+                        <p class="project-desc">${p.description}</p>
                     </div>
-                    <a href="${project.url}" class="btn-view">
-                        Ver Proyecto
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="showModal('${p.title}')">Saber Más</button>
+                        <a href="${p.url}" class="btn btn-primary">Ver Proyecto</a>
+                    </div>
                 </li>
             `).join('');
         }
 
-        // Renderizar Vista de Calendario (Abril 2026 como ejemplo)
-        function renderCalendar(filtered) {
-            const calendarGrid = document.getElementById('calendar-grid');
-            const calendarView = document.getElementById('calendar-view');
-            const listContainer = document.getElementById('project-list');
-            
-            listContainer.style.display = 'none';
-            calendarView.style.display = 'block';
+        function renderCalendar(data) {
+            const grid = document.getElementById('calendar-grid');
+            document.getElementById('project-list').style.display = 'none';
+            document.getElementById('calendar-view').style.display = 'block';
 
             const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
             let html = days.map(d => `<div class="calendar-day header-day">${d}</div>`).join('');
-
-            // Abril 2026 empieza en Miércoles (3)
-            const firstDayIndex = 3; 
-            const daysInMonth = 30;
-
-            for (let i = 0; i < firstDayIndex; i++) {
-                html += `<div class="calendar-day" style="opacity: 0.2"></div>`;
+            const startDay = 3; // Abril 2026 empieza Miércoles
+            for (let i = 0; i < startDay; i++) html += `<div class="calendar-day" style="opacity:0.1"></div>`;
+            for (let day = 1; day <= 30; day++) {
+                const date = `2026-04-${day.toString().padStart(2, '0')}`;
+                const projects = data.filter(p => p.date === date);
+                html += `<div class="calendar-day">
+                    <strong>${day}</strong>
+                    ${projects.map(p => `<div class="calendar-event" onclick="showModal('${p.title}')">${p.emoji} ${p.title}</div>`).join('')}
+                </div>`;
             }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = `2026-04-${day.toString().padStart(2, '0')}`;
-                const projectsToday = filtered.filter(p => p.date === dateStr);
-                
-                html += `
-                    <div class="calendar-day">
-                        <strong>${day}</strong>
-                        ${projectsToday.map(p => `
-                            <div class="calendar-event" title="${p.title}" onclick="window.location.href='${p.url}'">
-                                ${p.emoji} ${p.title}
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            }
-
-            calendarGrid.innerHTML = html;
+            grid.innerHTML = html;
         }
 
-        // Función Principal de Renderizado
         function render() {
-            const filtered = getFilteredProjects();
-            if (currentView === 'cards') {
-                renderCards(filtered);
-            } else {
-                renderCalendar(filtered);
-            }
+            const filtered = getFiltered();
+            currentView === 'cards' ? renderCards(filtered) : renderCalendar(filtered);
         }
 
-        // Controladores de Eventos
-        document.getElementById('search-input').addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            render();
-        });
-
-        document.getElementById('btn-cards').addEventListener('click', () => {
-            currentView = 'cards';
-            document.getElementById('btn-cards').classList.add('active');
-            document.getElementById('btn-calendar').classList.remove('active');
-            render();
-        });
-
-        document.getElementById('btn-calendar').addEventListener('click', () => {
-            currentView = 'calendar';
-            document.getElementById('btn-calendar').classList.add('active');
-            document.getElementById('btn-cards').classList.remove('active');
-            render();
-        });
-
-        // Inicio
+        // Setup
         document.addEventListener('DOMContentLoaded', () => {
-            initFilters();
+            initToolbar();
             render();
+            
+            document.getElementById('btn-cards').addEventListener('click', () => { 
+                currentView = 'cards'; 
+                document.getElementById('btn-cards').classList.add('active'); 
+                document.getElementById('btn-calendar').classList.remove('active'); 
+                render(); 
+            });
+            document.getElementById('btn-calendar').addEventListener('click', () => { 
+                currentView = 'calendar'; 
+                document.getElementById('btn-calendar').classList.add('active'); 
+                document.getElementById('btn-cards').classList.remove('active'); 
+                render(); 
+            });
+            
+            document.querySelector('.close-modal').onclick = () => document.getElementById('project-modal').style.display = 'none';
+            window.onclick = (e) => { if(e.target.className === 'modal') document.getElementById('project-modal').style.display = 'none'; };
         });
     </script>
 </body>
