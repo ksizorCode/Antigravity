@@ -1,0 +1,28 @@
+# Ejemplos e ideas para hacer Apps chulas
+Entendidas como Apps Web en formato Progresive Web Aplication (PWA)
+
+
+
+## Dashboard BoxOffice de Películas
+**Prompt**
+```
+crea un array con una lista de peliculas de harry potter y animales fantásitcos, y las pelis de el señor de los anillos y hobbit
+grafica de ventas , budget,  año de publicación y nacionalidad, mapa de localizaciones y otros muchos datos
+
+Quiero visualizar los datos de forma visual en varias gráficas o charts
+puedes usar bibliotecas como chart.js
+Diseño tipo dashboard llamativo
+
+añade un sistema de filtros con el que pueda hacer checkbox en las películas que quiero seleccionar y que se actualicen los datos en tiempo real
+```
+
+### Dashboard Datos de Fórmula 1
+
+```
+HTML y JS 
+F1 Dashboard
+interactive  charts
+
+Equipos, Pilotos, Puntos, Carreras, Clasificación, Circuitos, Paises, Mapas
+```
+
