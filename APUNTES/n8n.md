@@ -33,7 +33,7 @@ Para revisar si ya están instalados preguntaremos en las versiones de cada uno 
 |Comando        |Respuesta esperada                                  |
 |---------------|----------------------------------------------------|
 |```node -v```  | Si está instalado devolverá algo tipo: `v24.14.0`  |
-|```npm -v```   | Si está instalado devolverá algo tpo:  `11.9.0     |
+|```npm -v```   | Si está instalado devolverá algo tpo:  `11.9.0`    |
 Si no está instalado descargaremos node.js de al web oficial, y podemos instalar npm desde terminal: `npm install -g npm`
 
 
