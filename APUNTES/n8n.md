@@ -30,7 +30,8 @@ docker run -d \
 Opción B: Instalación con Node.js (clásica)
 1. Tener node y NPM (Node Package Manager):
 Para revisar si ya están instalados preguntaremos en las versiones de cada uno en la  terminar:
-|Comando        |Respuesta esperada                                  |
+
+| Comando       | Respuesta esperada                                 |
 |---------------|----------------------------------------------------|
 |```node -v```  | Si está instalado devolverá algo tipo: `v24.14.0`  |
 |```npm -v```   | Si está instalado devolverá algo tpo:  `11.9.0`    |
