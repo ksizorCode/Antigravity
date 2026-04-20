@@ -38,9 +38,8 @@ Para revisar si ya están instalados preguntaremos en las versiones de cada uno 
 Si no está instalado descargaremos node.js de al web oficial, y podemos instalar npm desde terminal: `npm install -g npm`
 
 
-¿Cómo instalar Node.js? [Ver video en Youtube](https://www.youtube.com/watch?v=M9N7yT4S9sk&time_continue=3&source_ve_path=NzY3NTg&embeds_referring_euri=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Dinstalando%2Bnode%2Bse%2Bisntala%2Bnpm%253F%26rlz%3D1C1CAFA_enES1190ES1190%26oq%3Dinstalando%2Bnode%2Bse%2Bisntala%2Bnpm%253)
-
-Qué es NPM y para qué sirve: [Ver video en Youtube](https://www.youtube.com/embed/FLAUD2lId4U?si=6izUcgcS9ffGiH3L)
+Cómo instalar Node.js en Windows: [Ver video en Youtube](https://www.youtube.com/watch?v=M9N7yT4S9s)
+Qué es NPM y para qué sirve: [Ver video en Youtube](https://youtu.be/FLAUD2lId4U)
 
 2. Instalar N8N viaTerminal:
 ``´
