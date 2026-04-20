@@ -1,0 +1,42 @@
+#N8N
+
+## Instalación (en local):
+Existen dos opciones: instaldación con Docker e instalación manual.
+
+Opción A: con Docker
+
+1. Tener instalado Docker
+2. insertar siguiente comando en terminal:
+```bach
+docker run -it --rm \
+  -p 5678:5678 \
+  -v ~/.n8n:/home/node/.n8n \
+  n8nio/n8n
+```
+3. Lanzar servidor local: http://localhost:5678
+
+(Opción A2)
+```bach
+docker run -d \
+  --name n8n \
+  -p 5678:5678 \
+  -e N8N_BASIC_AUTH_ACTIVE=true \
+  -e N8N_BASIC_AUTH_USER=admin \
+  -e N8N_BASIC_AUTH_PASSWORD=tu_password \
+  -v ~/.n8n:/home/node/.n8n \
+  n8nio/n8n
+```
+
+Opción B: Instalación con Node.js (clásica)
+1. Tener npm y node instalado:
+  Para revisar si ya están instalados preguntaremos en las versiones de cada uno en la  terminar:
+|Comando        |Respuesta esperada                                  |
+|---------------|----------------------------------------------------|
+|```node -v```  | Si está instalado devolverá algo tipo: `v24.14.0`  |
+|```npm -v```   | Si está instalado devolverá algo tpo:  `11.9.0     |`
+
+2. insertar en Terminal:
+``´
+npm install n8n -g
+```
+
