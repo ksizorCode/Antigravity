@@ -39,6 +39,7 @@ Si no está instalado descargaremos node.js de al web oficial, y podemos instala
 
 
 Cómo instalar Node.js en Windows: [Ver video en Youtube](https://www.youtube.com/watch?v=M9N7yT4S9s)
+
 Qué es NPM y para qué sirve: [Ver video en Youtube](https://youtu.be/FLAUD2lId4U)
 
 2. Instalar N8N viaTerminal:
@@ -46,3 +47,13 @@ Qué es NPM y para qué sirve: [Ver video en Youtube](https://youtu.be/FLAUD2lId
 npm install n8n -g
 ```
 
+3. Ejecutar
+```n8n``
+
+
+
+## Videotutoriales
+Referencias chulas:
+
+Midudev:
+https://www.youtube.com/watch?v=yP0PM-fpnXo&t=163s
