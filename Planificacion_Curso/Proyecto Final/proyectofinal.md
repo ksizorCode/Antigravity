@@ -48,12 +48,13 @@ Una posible solución sería crear un asistente sencillo que ayude a gestionar s
 ## 2. Proceso elegido, stakeholders, evidencia de fricción y coste actual
 En esta fase se describe el proceso concreto que se quiere mejorar y las personas afectadas.
 
-### Descripción del proceso Elegido
+### Descripción del "Proceso Elegido"
 Es la tarea o conjunto de tareas donde aparece el problema.
 
 Ejemplos:
 
 - Gestión de citas.
+- Presupuestador online automático para arquitectos, imprenta, etc..
 - Respuesta a consultas frecuentes.
 - Clasificación de correos.
 - Preparación de presupuestos.
@@ -64,7 +65,7 @@ Ejemplos:
 - Búsqueda y Filtrado de lugares, clientes / proveedores
 - Sistema de Fichas de productos / servicios / eventos
 
-### Qué son los stakeholders
+### Qué son los "stakeholders"
 Los **stakeholders** o *parte interesada*  son las personas o grupos afectados por el problema o por la solución.
 
 Pueden ser:
@@ -76,7 +77,7 @@ Pueden ser:
 - Equipo comercial.
 - Equipo técnico.
 
-### Qué es la evidencia de fricción
+### Qué es la "evidencia de fricción"
 Es la prueba de que el problema existe. No basta con decir “esto va mal”. Hay que aportar alguna evidencia sencilla.
 
 Ejemplos:
@@ -86,14 +87,14 @@ Ejemplos:
 - “Hay errores frecuentes al copiar datos de formularios.”
 - “Los clientes se quejan de que tardamos mucho en responder.”
 
-### Qué es el coste actual
+### Qué es el "coste actual"
 El coste puede ser económico, de tiempo, de calidad o de oportunidad.
 
 Ejemplo:
 
 > Si una persona dedica 8 horas semanales a responder consultas repetidas, y su coste interno es de 18 €/hora, el coste aproximado es de 144 € semanales. Además, ese tiempo no se dedica a tareas de mayor valor.
 
-- Cómo calcular costes hora o similar:
+- Curiosidad: Cómo calcular costes hora o similar:
 Al principio puede resultar complicado poner un coste hora al tiempo o servicios.
 Existen varias webs tipo "Calculadora Freelance" que ponen encima de la mesa una serie de cuestiones que nos hacen entender muchos de los costes en el esfuerzo empresarial. Más que dar una respuesta genera una serie de preguntas interesantes (y al final te vende un libro, así que resuelve un problema común que utiliza com elemento de marketing): https://www.calculadorafreelance.com/
 
@@ -101,10 +102,9 @@ Existen varias webs tipo "Calculadora Freelance" que ponen encima de la mesa una
 ---
 
 ## 3. Definición del caso de uso y criterios de éxito
-
 Aquí se concreta qué hará la solución y cómo sabremos si funciona.
 
-### Qué es un caso de uso
+### Qué es un "caso de uso"
 
 Un caso de uso describe una situación concreta en la que alguien utilizará la solución.
 
