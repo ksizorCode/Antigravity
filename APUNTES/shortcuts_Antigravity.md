@@ -12,6 +12,7 @@ Ctrl + Z    Deshacer
 Win + V     Historial de Portapapeles
 
 
+
 ## Atajos Comunes VSCode & Antigravity
 Ctrl + L   Selecciona Linea
 Alt + Shift + Abajo        Selecciona Liguiente linea
@@ -24,3 +25,7 @@ Alt + Scroll               Permte escribir en varias lineas de forma simultánea
 ## Atajos de Antigravity
 
 
+## Atajos Utiles
+
+### Navegadores:
+Ctrl + Shift + T        Restaurar pestaña cerrada
