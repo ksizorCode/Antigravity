@@ -1,5 +1,5 @@
 # 🎓 Proyecto fina: iA,  Googel Antigravity y VideCoding
-
+l
 Objetivo del Proyecto:
 
 Diseñar y materializar una solución práctica con IA (prototipo/PoC en Antigravity) que reduzca una fricción real de una pyme (propia o caso ficticio), demostrando valor, viabilidad y uso responsable.
