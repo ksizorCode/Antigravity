@@ -7,14 +7,14 @@ Hola. Voy a aprovechar este e-mail para recordaros lo que tenéis que entregar c
 - 🅰️ A. Solución creada con Google Antigravity.
 - 🅱️ B. Memoria/resumen ejecutivo del proyecto.
 
-|   | Dato              |                                                       |
-|---|-------------------|-------------------------------------------------------|
-|📆 | Fecha tope        | 15 de Junio 2026 a las 13:00.                         |
-|📦 | Tamaño            | Maximo 100MB en 20 archivos (.zip es lo mejor).       |
-|📍 | Lugar de Entrega  | Moodle: https://aula.jasonformacion.com               |
-|🔍 | Busca la tarea    | **🤖🤖🤖 Entrega Final 🤖🤖🤖**.                        |
-|🐙 | Repo del curso    | https://github.com/ksizorCode/Antigravity             |
-|👨🏻‍🏫 | Pizarra Figma Jam | https://www.figma.com/board/QdYj5wGkp6peNTQCM6G6GL/EOI---Antigravity?node-id=0-1&p=f  |
+|    Dato              |                                                       |
+|----------------------|-------------------------------------------------------|
+|📆  Fecha tope        | 15 de Junio 2026 a las 13:00.                         |
+|📦  Tamaño            | Maximo 100MB en 20 archivos (.zip es lo mejor).       |
+|📍  Lugar de Entrega  | Moodle: https://aula.jasonformacion.com               |
+|🔍  Busca la tarea    | **🤖🤖🤖 Entrega Final 🤖🤖🤖**.                        |
+|🐙  Repo del curso    | https://github.com/ksizorCode/Antigravity             |
+|👨🏻‍🏫  Pizarra Figma Jam | https://www.figma.com/board/QdYj5wGkp6peNTQCM6G6GL/EOI---Antigravity?node-id=0-1&p=f  |
 
 ## Desgloso las partes que componen la entrega:
 
