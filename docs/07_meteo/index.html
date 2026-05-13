@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1976d2" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Clima Local PWA</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header>
+      <div class="brand">
+        <img src="icons/icon.svg" alt="Icono clima" aria-hidden="true" />
+        <div>
+          <h1>Clima Locooooll</h1>
+          <p>Consulta el tiempo por GPS o ubicación manual</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="card status-card">
+      <div class="status-row">
+        <button id="btn-locate" type="button">Obtener mi ubicación</button>
+        <button id="btn-refresh" type="button">Actualizar clima</button>
+      </div>
+      <div class="manual-entry">
+        <input id="location-input" type="text" placeholder="Ciudad, barrio o latitud, longitud" aria-label="Ubicación manual" />
+        <button id="btn-search" type="button">Buscar</button>
+      </div>
+      <div id="message" class="message">Pulsa el botón o escribe tu ubicación.</div>
+    </section>
+
+    <section class="card weather-card hidden" id="weather-card">
+      <div class="weather-header">
+        <div>
+          <p class="location-name" id="location-name"></p>
+          <p class="timestamp" id="weather-time"></p>
+        </div>
+        <div class="temperature" id="temperature"></div>
+      </div>
+      <div class="weather-detail">
+        <div>
+          <span>Condición</span>
+          <strong id="condition"></strong>
+        </div>
+        <div>
+          <span>Velocidad viento</span>
+          <strong id="wind"></strong>
+        </div>
+        <div>
+          <span>Dirección</span>
+          <strong id="wind-direction"></strong>
+        </div>
+        <div>
+          <span>Estado</span>
+          <strong id="pressure"></strong>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Funciona offline con la última consulta almacenada.</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

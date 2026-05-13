@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Glassmorphism PWA</title>
+    <!-- Meta tags para PWA -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2344/2344132.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .calc-button {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .calc-button:active {
+            transform: scale(0.92);
+        }
+
+        .calc-button.operator {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        .calc-button.equal {
+            background: linear-gradient(to right, #f472b6, #fb923c);
+            color: white;
+        }
+
+        .display-area {
+            word-wrap: break-word;
+            word-break: break-all;
+            min-height: 120px;
+        }
+
+        /* Ocultar barra de scroll en el historial */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+
+    <!-- Contenedor Principal -->
+    <div class="glass w-full max-w-md rounded-[2.5rem] p-6 text-white overflow-hidden relative">
+        
+        <!-- Decoración de fondo -->
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse"></div>
+        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse"></div>
+
+        <!-- Pantalla -->
+        <div class="display-area flex flex-col justify-end items-end mb-6 px-2">
+            <div id="history" class="text-sm text-white/50 mb-1 h-6 font-medium"></div>
+            <div id="display" class="text-5xl font-bold tracking-tight overflow-hidden text-right w-full leading-tight">0</div>
+        </div>
+
+        <!-- Teclado -->
+        <div class="grid grid-cols-4 gap-3">
+            <!-- Fila 1 -->
+            <button onclick="clearDisplay()" class="calc-button glass col-span-2 py-5 rounded-2xl text-lg font-bold text-pink-300 hover:bg-white/20">AC</button>
+            <button onclick="deleteLast()" class="calc-button glass py-5 rounded-2xl text-lg font-bold text-white/80 hover:bg-white/20">DEL</button>
+            <button onclick="appendOperator('/')" class="calc-button operator py-5 rounded-2xl text-2xl font-bold hover:bg-white/40">÷</button>
+
+            <!-- Fila 2 -->
+            <button onclick="appendNumber('7')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">7</button>
+            <button onclick="appendNumber('8')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">8</button>
+            <button onclick="appendNumber('9')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">9</button>
+            <button onclick="appendOperator('*')" class="calc-button operator py-5 rounded-2xl text-2xl font-bold hover:bg-white/40">×</button>
+
+            <!-- Fila 3 -->
+            <button onclick="appendNumber('4')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">4</button>
+            <button onclick="appendNumber('5')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">5</button>
+            <button onclick="appendNumber('6')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">6</button>
+            <button onclick="appendOperator('-')" class="calc-button operator py-5 rounded-2xl text-2xl font-bold hover:bg-white/40">−</button>
+
+            <!-- Fila 4 -->
+            <button onclick="appendNumber('1')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">1</button>
+            <button onclick="appendNumber('2')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">2</button>
+            <button onclick="appendNumber('3')" class="calc-button glass py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">3</button>
+            <button onclick="appendOperator('+')" class="calc-button operator py-5 rounded-2xl text-2xl font-bold hover:bg-white/40">+</button>
+
+            <!-- Fila 5 -->
+            <button onclick="appendNumber('0')" class="calc-button glass col-span-2 py-5 rounded-2xl text-xl font-semibold hover:bg-white/20">0</button>
+            <button onclick="appendNumber('.')" class="calc-button glass py-5 rounded-2xl text-xl font-bold hover:bg-white/20">.</button>
+            <button onclick="calculate()" class="calc-button equal py-5 rounded-2xl text-2xl font-bold shadow-lg shadow-pink-500/20">=</button>
+        </div>
+
+        <!-- Footer / Mensaje PWA -->
+        <div class="mt-8 text-center">
+            <p class="text-white/30 text-xs tracking-widest uppercase font-semibold">Vibrant Calc v1.0</p>
+        </div>
+    </div>
+
+    <!-- Notificación personalizada -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass px-6 py-3 rounded-full text-sm font-medium opacity-0 transition-opacity pointer-events-none">
+        Mensaje aquí
+    </div>
+
+    <script>
+        let currentInput = '0';
+        let previousInput = '';
+        let operator = null;
+        let shouldResetDisplay = false;
+
+        const displayElement = document.getElementById('display');
+        const historyElement = document.getElementById('history');
+        const toastElement = document.getElementById('toast');
+
+        function updateDisplay() {
+            // Formatear números grandes para que no rompan la UI
+            let formatted = currentInput;
+            if (formatted.length > 10) {
+                formatted = parseFloat(formatted).toPrecision(8);
+            }
+            displayElement.innerText = formatted;
+            
+            // Efecto de cambio suave
+            displayElement.classList.remove('animate-fade');
+            void displayElement.offsetWidth; // Trigger reflow
+            displayElement.classList.add('animate-fade');
+        }
+
+        function appendNumber(number) {
+            if (currentInput === '0' || shouldResetDisplay) {
+                currentInput = number;
+                shouldResetDisplay = false;
+            } else {
+                if (currentInput.length < 15) {
+                    currentInput += number;
+                }
+            }
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (operator !== null) calculate();
+            previousInput = currentInput;
+            operator = op;
+            historyElement.innerText = `${previousInput} ${getOpChar(op)}`;
+            shouldResetDisplay = true;
+        }
+
+        function getOpChar(op) {
+            const chars = {'/': '÷', '*': '×', '-': '−', '+': '+'};
+            return chars[op] || op;
+        }
+
+        function calculate() {
+            if (operator === null || shouldResetDisplay) return;
+            
+            let result;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+
+            if (isNaN(prev) || isNaN(current)) return;
+
+            switch (operator) {
+                case '+': result = prev + current; break;
+                case '-': result = prev - current; break;
+                case '*': result = prev * current; break;
+                case '/': 
+                    if (current === 0) {
+                        showToast("No se puede dividir por cero");
+                        clearDisplay();
+                        return;
+                    }
+                    result = prev / current; 
+                    break;
+                default: return;
+            }
+
+            historyElement.innerText = `${prev} ${getOpChar(operator)} ${current} =`;
+            currentInput = result.toString();
+            operator = null;
+            shouldResetDisplay = true;
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            previousInput = '';
+            operator = null;
+            historyElement.innerText = '';
+            shouldResetDisplay = false;
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            if (shouldResetDisplay) return;
+            currentInput = currentInput.slice(0, -1);
+            if (currentInput === '' || currentInput === '-') currentInput = '0';
+            updateDisplay();
+        }
+
+        function showToast(msg) {
+            toastElement.innerText = msg;
+            toastElement.style.opacity = '1';
+            setTimeout(() => {
+                toastElement.style.opacity = '0';
+            }, 2500);
+        }
+
+        // Soporte de Teclado
+        window.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') appendNumber(e.key);
+            if (e.key === '.') appendNumber('.');
+            if (e.key === '=' || e.key === 'Enter') calculate();
+            if (e.key === 'Backspace') deleteLast();
+            if (e.key === 'Escape') clearDisplay();
+            if (['+', '-', '*', '/'].includes(e.key)) appendOperator(e.key);
+        });
+
+        // Simulación de registro de Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            console.log('PWA Ready');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "Clima Local PWA",
+  "short_name": "Clima Local",
+  "description": "Consulta el tiempo con GPS o escribiendo tu ubicación.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f2f7ff",
+  "theme_color": "#1976d2",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}
