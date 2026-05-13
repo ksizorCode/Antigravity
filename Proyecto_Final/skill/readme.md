@@ -10,3 +10,15 @@ Como ejecutarlo con *Google Antigravity*. Pasos a seguir:
 
 3. Ejecutalo dandole el contecto anterior (paso 1).
 
+
+
+Ejemplos de referencia
+Ver el ejemplo resuelto de "CulturaLocal IA" (Ayuntamiento / gestor de actividades culturales)
+como referencia de calidad media para calibrar el nivel de detalle esperado.
+Puntos donde ese ejemplo puede mejorarse (y este skill debe hacerlo mejor):
+
+La sección de proceso de construcción es escasa: no describe qué prompts se usaron ni cómo se iteró
+No menciona referencias ni inspiraciones
+Las dificultades encontradas no se narran
+
+Este skill debe producir documentos con esa información explícita y narrativa.

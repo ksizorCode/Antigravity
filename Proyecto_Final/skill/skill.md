@@ -99,6 +99,17 @@ Una vez tengas los datos, genera el informe completo con esta estructura.
 Usa **Markdown limpio** (sin bullets anidados excesivos, sin negrita en cada frase).
 El tono es profesional pero claro. Nada de jerga que no se explique.
 
+
+## Evalucación del proyecto :Criterios de calidad académica
+
+El informe debe demostrar:
+- identificación clara de un problema realista
+- relación lógica entre problema, solución y KPI
+- uso documentado de IA durante el desarrollo
+- evidencia de iteración, pruebas y mejora
+- conciencia de riesgos y límites
+- viabilidad mínima del prototipo
+
 ---
 
 ### ESTRUCTURA DEL INFORME EJECUTIVO
