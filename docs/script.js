@@ -197,7 +197,7 @@ function render() {
                 </div>
                 <div class="actions">
                     <button class="btn btn-secondary" onclick="show_modal('${p.title}')">Saber Más</button>
-                    <a href="${p.url}" class="btn btn-primary">Ver Proyecto</a>
+                    <a href="${p.url}" class="btn btn-primary" target="_blank">Ver Proyecto</a>
                 </div>
             </li>
         `).join('');
