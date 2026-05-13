@@ -7,7 +7,7 @@ Hola. Voy a aprovechar este e-mail para recordaros lo que tenéis que entregar c
 - 🅰️ A. Solución creada con Google Antigravity.
 - 🅱️ B. Memoria/resumen ejecutivo del proyecto.
 
-|Dato              |                                                       |
+|                      |                                                       |
 |----------------------|-------------------------------------------------------|
 |📆  Fecha tope        | 15 de Junio 2026 a las 13:00.                         |
 |📦  Tamaño            | Maximo 100MB en 20 archivos (.zip es lo mejor).       |
