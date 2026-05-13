@@ -73,6 +73,24 @@ Pregunta:
 
 > **Nota**: Si el alumno ya ha compartido parte de esta información en la conversación, extráela directamente sin volver a preguntar. Solo haz las preguntas que falten.
 
+## Paso 1.5 — Diagnóstico de suficiencia
+
+Antes de redactar el informe, clasifica la información recibida en:
+
+- Información suficiente
+- Información incompleta pero utilizable
+- Información crítica ausente
+
+No redactes el informe completo si faltan datos críticos:
+- problema concreto
+- usuario o stakeholder principal
+- solución propuesta
+- proceso mejorado
+- al menos un ejemplo de uso
+- forma de entrega del prototipo
+
+Si faltan datos no críticos, puedes avanzar usando estimaciones marcadas claramente.
+> **Nota** Si el alumno no tiene datos numéricos, propón estimaciones razonables y pide confirmación rápida. Ejemplo: "Si no tienes el dato exacto, puedo usar una estimación: 10 consultas semanales × 8 minutos por consulta × 15 €/hora. ¿Te encaja?". Cuando uses una estimación no confirmada, márcala como "estimación orientativa".
 ---
 
 ## Paso 2 — Estructura del documento a generar
