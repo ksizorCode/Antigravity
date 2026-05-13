@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TuristSpain - Memoria Ejecutiva y Técnica Ampliada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --primary: #007AFF;
+      --primary-2: #0057D8;
+      --primary-light: #E5F1FF;
+      --secondary: #FF9500;
+      --secondary-light: #FFF3DE;
+      --accent: #5856D6;
+      --accent-light: #EFEEFF;
+      --bg: #F8F9FC;
+      --card-bg: #FFFFFF;
+      --text: #1C1C1E;
+      --text-muted: #636366;
+      --border: #E5E5EA;
+      --success: #34C759;
+      --success-light: #EAF9EF;
+      --warning: #FFCC00;
+      --danger: #FF3B30;
+      --danger-light: #FFF0EF;
+      --ink: #111827;
+      --sidebar-width: 320px;
+      --shadow: 0 12px 36px rgba(20, 33, 61, 0.07);
+      --shadow-soft: 0 8px 24px rgba(20, 33, 61, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, #eef6ff 0, rgba(238,246,255,0) 360px), var(--bg);
+      color: var(--text);
+      line-height: 1.72;
+      display: flex;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4, .nav-logo, .value { font-family: 'Plus Jakarta Sans', sans-serif; }
+    p { margin-bottom: 1.2rem; font-size: 1.05rem; color: #48484A; }
+    strong { color: var(--ink); }
+    a { color: inherit; }
+    code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; background: #F2F2F7; padding: 0.12rem 0.35rem; border-radius: 6px; }
+
+    nav {
+      width: var(--sidebar-width);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-right: 1px solid var(--border);
+      height: 100vh;
+      position: fixed;
+      padding: 2rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-weight: 800;
+      font-size: 1.55rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .nav-meta { font-size: .78rem; color: var(--text-muted); margin-bottom: 1.5rem; padding: 0 0.6rem; }
+    .nav-links { list-style: none; }
+    .nav-links li { margin-bottom: 0.25rem; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-weight: 650;
+      padding: 0.65rem 0.85rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: all 0.22s ease;
+    }
+    .nav-links a:hover { background: var(--primary-light); color: var(--primary); transform: translateX(4px); }
+    .nav-links a.active { background: var(--primary); color: white; box-shadow: 0 8px 20px rgba(0, 122, 255, 0.23); }
+    .nav-footer { margin-top: auto; padding: 1rem .6rem 0; color: var(--text-muted); font-size: .78rem; border-top: 1px solid var(--border); }
+
+    main { margin-left: var(--sidebar-width); flex: 1; padding: 4.5rem 8% 9rem; max-width: 1500px; }
+    section { margin-bottom: 7.5rem; scroll-margin-top: 3rem; }
+    .hero { text-align: center; margin-bottom: 6.5rem; padding-top: 2rem; }
+    .eyebrow { font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; font-size: .85rem; }
+    .hero h1 { font-size: clamp(3.4rem, 8vw, 6.8rem); letter-spacing: -4px; line-height: .95; margin-bottom: 1.4rem; background: linear-gradient(135deg, var(--text) 0%, var(--primary) 70%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.35rem; color: var(--text-muted); max-width: 920px; margin: 0 auto 2rem; }
+    .hero-actions { display:flex; justify-content:center; gap:1rem; flex-wrap: wrap; margin-top:2rem; }
+    .pill { display:inline-flex; align-items:center; gap:.55rem; border:1px solid var(--border); background:#fff; padding:.75rem 1rem; border-radius:999px; font-weight:700; color:var(--text); box-shadow:var(--shadow-soft); }
+
+    h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 1.9rem; display: flex; align-items: center; gap: 1rem; line-height: 1.1; letter-spacing:-1px; }
+    h2 .icon { width: 54px; height: 54px; border-radius: 18px; background: var(--primary-light); color: var(--primary); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size: 1.7rem; box-shadow: var(--shadow-soft); }
+    h3 { font-size: 1.55rem; margin: 2.7rem 0 1.1rem; color: var(--text); letter-spacing: -.3px; }
+    h4 { font-size: 1.05rem; margin-bottom: .65rem; }
+    ul, ol { margin: 1rem 0 1.5rem 1.35rem; color: #48484A; }
+    li { margin-bottom: .65rem; }
+
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 28px; padding: clamp(1.5rem, 4vw, 3.2rem); margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .card.compact { padding: 2rem; }
+    .muted { color: var(--text-muted); }
+    .section-lead { font-size:1.18rem; color:#3A3A3C; max-width: 1050px; }
+    .highlight-box { background: var(--primary-light); border-radius: 18px; padding: 1.65rem 1.8rem; border-left: 6px solid var(--primary); margin: 1.8rem 0; }
+    .warning-box { background: var(--secondary-light); border-left-color: var(--secondary); }
+    .danger-box { background: var(--danger-light); border-left-color: var(--danger); }
+    .success-box { background: var(--success-light); border-left-color: var(--success); }
+
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 2rem 0; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft); border: 1px solid var(--border); }
+    th { background: #F2F2F7; padding: 1rem 1.1rem; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; color: var(--text-muted); text-align:left; }
+    td { padding: 1rem 1.1rem; background: white; border-top: 1px solid var(--border); font-size: .96rem; vertical-align: top; }
+
+    .grid { display:grid; gap:1.4rem; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.3rem; margin: 2rem 0; }
+    .kpi-card { background: white; padding: 1.65rem; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--shadow-soft); }
+    .kpi-card h4 { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing:.7px; margin-bottom: 0.5rem; }
+    .kpi-card .value { font-size: 2.35rem; line-height:1; font-weight: 800; color: var(--primary); margin-bottom: 0.45rem; letter-spacing:-1px; }
+    .kpi-card .label { font-size: 0.88rem; font-weight: 700; color: var(--success); }
+    .mini-card { border:1px solid var(--border); background:#fff; border-radius:22px; padding:1.55rem; box-shadow: var(--shadow-soft); }
+    .mini-card .emoji { font-size:2rem; margin-bottom:.7rem; display:block; }
+
+    .prompt-box { background: #121318; color: #E5E5EA; padding: 2.2rem; border-radius: 22px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: .94rem; margin: 1.5rem 0; position: relative; line-height: 1.75; overflow:auto; border:1px solid #2D2D32; }
+    .prompt-box::after { content: attr(data-label); position: absolute; top: .85rem; right: 1rem; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; color: var(--secondary); border: 1px solid var(--secondary); padding: 2px 8px; border-radius: 6px; background:rgba(255,149,0,.08); }
+    .prompt-title { display:flex; gap:.7rem; align-items:center; font-weight:800; margin:2rem 0 .8rem; }
+
+    .journey-step { display: flex; gap: 1.4rem; margin-bottom: 1.8rem; position: relative; }
+    .journey-step::before { content: ''; position: absolute; left: 21px; top: 44px; bottom: -22px; width: 2px; background: var(--border); }
+    .journey-step:last-child::before { display:none; }
+    .step-icon { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:800; z-index:1; box-shadow:0 8px 18px rgba(0,122,255,.25); }
+
+    .mermaid-wrap { background:#fff; border:1px solid var(--border); border-radius:24px; padding:1.4rem; margin:1.5rem 0 2rem; box-shadow:var(--shadow-soft); overflow:auto; }
+    .mermaid { min-width: 650px; }
+    .caption { font-size:.86rem; color:var(--text-muted); margin-top:-.5rem; margin-bottom:1.2rem; }
+
+    .bar-chart { display:grid; gap:1rem; margin:1.5rem 0; }
+    .bar-row { display:grid; grid-template-columns: 220px 1fr 72px; gap:1rem; align-items:center; }
+    .bar-label { font-weight:700; color:#3A3A3C; }
+    .bar-track { background:#EEF2F7; border-radius:999px; height:20px; overflow:hidden; }
+    .bar { height:100%; border-radius:999px; background:linear-gradient(90deg, var(--primary), var(--accent)); }
+    .bar.secondary { background:linear-gradient(90deg, var(--secondary), #FFCC00); }
+    .bar.success { background:linear-gradient(90deg, var(--success), #7BE495); }
+
+    .timeline { position:relative; margin:2rem 0; padding-left:1.2rem; }
+    .timeline::before { content:''; position:absolute; top:0; bottom:0; left:18px; width:2px; background:var(--border); }
+    .timeline-item { position:relative; padding-left:3.2rem; margin-bottom:1.7rem; }
+    .timeline-item::before { content:attr(data-num); position:absolute; left:0; top:0; width:36px; height:36px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; box-shadow:0 8px 18px rgba(0,122,255,.22); }
+
+    .tag-list { display:flex; flex-wrap:wrap; gap:.65rem; margin:1rem 0 1.5rem; }
+    .tag { display:inline-flex; align-items:center; gap:.45rem; padding:.45rem .7rem; border-radius:999px; background:#fff; border:1px solid var(--border); font-weight:700; color:#3A3A3C; font-size:.86rem; }
+
+    .two-column-text { columns:2; column-gap:2.5rem; }
+    .score { font-weight:800; color: var(--primary); }
+
+    #presentation-overlay { display:none; position:fixed; inset:0; background:radial-gradient(circle at center, #ffffff 0%, #f0f7ff 100%); z-index:2000; flex-direction:column; justify-content:center; align-items:center; padding:5%; }
+    .slide { display:none; width:100%; max-width:1200px; text-align:center; animation:slideUp .45s cubic-bezier(.2,.8,.2,1); }
+    .slide.active { display:block; }
+    .slide h2 { font-size:clamp(3.3rem, 7vw, 5.4rem); border:none; margin-bottom:1.4rem; justify-content:center; display:block; }
+    .slide p { font-size:1.65rem; color:var(--text-muted); line-height:1.35; }
+    .slide .mini-card p { font-size:1rem; }
+    .presentation-controls { position:fixed; bottom:2.3rem; display:flex; gap:1rem; background:rgba(255,255,255,.82); backdrop-filter:blur(10px); padding:.85rem 1.4rem; border-radius:999px; border:1px solid var(--border); box-shadow:0 20px 40px rgba(0,0,0,.1); align-items:center; }
+    .btn { padding:.9rem 1.35rem; border-radius:13px; border:none; cursor:pointer; font-weight:800; font-family:'Plus Jakarta Sans', sans-serif; transition:all .18s; font-size:.95rem; }
+    .btn-primary { background:var(--primary); color:white; }
+    .btn-secondary { background:var(--bg); color:var(--text); }
+    .btn:hover { opacity:.9; transform:scale(1.04); }
+    @keyframes slideUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+
+    .fab { position:fixed; bottom:2rem; right:2rem; background:var(--primary); color:white; width:66px; height:66px; border-radius:22px; display:flex; justify-content:center; align-items:center; box-shadow:0 15px 35px rgba(0,122,255,.38); cursor:pointer; z-index:1000; border:none; transition:all .25s; }
+    .fab:hover { transform:scale(1.07) rotate(4deg); background:var(--accent); }
+    .fab svg { width:31px; height:31px; }
+
+    @media (max-width: 1200px) { nav { display:none; } main { margin-left:0; padding:3rem 6% 8rem; } .grid-4, .grid-3, .grid-2 { grid-template-columns:1fr; } .two-column-text { columns:1; } .bar-row { grid-template-columns:1fr; gap:.4rem; } }
+    @media print { nav, .fab, #presentation-overlay { display:none !important; } main { margin:0; padding:1.5rem; max-width:none; } section { break-inside:avoid; margin-bottom:2rem; } .card { box-shadow:none; } body { background:white; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo">🧭 TuristSpain</div>
+    <div class="nav-meta">Memoria ejecutiva, técnica y académica ampliada · MVP TravelTech con IA</div>
+    <ul class="nav-links">
+      <li><a href="#inicio" class="active">🏁 Portada</a></li>
+      <li><a href="#resumen">📌 1. Resumen ejecutivo</a></li>
+      <li><a href="#contexto">🌍 2. Contexto y oportunidad</a></li>
+      <li><a href="#problema">⚠️ 3. Problema turístico</a></li>
+      <li><a href="#objetivos">🎯 4. Objetivos y alcance</a></li>
+      <li><a href="#solucion">💡 5. Solución propuesta</a></li>
+      <li><a href="#usuarios">👥 6. Usuarios y casos de uso</a></li>
+      <li><a href="#ux">🧩 7. UX y flujos</a></li>
+      <li><a href="#arquitectura">🏗️ 8. Arquitectura MVP</a></li>
+      <li><a href="#datos">🗄️ 9. Modelo de datos</a></li>
+      <li><a href="#ia">🤖 10. Vibe coding e IA</a></li>
+      <li><a href="#prompts">📝 11. Prompts elegidos</a></li>
+      <li><a href="#desarrollo">🛠️ 12. Construcción técnica</a></li>
+      <li><a href="#evaluacion">📊 13. Evaluación y métricas</a></li>
+      <li><a href="#riesgos">🛡️ 14. Riesgos y mitigación</a></li>
+      <li><a href="#responsabilidad">⚖️ 15. Ética e IA responsable</a></li>
+      <li><a href="#negocio">💼 16. Viabilidad</a></li>
+      <li><a href="#roadmap">🗺️ 17. Roadmap</a></li>
+      <li><a href="#entrega">📦 18. Entrega final</a></li>
+      <li><a href="#anexo-competencia">🧭 19. Benchmark</a></li>
+      <li><a href="#anexo-backlog">📋 20. Backlog</a></li>
+      <li><a href="#anexo-qa">🧪 21. QA</a></li>
+      <li><a href="#anexo-sql">🧬 22. SQL</a></li>
+      <li><a href="#anexo-operacion">🧰 23. Operación</a></li>
+      <li><a href="#anexo-accesibilidad">♿ 24. Accesibilidad</a></li>
+      <li><a href="#anexo-defensa">🎤 25. Defensa</a></li>
+      <li><a href="#anexo-conclusiones">🏁 26. Conclusiones</a></li>
+      <li><a href="#anexo-historias">📚 27. Historias</a></li>
+      <li><a href="#anexo-diccionario">📖 28. Diccionario</a></li>
+      <li><a href="#anexo-evaluacion-academica">🎓 29. Evaluación</a></li>
+      <li><a href="#anexo-kpis">📈 30. Analítica</a></li>
+      <li><a href="#anexo-seguridad">🔐 31. Seguridad</a></li>
+      <li><a href="#anexo-cierre-extra">🧠 32. Lecciones</a></li>
+      <li><a href="#anexo-implementacion">🧱 33. Sprints</a></li>
+      <li><a href="#anexo-glosario">🔤 34. Glosario</a></li>
+      <li><a href="#anexo-limitaciones">🧯 35. Limitaciones</a></li>
+    </ul>
+    <div class="nav-footer">Incluye diagramas Mermaid, prompts reales, gráficos comparativos y modo defensa.</div>
+  </nav>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="eyebrow">Memoria de Proyecto Final · Versión Ejecutiva Ampliada</div>
+      <h1>TuristSpain</h1>
+      <p>Plataforma PWA de descubrimiento turístico cercano que usa geolocalización, Supabase e IA aplicada al desarrollo para recomendar puntos de interés, gastronomía y experiencias en un radio útil de 75 km.</p>
+      <div class="hero-actions">
+        <span class="pill">📍 Radio inteligente 75 km</span>
+        <span class="pill">☁️ Backend Supabase</span>
+        <span class="pill">🤖 Vibe coding con IA</span>
+        <span class="pill">📱 PWA instalable</span>
+      </div>
+      <div class="kpi-grid" style="margin-top:3rem; text-align:left;">
+        <div class="kpi-card"><h4>Tipo de producto</h4><div class="value">TravelTech</div><div class="label">MVP funcional</div></div>
+        <div class="kpi-card"><h4>Beneficio principal</h4><div class="value">-90%</div><div class="label">menos tiempo de búsqueda</div></div>
+        <div class="kpi-card"><h4>Canal</h4><div class="value">PWA</div><div class="label">móvil, web e instalable</div></div>
+        <div class="kpi-card"><h4>Motor de datos</h4><div class="value">SQL</div><div class="label">Supabase + consultas filtradas</div></div>
+      </div>
+    </section>
+
+    <section id="resumen">
+      <h2><span class="icon">📌</span>1. Resumen ejecutivo</h2>
+      <div class="card">
+        <p class="section-lead"><strong>TuristSpain</strong> nace para resolver una fricción concreta: cuando una persona está de viaje o en una escapada, quiere saber rápido qué merece la pena visitar cerca, dónde comer, qué actividades tiene a mano y cómo reservar sin perder media mañana comparando fuentes dispersas.</p>
+        <p>El proyecto se plantea como una <strong>Progressive Web App</strong> orientada a uso móvil. El usuario permite la ubicación, el sistema calcula la distancia respecto a los puntos de interés almacenados y devuelve recomendaciones ordenadas por cercanía, categoría y utilidad. El producto evita dos errores habituales en apps turísticas: mostrar demasiadas opciones irrelevantes y depender de búsquedas manuales largas.</p>
+        <p>El MVP se ha desarrollado mediante una metodología de <strong>vibe coding</strong>, apoyada por asistentes de IA como <strong>Google Antigravity</strong>. El rol humano no desaparece: se desplaza desde la escritura manual de cada línea hacia la dirección de producto, la definición de requisitos, la validación del resultado, la depuración funcional y la toma de decisiones sobre experiencia de usuario.</p>
+        <div class="highlight-box">
+          <h4>Idea fuerza</h4>
+          <p>TuristSpain convierte una pregunta ambigua —“¿qué hago cerca de aquí?”— en una respuesta práctica: lugares cercanos, datos accionables, distancia aproximada, horarios, teléfono, mapa y enlace de reserva.</p>
+        </div>
+        <h3>1.1 Decisión ejecutiva</h3>
+        <table>
+          <thead><tr><th>Dimensión</th><th>Decisión tomada</th><th>Justificación</th><th>Impacto esperado</th></tr></thead>
+          <tbody>
+            <tr><td>Producto</td><td>PWA móvil-first</td><td>Reduce fricción de instalación y sirve tanto para turistas como agencias.</td><td>Mayor adopción inicial y menor coste de distribución.</td></tr>
+            <tr><td>Datos</td><td>Supabase como backend</td><td>Base SQL, API inmediata, escalabilidad simple y buena velocidad para MVP.</td><td>Desarrollo rápido sin infraestructura compleja.</td></tr>
+            <tr><td>Geolocalización</td><td>Filtro radial de 75 km</td><td>Radio suficientemente amplio para escapadas, pero acotado para no saturar.</td><td>Resultados relevantes y menor fatiga cognitiva.</td></tr>
+            <tr><td>IA</td><td>IA como copiloto de desarrollo</td><td>Acelera prototipado, generación de componentes, validación de errores y documentación.</td><td>Menos tiempo de ejecución y mejor trazabilidad.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="contexto">
+      <h2><span class="icon">🌍</span>2. Contexto y oportunidad</h2>
+      <div class="card">
+        <p>El turismo español tiene una paradoja clara: dispone de una enorme riqueza patrimonial, gastronómica, natural y local, pero el usuario medio termina visitando siempre los mismos puntos visibles en grandes plataformas. Esto produce saturación en unos pocos lugares y baja visibilidad para municipios, restaurantes, rutas y actividades de alto valor que no cuentan con una estrategia digital potente.</p>
+        <p>TuristSpain ataca esa asimetría. No intenta competir como una red social turística generalista ni como un marketplace gigante. Su posicionamiento es más preciso: <strong>descubrimiento de proximidad accionable</strong>. El valor no está en tener millones de registros, sino en mostrar pocos resultados útiles en el momento exacto.</p>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">🏘️</span><h4>Economía local</h4><p>Da visibilidad a negocios, recursos rurales y experiencias que no aparecen en los primeros resultados de buscadores.</p></div>
+          <div class="mini-card"><span class="emoji">🧠</span><h4>Menos saturación mental</h4><p>Reduce la comparación interminable entre blogs, mapas, reseñas, redes sociales y webs oficiales.</p></div>
+          <div class="mini-card"><span class="emoji">🧭</span><h4>Decisión contextual</h4><p>Recomienda según ubicación, distancia y categoría, no solo por popularidad global.</p></div>
+        </div>
+        <h3>2.1 Oportunidad de producto</h3>
+        <p>La oportunidad se sitúa entre tres necesidades: rapidez para el turista, capacidad de recomendación para agencias y digitalización ligera para destinos pequeños. El MVP permite demostrar la propuesta sin construir todavía un sistema complejo de reservas, pagos o personalización avanzada.</p>
+        <div class="bar-chart">
+          <div class="bar-row"><div class="bar-label">Relevancia de proximidad</div><div class="bar-track"><div class="bar" style="width:92%"></div></div><strong>92%</strong></div>
+          <div class="bar-row"><div class="bar-label">Necesidad de datos fiables</div><div class="bar-track"><div class="bar success" style="width:88%"></div></div><strong>88%</strong></div>
+          <div class="bar-row"><div class="bar-label">Complejidad técnica inicial</div><div class="bar-track"><div class="bar secondary" style="width:54%"></div></div><strong>54%</strong></div>
+          <div class="bar-row"><div class="bar-label">Potencial de escalabilidad</div><div class="bar-track"><div class="bar" style="width:85%"></div></div><strong>85%</strong></div>
+        </div>
+        <p class="caption">Gráfico cualitativo de priorización del MVP: cuanto mayor es el valor, más relevante es la dimensión para el proyecto.</p>
+      </div>
+    </section>
+
+    <section id="problema">
+      <h2><span class="icon">⚠️</span>3. Problema turístico</h2>
+      <div class="card">
+        <h3>3.1 Problema principal</h3>
+        <p>El usuario no carece de información. Carece de <strong>información filtrada, fiable y accionable</strong>. La abundancia de fuentes genera una experiencia lenta: abrir Google Maps, mirar reseñas, comparar fotos, buscar horarios, comprobar si hay reserva, validar distancia real y repetir el proceso para cada alternativa.</p>
+        <p>Este coste de búsqueda perjudica especialmente a turistas con tiempo limitado, familias, personas mayores, viajeros en coche, agencias que preparan itinerarios y municipios que dependen de que el visitante encuentre actividades complementarias.</p>
+        <h3>3.2 Mapa de fricciones</h3>
+        <table>
+          <thead><tr><th>Perfil</th><th>Fricción</th><th>Consecuencia</th><th>Respuesta de TuristSpain</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Turista urbano</strong></td><td>Demasiadas opciones repetidas.</td><td>Visita solo lugares hiperpopulares.</td><td>Filtro por distancia y categorías concretas.</td></tr>
+            <tr><td><strong>Familia en ruta</strong></td><td>Necesita decisiones rápidas y prácticas.</td><td>Tiempo perdido buscando comida o actividades.</td><td>Fichas con llamada, mapa, horario y reserva.</td></tr>
+            <tr><td><strong>Agencia de viajes</strong></td><td>Recomendaciones manuales caso a caso.</td><td>Menor productividad comercial.</td><td>Modo tabla para comparar opciones y cierres.</td></tr>
+            <tr><td><strong>Municipio pequeño</strong></td><td>Poca visibilidad digital.</td><td>Turismo de paso sin gasto local.</td><td>Indexación estructurada de POIs locales.</td></tr>
+            <tr><td><strong>Restaurante local</strong></td><td>No aparece en rutas genéricas.</td><td>Dependencia de reseñas externas.</td><td>Categoría gastronómica destacada.</td></tr>
+          </tbody>
+        </table>
+        <h3>3.3 Árbol del problema</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+flowchart TD
+  A[Usuario quiere decidir qué hacer cerca] --> B[Consulta múltiples fuentes]
+  B --> C[Información duplicada o incompleta]
+  B --> D[Horarios y enlaces dispersos]
+  B --> E[Distancias no comparables]
+  C --> F[Fatiga de decisión]
+  D --> F
+  E --> F
+  F --> G[Elección lenta o conservadora]
+  G --> H[Saturación de puntos turísticos conocidos]
+  G --> I[Menor visibilidad para negocios locales]
+  H --> J[Experiencia turística peor]
+  I --> J
+          </pre>
+        </div>
+        <div class="danger-box highlight-box">
+          <h4>Conclusión del diagnóstico</h4>
+          <p>El problema no se resuelve añadiendo más información. Se resuelve reduciendo ruido, ordenando por proximidad y presentando acciones claras.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="objetivos">
+      <h2><span class="icon">🎯</span>4. Objetivos y alcance del proyecto</h2>
+      <div class="card">
+        <p>El alcance del MVP se define para demostrar valor real sin sobredimensionar el desarrollo. La primera versión se centra en descubrimiento, no en pagos, reseñas propias ni sistemas avanzados de recomendación predictiva.</p>
+        <h3>4.1 Objetivo general</h3>
+        <p>Diseñar y construir una aplicación web progresiva que permita a cualquier usuario encontrar puntos de interés turísticos y gastronómicos cercanos de forma rápida, usable y accionable, usando datos estructurados y geolocalización.</p>
+        <h3>4.2 Objetivos específicos</h3>
+        <div class="grid grid-2">
+          <div class="mini-card"><span class="emoji">📍</span><h4>Geolocalización útil</h4><p>Calcular distancia entre usuario y POIs mediante coordenadas, limitando resultados a un radio de 75 km.</p></div>
+          <div class="mini-card"><span class="emoji">🗂️</span><h4>Datos estructurados</h4><p>Definir un modelo de datos limpio con nombre, descripción, categoría, coordenadas, horario, teléfono, imagen y enlaces.</p></div>
+          <div class="mini-card"><span class="emoji">📱</span><h4>Interfaz móvil</h4><p>Crear vistas de lista, tabla y ficha para responder a necesidades diferentes: usuario final, comparativa y presentación visual.</p></div>
+          <div class="mini-card"><span class="emoji">⚡</span><h4>Prototipado acelerado</h4><p>Aplicar IA generativa para reducir tiempos de desarrollo, manteniendo revisión humana de requisitos, pruebas y calidad.</p></div>
+        </div>
+        <h3>4.3 Dentro y fuera de alcance</h3>
+        <table>
+          <thead><tr><th>Incluido en el MVP</th><th>No incluido en esta fase</th><th>Motivo</th></tr></thead>
+          <tbody>
+            <tr><td>Consulta de POIs desde Supabase.</td><td>Pagos integrados.</td><td>Primero se valida descubrimiento y conversión hacia enlaces externos.</td></tr>
+            <tr><td>Filtro por ubicación, categoría y distancia.</td><td>Motor de IA personalizado por usuario.</td><td>Requiere datos de uso y política de privacidad más compleja.</td></tr>
+            <tr><td>Fichas con datos accionables.</td><td>Gestión de reseñas propias.</td><td>Evita moderación y sesgos en fase inicial.</td></tr>
+            <tr><td>PWA instalable.</td><td>Apps nativas iOS/Android.</td><td>La PWA permite validar con menor coste.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="solucion">
+      <h2><span class="icon">💡</span>5. Solución propuesta</h2>
+      <div class="card">
+        <p class="section-lead">TuristSpain se basa en una experiencia directa: abrir, permitir ubicación, filtrar, elegir y actuar. La aplicación no fuerza registro inicial ni genera una barrera de entrada innecesaria.</p>
+        <h3>5.1 Propuesta de valor</h3>
+        <div class="grid grid-4">
+          <div class="mini-card"><span class="emoji">🔎</span><h4>Descubrir</h4><p>Encuentra POIs turísticos, culturales, naturales y gastronómicos cercanos.</p></div>
+          <div class="mini-card"><span class="emoji">🧮</span><h4>Comparar</h4><p>Visualiza distancia, horarios y datos clave en modo tabla.</p></div>
+          <div class="mini-card"><span class="emoji">📞</span><h4>Actuar</h4><p>Acceso directo a llamada, mapa, web o reserva.</p></div>
+          <div class="mini-card"><span class="emoji">🧠</span><h4>Decidir</h4><p>Reduce opciones irrelevantes y mejora la confianza de elección.</p></div>
+        </div>
+        <h3>5.2 Fórmula funcional</h3>
+        <div class="highlight-box success-box">
+          <p style="font-size:1.2rem; margin:0;"><strong>Valor = Ubicación actual + Datos fiables + Filtro por radio + Vista adecuada + Acción inmediata</strong></p>
+        </div>
+        <h3>5.3 Diferenciación frente a alternativas</h3>
+        <table>
+          <thead><tr><th>Alternativa</th><th>Ventaja</th><th>Limitación</th><th>Diferencia de TuristSpain</th></tr></thead>
+          <tbody>
+            <tr><td>Google Maps</td><td>Base de datos enorme.</td><td>Demasiado ruido y enfoque generalista.</td><td>Selección curada para turismo y gastronomía.</td></tr>
+            <tr><td>Tripadvisor</td><td>Reseñas y ranking.</td><td>Más orientado a popularidad que a proximidad contextual.</td><td>Radio fijo y uso inmediato durante ruta.</td></tr>
+            <tr><td>Blogs turísticos</td><td>Contenido narrativo.</td><td>Puede estar desactualizado y no depende de ubicación.</td><td>Datos estructurados y accionables.</td></tr>
+            <tr><td>Webs municipales</td><td>Fuente oficial.</td><td>UX irregular y baja comparación entre destinos.</td><td>Interfaz unificada para distintos territorios.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="usuarios">
+      <h2><span class="icon">👥</span>6. Usuarios y casos de uso</h2>
+      <div class="card">
+        <h3>6.1 Personas principales</h3>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">👨‍👩‍👧‍👦</span><h4>Familia en escapada</h4><p>Busca actividades cercanas, restaurantes con teléfono y rutas asumibles. Necesita decidir en minutos.</p></div>
+          <div class="mini-card"><span class="emoji">🧳</span><h4>Viajero cultural</h4><p>Quiere patrimonio, museos, pueblos y experiencias locales fuera del circuito obvio.</p></div>
+          <div class="mini-card"><span class="emoji">🧑‍💼</span><h4>Agente de viajes</h4><p>Necesita comparar recursos para preparar propuestas, itinerarios o recomendaciones rápidas a clientes.</p></div>
+        </div>
+        <h3>6.2 Casos de uso priorizados</h3>
+        <table>
+          <thead><tr><th>ID</th><th>Caso de uso</th><th>Actor</th><th>Prioridad</th><th>Criterio de aceptación</th></tr></thead>
+          <tbody>
+            <tr><td>CU-01</td><td>Buscar POIs cercanos por ubicación actual.</td><td>Turista</td><td>Alta</td><td>El usuario ve resultados dentro de 75 km ordenados por distancia.</td></tr>
+            <tr><td>CU-02</td><td>Filtrar por gastronomía, cultura, naturaleza o actividad.</td><td>Turista</td><td>Alta</td><td>Los resultados cambian sin recargar la página.</td></tr>
+            <tr><td>CU-03</td><td>Comparar resultados en modo tabla.</td><td>Agencia</td><td>Media</td><td>Se muestran horario, distancia, contacto y categoría.</td></tr>
+            <tr><td>CU-04</td><td>Abrir mapa o enlace de reserva.</td><td>Turista</td><td>Alta</td><td>La ficha incluye botones de acción visibles.</td></tr>
+            <tr><td>CU-05</td><td>Instalar la PWA en móvil.</td><td>Usuario frecuente</td><td>Media</td><td>La app puede añadirse a pantalla de inicio.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="ux">
+      <h2><span class="icon">🧩</span>7. UX y flujos de interacción</h2>
+      <div class="card">
+        <p>La experiencia se diseña con un principio: <strong>mínima fricción, máxima utilidad</strong>. El usuario no debe aprender un sistema complejo. Debe reconocer rápidamente dónde está, qué hay cerca y qué acción puede ejecutar.</p>
+        <h3>7.1 User journey principal</h3>
+        <div class="journey-step"><div class="step-icon">1</div><div><h4>Entrada</h4><p>El usuario abre la PWA desde navegador o icono instalado. Se carga la interfaz base y se explica el valor de activar la ubicación.</p></div></div>
+        <div class="journey-step"><div class="step-icon">2</div><div><h4>Permiso de ubicación</h4><p>La app solicita GPS solo cuando es necesario. Si el usuario rechaza el permiso, debe poder buscar manualmente por zona en una fase futura.</p></div></div>
+        <div class="journey-step"><div class="step-icon">3</div><div><h4>Consulta de datos</h4><p>El frontend obtiene los POIs desde Supabase y aplica cálculo de distancia. Los resultados se filtran por radio y categoría.</p></div></div>
+        <div class="journey-step"><div class="step-icon">4</div><div><h4>Exploración</h4><p>El usuario alterna entre modo lista, tabla o ficha visual según su necesidad.</p></div></div>
+        <div class="journey-step"><div class="step-icon">5</div><div><h4>Acción</h4><p>La decisión se convierte en llamada, reserva, navegación en mapa o visita a la web oficial.</p></div></div>
+        <h3>7.2 Diagrama de flujo UX</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+flowchart LR
+  A[Inicio PWA] --> B{Permiso GPS?}
+  B -- Sí --> C[Obtener coordenadas]
+  B -- No --> D[Mostrar explicación y opción manual futura]
+  C --> E[Consultar POIs en Supabase]
+  E --> F[Calcular distancia]
+  F --> G{Dentro de 75 km?}
+  G -- Sí --> H[Mostrar resultado]
+  G -- No --> I[Ocultar]
+  H --> J{Vista elegida}
+  J --> K[Lista]
+  J --> L[Tabla]
+  J --> M[Ficha]
+  K --> N[Acción: mapa, llamada, reserva]
+  L --> N
+  M --> N
+          </pre>
+        </div>
+        <h3>7.3 Principios visuales</h3>
+        <div class="tag-list">
+          <span class="tag">📱 Mobile first</span><span class="tag">🔘 Botones grandes</span><span class="tag">🎨 Alto contraste</span><span class="tag">🧭 Jerarquía clara</span><span class="tag">⚡ Carga rápida</span><span class="tag">🧓 Lectura accesible</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="arquitectura">
+      <h2><span class="icon">🏗️</span>8. Arquitectura del MVP</h2>
+      <div class="card">
+        <p>La arquitectura se ha mantenido deliberadamente sencilla. El objetivo es evitar una sobreingeniería que retrase la validación. El MVP separa claramente interfaz, lógica de geolocalización, acceso a datos y presentación.</p>
+        <h3>8.1 Componentes principales</h3>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">🖥️</span><h4>Frontend PWA</h4><p>HTML, CSS y JavaScript con diseño responsive, vistas conmutables y lógica de interacción.</p></div>
+          <div class="mini-card"><span class="emoji">📡</span><h4>API Supabase</h4><p>Consulta de puntos turísticos, imágenes, enlaces y metadatos operativos desde base SQL.</p></div>
+          <div class="mini-card"><span class="emoji">📍</span><h4>Geolocation API</h4><p>Obtención de coordenadas del usuario y cálculo de distancia mediante fórmula de Haversine.</p></div>
+        </div>
+        <h3>8.2 Diagrama de arquitectura</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+flowchart TB
+  U[Usuario móvil / navegador] --> PWA[PWA TuristSpain]
+  PWA --> GEO[Geolocation API]
+  PWA --> UI[Motor de vistas: lista, tabla, ficha]
+  PWA --> LOGIC[Lógica de filtrado y distancia]
+  LOGIC --> HAV[Haversine / radio 75 km]
+  PWA --> API[Supabase Client]
+  API --> DB[(Supabase PostgreSQL)]
+  DB --> T1[Tabla POIs]
+  DB --> T2[Tabla categorías]
+  DB --> T3[Storage imágenes]
+  DB --> T4[Enlaces y contacto]
+  HAV --> UI
+  API --> UI
+  UI --> ACT[Acciones: llamar, mapa, reservar]
+          </pre>
+        </div>
+        <h3>8.3 Decisiones técnicas clave</h3>
+        <table>
+          <thead><tr><th>Decisión</th><th>Razón</th><th>Beneficio</th><th>Riesgo controlado</th></tr></thead>
+          <tbody>
+            <tr><td>Vanilla JS o stack ligero</td><td>Evita dependencias innecesarias.</td><td>Menor peso y despliegue simple.</td><td>Más disciplina en organización del código.</td></tr>
+            <tr><td>Supabase</td><td>Proporciona base, API y auth si se necesita después.</td><td>Escala desde MVP hasta producto real.</td><td>Requiere políticas RLS correctas.</td></tr>
+            <tr><td>Cálculo de distancia cliente</td><td>Suficiente para prototipo y datasets moderados.</td><td>Desarrollo rápido.</td><td>En fase avanzada conviene migrar a PostGIS.</td></tr>
+            <tr><td>Vista triple</td><td>Diferentes usuarios necesitan diferentes lecturas.</td><td>Más utilidad sin añadir módulos.</td><td>Mayor esfuerzo de UX responsive.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="datos">
+      <h2><span class="icon">🗄️</span>9. Modelo de datos y gobernanza</h2>
+      <div class="card">
+        <p>La calidad de TuristSpain depende más de los datos que de la interfaz. Una mala coordenada, un horario desactualizado o un enlace roto destruyen confianza. Por eso el modelo debe ser simple, verificable y ampliable.</p>
+        <h3>9.1 Estructura mínima de POI</h3>
+        <table>
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Descripción</th><th>Uso en interfaz</th></tr></thead>
+          <tbody>
+            <tr><td><code>id</code></td><td>UUID / int</td><td>Identificador único del punto.</td><td>Renderizado y enlaces.</td></tr>
+            <tr><td><code>name</code></td><td>Texto</td><td>Nombre del lugar o experiencia.</td><td>Título de ficha.</td></tr>
+            <tr><td><code>category</code></td><td>Texto / FK</td><td>Cultura, naturaleza, gastronomía, actividad.</td><td>Filtros y etiquetas.</td></tr>
+            <tr><td><code>latitude</code>, <code>longitude</code></td><td>Decimal</td><td>Coordenadas geográficas.</td><td>Cálculo de distancia y mapa.</td></tr>
+            <tr><td><code>schedule</code></td><td>Texto / JSON</td><td>Horarios, cierres y notas.</td><td>Modo tabla y ficha.</td></tr>
+            <tr><td><code>phone</code></td><td>Texto</td><td>Contacto directo.</td><td>Botón de llamada.</td></tr>
+            <tr><td><code>booking_url</code></td><td>URL</td><td>Reserva, entradas o web oficial.</td><td>Botón de conversión.</td></tr>
+            <tr><td><code>image_url</code></td><td>URL</td><td>Imagen optimizada.</td><td>Ficha visual.</td></tr>
+            <tr><td><code>updated_at</code></td><td>Timestamp</td><td>Fecha de última revisión.</td><td>Control de fiabilidad.</td></tr>
+          </tbody>
+        </table>
+        <h3>9.2 ERD propuesto</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+erDiagram
+  CATEGORIES ||--o{ POIS : clasifica
+  MUNICIPALITIES ||--o{ POIS : contiene
+  POIS ||--o{ POI_LINKS : tiene
+  POIS ||--o{ POI_IMAGES : muestra
+  POIS ||--o{ POI_TAGS : etiqueta
+
+  POIS {
+    uuid id PK
+    string name
+    string description
+    decimal latitude
+    decimal longitude
+    string schedule
+    string phone
+    string status
+    timestamp updated_at
+  }
+  CATEGORIES {
+    int id PK
+    string name
+    string icon
+  }
+  MUNICIPALITIES {
+    int id PK
+    string name
+    string province
+    string autonomous_region
+  }
+  POI_LINKS {
+    int id PK
+    uuid poi_id FK
+    string type
+    string url
+  }
+  POI_IMAGES {
+    int id PK
+    uuid poi_id FK
+    string url
+    string alt_text
+  }
+  POI_TAGS {
+    int id PK
+    uuid poi_id FK
+    string tag
+  }
+          </pre>
+        </div>
+        <h3>9.3 Reglas de calidad de datos</h3>
+        <div class="grid grid-2">
+          <div class="mini-card"><span class="emoji">✅</span><h4>Validación de coordenadas</h4><p>Latitud entre -90 y 90, longitud entre -180 y 180, y comprobación visual en mapa antes de publicar.</p></div>
+          <div class="mini-card"><span class="emoji">🔁</span><h4>Actualización periódica</h4><p>Campos <code>updated_at</code> y estado de revisión para detectar registros obsoletos.</p></div>
+          <div class="mini-card"><span class="emoji">🧾</span><h4>Fuente identificable</h4><p>Cada POI debe conservar referencia de origen: web oficial, ayuntamiento, ficha pública o carga manual.</p></div>
+          <div class="mini-card"><span class="emoji">🧹</span><h4>Normalización</h4><p>Categorías, provincias y URLs deben seguir formato común para evitar duplicados y errores de filtrado.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ia">
+      <h2><span class="icon">🤖</span>10. Vibe coding e IA aplicada</h2>
+      <div class="card">
+        <p>El proyecto se ha desarrollado usando una metodología de <strong>vibe coding</strong>: se define el comportamiento deseado mediante prompts, se generan iteraciones funcionales con IA, se prueban, se corrigen y se consolidan las partes válidas. Este enfoque acelera el desarrollo, pero exige criterio técnico. La IA genera; el responsable del proyecto decide.</p>
+        <h3>10.1 Rol humano vs rol de la IA</h3>
+        <table>
+          <thead><tr><th>Actividad</th><th>Responsabilidad humana</th><th>Apoyo de IA</th><th>Control de calidad</th></tr></thead>
+          <tbody>
+            <tr><td>Definición de producto</td><td>Problema, usuarios, alcance y prioridad.</td><td>Sugerencia de estructura y benchmark.</td><td>Validación contra necesidad real.</td></tr>
+            <tr><td>Arquitectura</td><td>Elegir stack y límites del MVP.</td><td>Proponer esquemas y código inicial.</td><td>Revisión de seguridad, escalabilidad y simplicidad.</td></tr>
+            <tr><td>Frontend</td><td>Aprobar UX, jerarquía visual y accesibilidad.</td><td>Generar componentes, estilos y estados.</td><td>Pruebas en móvil y corrección de errores.</td></tr>
+            <tr><td>Datos</td><td>Definir campos y reglas de calidad.</td><td>Normalizar datasets y crear SQL inicial.</td><td>Comprobación manual de registros críticos.</td></tr>
+            <tr><td>Documentación</td><td>Seleccionar narrativa y evidencias.</td><td>Redactar borradores y diagramas.</td><td>Eliminar exageraciones y dejar trazabilidad.</td></tr>
+          </tbody>
+        </table>
+        <h3>10.2 Ciclo de trabajo con IA</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+flowchart LR
+  A[Brief de producto] --> B[Prompt de generación]
+  B --> C[Salida de IA]
+  C --> D[Revisión humana]
+  D --> E{¿Cumple?}
+  E -- No --> F[Prompt de corrección]
+  F --> C
+  E -- Sí --> G[Integración en código]
+  G --> H[Prueba funcional]
+  H --> I{¿Error?}
+  I -- Sí --> J[Debug con IA + inspección manual]
+  J --> H
+  I -- No --> K[Documentación y versión]
+          </pre>
+        </div>
+        <h3>10.3 Ventajas y límites</h3>
+        <div class="grid grid-2">
+          <div class="highlight-box success-box"><h4>Ventajas</h4><ul><li>Reduce tiempo de prototipado.</li><li>Permite explorar varias soluciones visuales rápido.</li><li>Ayuda a documentar decisiones técnicas.</li><li>Acelera depuración de errores comunes.</li></ul></div>
+          <div class="highlight-box warning-box"><h4>Límites</h4><ul><li>Puede inventar APIs o detalles inexistentes.</li><li>Puede generar código funcional pero poco mantenible.</li><li>No sustituye pruebas reales.</li><li>Necesita prompts precisos y revisión continua.</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prompts">
+      <h2><span class="icon">📝</span>11. Prompts elegidos y justificación</h2>
+      <div class="card">
+        <p class="section-lead">Los prompts no se tratan como frases sueltas. Funcionan como especificaciones breves de producto. A continuación se documentan los prompts clave usados o recomendados para construir el MVP de forma controlada.</p>
+
+        <div class="prompt-title">🧭 Prompt 1 · Definición de producto</div>
+        <div class="prompt-box" data-label="Producto">
+Actúa como experto en producto TravelTech. Define un MVP llamado TuristSpain: una PWA para descubrir puntos turísticos y gastronómicos cercanos en España. Debe resolver la pregunta “qué puedo visitar cerca de mí ahora”. Prioriza funcionalidades, usuarios, propuesta de valor, riesgos y métricas. No propongas pagos ni red social en la primera versión.
+        </div>
+        <p><strong>Por qué se eligió:</strong> fuerza a mantener el alcance bajo control y evita que la IA proponga una plataforma demasiado grande para un MVP académico.</p>
+
+        <div class="prompt-title">🏗️ Prompt 2 · Arquitectura técnica</div>
+        <div class="prompt-box" data-label="Arquitectura">
+Diseña la arquitectura de una PWA turística con frontend ligero, Supabase como backend y Geolocation API. Necesito componentes, flujo de datos, tabla principal de POIs, campos mínimos, estrategia de filtrado por radio de 75 km y riesgos técnicos. Devuelve también un diagrama Mermaid de arquitectura.
+        </div>
+        <p><strong>Por qué se eligió:</strong> conecta decisiones técnicas con funcionalidad real: ubicación, backend, filtrado, datos y presentación.</p>
+
+        <div class="prompt-title">📍 Prompt 3 · Geolocalización y distancia</div>
+        <div class="prompt-box" data-label="GPS">
+Implementa una función JavaScript robusta para calcular la distancia entre la ubicación del usuario y cada POI usando Haversine. Valida latitud y longitud, descarta registros inválidos, ordena por distancia ascendente y filtra resultados dentro de 75 km. Añade comentarios claros y mensajes de error para permisos GPS denegados.
+        </div>
+        <p><strong>Por qué se eligió:</strong> ataca el núcleo del producto. Sin distancia fiable, la app pierde sentido.</p>
+
+        <div class="prompt-title">🎨 Prompt 4 · UX de triple vista</div>
+        <div class="prompt-box" data-label="UX">
+Crea una interfaz móvil-first para TuristSpain con tres modos conmutables sin recargar: lista rápida, tabla comparativa y ficha visual. Cada POI debe mostrar nombre, categoría, distancia, horario, teléfono, botón de mapa y enlace de reserva. Usa una estética limpia, moderna, accesible y con iconos por categoría.
+        </div>
+        <p><strong>Por qué se eligió:</strong> resuelve necesidades distintas: exploración rápida, comparación profesional y presentación atractiva.</p>
+
+        <div class="prompt-title">🗄️ Prompt 5 · Modelo de datos Supabase</div>
+        <div class="prompt-box" data-label="Datos">
+Genera el SQL inicial para Supabase de una tabla pois con id, name, description, category, latitude, longitude, schedule, phone, website_url, booking_url, image_url, municipality, province, status y updated_at. Añade restricciones básicas, índices recomendados y una política RLS de lectura pública y escritura restringida.
+        </div>
+        <p><strong>Por qué se eligió:</strong> documenta desde el inicio seguridad, calidad de datos e índices, no solo campos visibles.</p>
+
+        <div class="prompt-title">🧪 Prompt 6 · Pruebas y depuración</div>
+        <div class="prompt-box" data-label="QA">
+Actúa como QA técnico. Revisa este flujo de TuristSpain: permiso GPS, carga de POIs desde Supabase, cálculo de distancia, filtros de categoría y cambio de vistas. Devuelve una matriz de pruebas con casos positivos, negativos, edge cases, comportamiento esperado y prioridad.
+        </div>
+        <p><strong>Por qué se eligió:</strong> evita que el informe parezca solo diseño. Introduce validación, casos límite y criterios de aceptación.</p>
+
+        <div class="prompt-title">📄 Prompt 7 · Memoria ejecutiva</div>
+        <div class="prompt-box" data-label="Informe">
+Actúa como consultor senior de desarrollo de proyectos. Redacta una memoria ejecutiva y técnica para TuristSpain. Debe incluir resumen, problema, solución, usuarios, arquitectura, datos, IA responsable, riesgos, métricas, roadmap, prompts utilizados y diagramas Mermaid. Tono profesional, académico y defendible ante tribunal.
+        </div>
+        <p><strong>Por qué se eligió:</strong> convierte la ejecución técnica en una narrativa defendible, con decisiones, límites y evidencias.</p>
+      </div>
+    </section>
+
+    <section id="desarrollo">
+      <h2><span class="icon">🛠️</span>12. Construcción técnica del MVP</h2>
+      <div class="card">
+        <h3>12.1 Fases de construcción</h3>
+        <div class="timeline">
+          <div class="timeline-item" data-num="1"><h4>Brief y definición funcional</h4><p>Se delimitó el problema: búsqueda turística cercana y accionable. Se descartaron pagos, perfiles complejos y reseñas propias para mantener foco.</p></div>
+          <div class="timeline-item" data-num="2"><h4>Diseño de datos</h4><p>Se definieron los campos mínimos de POI y los requisitos de geolocalización: latitud, longitud, categoría, contacto, horarios e imagen.</p></div>
+          <div class="timeline-item" data-num="3"><h4>Interfaz base</h4><p>Se creó una estructura mobile-first con tarjetas, filtros y botones de acción. El objetivo era claridad antes que decoración.</p></div>
+          <div class="timeline-item" data-num="4"><h4>Integración Supabase</h4><p>Se conectó el frontend con la base y se validó la carga de registros. Se añadieron controles ante errores de conexión o datos vacíos.</p></div>
+          <div class="timeline-item" data-num="5"><h4>Geolocalización y filtrado</h4><p>Se implementó el cálculo de distancia y el radio de 75 km, con orden ascendente por cercanía.</p></div>
+          <div class="timeline-item" data-num="6"><h4>Pruebas, ajustes y documentación</h4><p>Se revisaron casos de GPS denegado, coordenadas inválidas, pantallas pequeñas y rendimiento inicial.</p></div>
+        </div>
+        <h3>12.2 Secuencia técnica</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+sequenceDiagram
+  participant U as Usuario
+  participant P as PWA TuristSpain
+  participant G as Geolocation API
+  participant S as Supabase
+  participant V as Vistas UI
+
+  U->>P: Abre aplicación
+  P->>G: Solicita ubicación
+  G-->>P: Devuelve latitud/longitud
+  P->>S: Consulta POIs activos
+  S-->>P: Devuelve registros turísticos
+  P->>P: Valida coordenadas
+  P->>P: Calcula distancia Haversine
+  P->>P: Filtra radio 75 km
+  P->>V: Renderiza lista/tabla/ficha
+  U->>V: Selecciona POI
+  V-->>U: Mapa, llamada o reserva
+          </pre>
+        </div>
+        <h3>12.3 Criterios de aceptación técnicos</h3>
+        <table>
+          <thead><tr><th>Funcionalidad</th><th>Criterio de aceptación</th><th>Prioridad</th><th>Estado esperado</th></tr></thead>
+          <tbody>
+            <tr><td>Ubicación</td><td>Solicita permisos y captura coordenadas en navegador compatible.</td><td>Alta</td><td>Obligatorio MVP</td></tr>
+            <tr><td>Filtro radial</td><td>No muestra POIs fuera de 75 km salvo modo diagnóstico.</td><td>Alta</td><td>Obligatorio MVP</td></tr>
+            <tr><td>Datos vacíos</td><td>Muestra mensaje comprensible si no hay resultados.</td><td>Alta</td><td>Obligatorio MVP</td></tr>
+            <tr><td>Vista tabla</td><td>Permite comparar POIs sin perder datos clave.</td><td>Media</td><td>Deseable MVP</td></tr>
+            <tr><td>PWA</td><td>Incluye manifest, iconos y configuración instalable.</td><td>Media</td><td>Deseable MVP</td></tr>
+            <tr><td>Accesibilidad</td><td>Contraste correcto, botones visibles y textos legibles.</td><td>Alta</td><td>Obligatorio MVP</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="evaluacion">
+      <h2><span class="icon">📊</span>13. Evaluación y métricas</h2>
+      <div class="card">
+        <p>La evaluación del MVP debe distinguir entre métricas de producto, métricas técnicas y métricas de experiencia. En esta fase, lo importante no es demostrar tracción comercial, sino confirmar que el flujo reduce tiempo de búsqueda y resulta comprensible.</p>
+        <h3>13.1 Métricas propuestas</h3>
+        <div class="kpi-grid">
+          <div class="kpi-card"><h4>Tiempo hasta primer resultado útil</h4><div class="value">&lt; 15s</div><div class="label">Objetivo UX</div></div>
+          <div class="kpi-card"><h4>Clicks hasta acción</h4><div class="value">≤ 3</div><div class="label">Mapa / llamada / reserva</div></div>
+          <div class="kpi-card"><h4>Resultados relevantes</h4><div class="value">80%</div><div class="label">Meta cualitativa</div></div>
+          <div class="kpi-card"><h4>Registros válidos</h4><div class="value">95%</div><div class="label">Calidad de datos</div></div>
+        </div>
+        <h3>13.2 Comparativa antes / después</h3>
+        <table>
+          <thead><tr><th>Actividad</th><th>Proceso tradicional</th><th>Con TuristSpain</th><th>Mejora esperada</th></tr></thead>
+          <tbody>
+            <tr><td>Encontrar restaurante cercano</td><td>Buscar, filtrar reseñas, comprobar distancia y llamar.</td><td>Filtrar gastronomía y pulsar llamada/reserva.</td><td>Muy alta</td></tr>
+            <tr><td>Preparar recomendación de agencia</td><td>Consultar varias fuentes y copiar datos manualmente.</td><td>Modo tabla con distancia, horario y contacto.</td><td>Alta</td></tr>
+            <tr><td>Descubrir recurso local</td><td>Depende de búsquedas genéricas o recomendaciones externas.</td><td>POIs locales indexados por radio.</td><td>Alta</td></tr>
+            <tr><td>Decidir actividad familiar</td><td>Comparación lenta entre planes.</td><td>Listado cercano con categorías.</td><td>Media-alta</td></tr>
+          </tbody>
+        </table>
+        <h3>13.3 Gráfico de impacto estimado</h3>
+        <div class="bar-chart">
+          <div class="bar-row"><div class="bar-label">Reducción de tiempo de búsqueda</div><div class="bar-track"><div class="bar success" style="width:90%"></div></div><strong>90%</strong></div>
+          <div class="bar-row"><div class="bar-label">Claridad para el usuario</div><div class="bar-track"><div class="bar" style="width:84%"></div></div><strong>84%</strong></div>
+          <div class="bar-row"><div class="bar-label">Utilidad para agencias</div><div class="bar-track"><div class="bar" style="width:78%"></div></div><strong>78%</strong></div>
+          <div class="bar-row"><div class="bar-label">Riesgo de dato desactualizado</div><div class="bar-track"><div class="bar secondary" style="width:42%"></div></div><strong>42%</strong></div>
+        </div>
+        <p class="caption">Estimación de impacto del MVP; debe validarse con pruebas de usuarios y dataset real ampliado.</p>
+      </div>
+    </section>
+
+    <section id="riesgos">
+      <h2><span class="icon">🛡️</span>14. Riesgos y plan de mitigación</h2>
+      <div class="card">
+        <p>Un informe ejecutivo sólido no solo vende la solución. También reconoce sus riesgos. En TuristSpain, los riesgos principales están en calidad de datos, permisos de ubicación, dependencia de servicios externos y mantenimiento.</p>
+        <table>
+          <thead><tr><th>Riesgo</th><th>Probabilidad</th><th>Impacto</th><th>Mitigación</th></tr></thead>
+          <tbody>
+            <tr><td>Datos incompletos o desactualizados.</td><td>Alta</td><td>Alto</td><td>Campo <code>updated_at</code>, revisión periódica y fuentes oficiales.</td></tr>
+            <tr><td>Usuario deniega ubicación.</td><td>Media</td><td>Medio</td><td>Explicación clara del beneficio y búsqueda manual por zona en fase futura.</td></tr>
+            <tr><td>Coordenadas erróneas.</td><td>Media</td><td>Alto</td><td>Validación automática y comprobación visual en mapa antes de publicar.</td></tr>
+            <tr><td>Coste de escalado de consultas.</td><td>Media</td><td>Medio</td><td>Índices, paginación y futura migración a PostGIS si crece el dataset.</td></tr>
+            <tr><td>Alucinaciones de IA en desarrollo.</td><td>Media</td><td>Medio</td><td>Revisión manual, pruebas unitarias y documentación de prompts.</td></tr>
+            <tr><td>Dependencia de enlaces externos.</td><td>Alta</td><td>Medio</td><td>Monitorización de URLs y fallback a teléfono o mapa.</td></tr>
+          </tbody>
+        </table>
+        <h3>14.1 Matriz cualitativa</h3>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">🔴</span><h4>Alta prioridad</h4><p>Calidad de datos, coordenadas, privacidad y seguridad de lectura/escritura.</p></div>
+          <div class="mini-card"><span class="emoji">🟠</span><h4>Prioridad media</h4><p>GPS denegado, rendimiento con más registros, enlaces rotos y compatibilidad de navegadores.</p></div>
+          <div class="mini-card"><span class="emoji">🟢</span><h4>Prioridad controlada</h4><p>Diseño visual, iconografía y contenido de apoyo, siempre que no bloqueen el flujo principal.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="responsabilidad">
+      <h2><span class="icon">⚖️</span>15. Ética, privacidad e IA responsable</h2>
+      <div class="card">
+        <p>TuristSpain utiliza ubicación y se apoya en IA durante el desarrollo. Ambas dimensiones obligan a definir principios claros. La confianza del usuario depende de que la app sea transparente, no invasiva y no favorezca artificialmente unos negocios frente a otros.</p>
+        <h3>15.1 Principios aplicados</h3>
+        <div class="grid grid-2">
+          <div class="mini-card"><span class="emoji">🔐</span><h4>Privacidad por diseño</h4><p>La ubicación se usa para calcular cercanía. El MVP no necesita almacenar histórico de movimientos del usuario.</p></div>
+          <div class="mini-card"><span class="emoji">⚖️</span><h4>Neutralidad comercial inicial</h4><p>Los resultados deben ordenarse por distancia y relevancia, no por pagos ocultos.</p></div>
+          <div class="mini-card"><span class="emoji">🧾</span><h4>Trazabilidad del contenido</h4><p>Los POIs deben proceder de fuentes identificables y ser revisables.</p></div>
+          <div class="mini-card"><span class="emoji">♿</span><h4>Accesibilidad</h4><p>Tipografía legible, contraste suficiente y botones claros para uso móvil y perfiles no técnicos.</p></div>
+        </div>
+        <h3>15.2 Control del uso de IA</h3>
+        <table>
+          <thead><tr><th>Riesgo de IA</th><th>Ejemplo</th><th>Control aplicado</th></tr></thead>
+          <tbody>
+            <tr><td>Invención de datos turísticos</td><td>Crear POIs inexistentes o horarios falsos.</td><td>No publicar datos generados sin verificación externa.</td></tr>
+            <tr><td>Código inseguro</td><td>Exponer claves o permisos amplios.</td><td>Variables de entorno, RLS y revisión manual.</td></tr>
+            <tr><td>Sesgo en recomendaciones</td><td>Favorecer solo destinos populares.</td><td>Orden por distancia, categoría y criterios transparentes.</td></tr>
+            <tr><td>Documentación exagerada</td><td>Prometer funcionalidades no construidas.</td><td>Diferenciar MVP actual, hipótesis y roadmap.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="negocio">
+      <h2><span class="icon">💼</span>16. Viabilidad y modelo de evolución</h2>
+      <div class="card">
+        <p>El MVP tiene sentido si puede evolucionar hacia un producto sostenible. No es necesario monetizar en la primera fase, pero sí diseñar caminos realistas de crecimiento.</p>
+        <h3>16.1 Líneas de valor futuras</h3>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">🏛️</span><h4>Convenios con municipios</h4><p>Planes de digitalización turística para ayuntamientos y mancomunidades.</p></div>
+          <div class="mini-card"><span class="emoji">🧑‍💼</span><h4>Herramienta para agencias</h4><p>Panel B2B para generar propuestas de ruta y recomendaciones exportables.</p></div>
+          <div class="mini-card"><span class="emoji">🎟️</span><h4>Conversión externa</h4><p>Afiliación o comisión por experiencias, entradas y reservas verificadas.</p></div>
+        </div>
+        <h3>16.2 Hipótesis de validación</h3>
+        <table>
+          <thead><tr><th>Hipótesis</th><th>Cómo validarla</th><th>Indicador</th></tr></thead>
+          <tbody>
+            <tr><td>El usuario valora el radio de proximidad.</td><td>Test con usuarios en escapadas reales.</td><td>Porcentaje que activa ubicación y usa resultados.</td></tr>
+            <tr><td>Las agencias necesitan modo comparativo.</td><td>Entrevistas y prueba con agentes.</td><td>Uso del modo tabla y exportación solicitada.</td></tr>
+            <tr><td>Los municipios aceptarían cargar POIs.</td><td>Piloto con dataset municipal.</td><td>Número de registros aportados y frecuencia de actualización.</td></tr>
+            <tr><td>La gastronomía aumenta conversión.</td><td>Medir clics en llamada/reserva.</td><td>CTR de fichas gastronómicas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <h2><span class="icon">🗺️</span>17. Roadmap 2026-2027</h2>
+      <div class="card">
+        <p>La hoja de ruta separa validación, escalado de datos, inteligencia contextual y monetización. No conviene saltar a IA predictiva sin antes resolver calidad de datos y adopción.</p>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+gantt
+  title Roadmap TuristSpain
+  dateFormat  YYYY-MM-DD
+  axisFormat  %b %Y
+  section MVP
+  Prototipo funcional PWA           :done,    a1, 2026-01-01, 2026-03-31
+  Pruebas usuario y QA              :active,  a2, 2026-04-01, 2026-06-30
+  section Datos
+  Normalización dataset             :         b1, 2026-07-01, 2026-09-30
+  Pilotos municipales               :         b2, 2026-10-01, 2026-12-31
+  section Producto
+  Búsqueda manual por zona          :         c1, 2027-01-01, 2027-03-31
+  Personalización contextual        :         c2, 2027-04-01, 2027-06-30
+  section Negocio
+  Panel para agencias               :         d1, 2027-07-01, 2027-09-30
+  Marketplace de experiencias       :         d2, 2027-10-01, 2027-12-31
+          </pre>
+        </div>
+        <h3>17.1 Fases detalladas</h3>
+        <table>
+          <thead><tr><th>Fase</th><th>Objetivo</th><th>Entregables</th><th>Criterio de avance</th></tr></thead>
+          <tbody>
+            <tr><td>Fase 1 · Validación</td><td>Confirmar utilidad del flujo GPS → resultados → acción.</td><td>PWA, dataset inicial, pruebas.</td><td>Usuarios completan acción en menos de 3 clicks.</td></tr>
+            <tr><td>Fase 2 · Datos</td><td>Aumentar cobertura sin perder calidad.</td><td>Modelo ampliado, revisión de fuentes, panel admin básico.</td><td>POIs verificados y actualizados.</td></tr>
+            <tr><td>Fase 3 · Contexto</td><td>Incorporar hora, clima, apertura y preferencias ligeras.</td><td>Motor de reglas y filtros avanzados.</td><td>Más relevancia percibida por usuario.</td></tr>
+            <tr><td>Fase 4 · B2B</td><td>Convertir TuristSpain en herramienta para agencias y destinos.</td><td>Panel profesional, exportación de rutas y estadísticas.</td><td>Primeros pilotos institucionales o comerciales.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="entrega">
+      <h2><span class="icon">📦</span>18. Componentes de la entrega final</h2>
+      <div class="card">
+        <p>La entrega final se estructura como paquete de proyecto: producto, documentación técnica, memoria ejecutiva y material para defensa. Esta memoria está pensada para servir tanto como informe académico como guía de evolución.</p>
+        <div class="grid grid-2">
+          <div class="mini-card"><span class="emoji">💻</span><h4>Aplicación MVP</h4><p>Frontend PWA con interfaz responsive, filtros, vistas y conexión a backend.</p></div>
+          <div class="mini-card"><span class="emoji">🗄️</span><h4>Base de datos</h4><p>Esquema Supabase, tabla de POIs, campos mínimos, reglas de calidad y propuesta RLS.</p></div>
+          <div class="mini-card"><span class="emoji">📄</span><h4>Memoria ejecutiva</h4><p>Documento ampliado con problema, solución, arquitectura, métricas, riesgos, ética y roadmap.</p></div>
+          <div class="mini-card"><span class="emoji">🎤</span><h4>Modo presentación</h4><p>Slides integradas para defensa rápida ante tribunal o revisión interna.</p></div>
+        </div>
+        <h3>18.1 Checklist de defensa</h3>
+        <table>
+          <thead><tr><th>Pregunta probable</th><th>Respuesta recomendada</th></tr></thead>
+          <tbody>
+            <tr><td>¿Qué problema resuelve?</td><td>Reduce el tiempo de búsqueda turística cercana y convierte datos dispersos en acciones.</td></tr>
+            <tr><td>¿Por qué PWA?</td><td>Porque valida rápido en móvil sin coste de apps nativas ni fricción de instalación.</td></tr>
+            <tr><td>¿Qué aporta la IA?</td><td>Acelera desarrollo, documentación, depuración y generación de estructuras, pero no sustituye validación humana.</td></tr>
+            <tr><td>¿Cuál es el riesgo principal?</td><td>La calidad y actualización de datos; por eso se proponen reglas de gobernanza.</td></tr>
+            <tr><td>¿Cómo escalaría?</td><td>Más datos verificados, PostGIS, panel de administración, búsqueda manual, personalización contextual y pilotos B2B.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+
+    <section id="anexo-competencia">
+      <h2><span class="icon">🧭</span>19. Anexo A · Benchmark y posicionamiento competitivo</h2>
+      <div class="card">
+        <p class="section-lead">Para defender el proyecto con más solidez, conviene explicar qué espacio ocupa TuristSpain frente a soluciones conocidas. El objetivo no es afirmar que TuristSpain sustituya a plataformas maduras, sino justificar por qué tiene sentido como MVP enfocado a proximidad, simplicidad y turismo local.</p>
+        <h3>19.1 Lectura estratégica del mercado</h3>
+        <p>Las plataformas turísticas grandes suelen optimizar para volumen, reseñas, reservas o publicidad. Esto es útil cuando el usuario sabe qué busca o cuando quiere comparar destinos populares. El hueco aparece cuando la pregunta es más situacional: “estoy aquí, tengo unas horas, quiero algo cercano, fiable y fácil de reservar”. En ese caso, la densidad informativa de plataformas generalistas puede ser un problema.</p>
+        <p>TuristSpain se posiciona como una capa de decisión rápida. No pretende tener el dataset más grande desde el primer día. Pretende que cada resultado mostrado tenga utilidad inmediata. Esta diferencia permite defender el proyecto como herramienta de <strong>curación y contexto</strong>, no como repositorio masivo.</p>
+        <table>
+          <thead><tr><th>Solución</th><th>Fortaleza</th><th>Debilidad para el caso TuristSpain</th><th>Aprendizaje incorporado</th></tr></thead>
+          <tbody>
+            <tr><td>Google Maps</td><td>Cobertura enorme, navegación y reseñas.</td><td>Resultados amplios, mezcla de intenciones y exceso de ruido.</td><td>Integrar acceso a mapa, pero filtrar antes por uso turístico.</td></tr>
+            <tr><td>Tripadvisor</td><td>Reputación, opiniones y ranking.</td><td>Experiencia más orientada a planificación y popularidad.</td><td>Mostrar fichas claras y datos accionables.</td></tr>
+            <tr><td>GetYourGuide / Civitatis</td><td>Reserva de experiencias.</td><td>Menor foco en recursos gratuitos, locales o espontáneos.</td><td>Separar descubrimiento de conversión.</td></tr>
+            <tr><td>Webs oficiales de turismo</td><td>Contenido fiable e institucional.</td><td>UX desigual, poco móvil y difícil de comparar.</td><td>Normalizar datos de varias fuentes en una experiencia única.</td></tr>
+            <tr><td>Blogs y redes sociales</td><td>Inspiración visual y narrativa.</td><td>Información dispersa, subjetiva y a veces desactualizada.</td><td>Aprovechar storytelling, pero mantener estructura verificable.</td></tr>
+          </tbody>
+        </table>
+        <h3>19.2 Matriz de posicionamiento</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+quadrantChart
+  title Posicionamiento conceptual de TuristSpain
+  x-axis Baja proximidad contextual --> Alta proximidad contextual
+  y-axis Baja acción inmediata --> Alta acción inmediata
+  quadrant-1 Acción local rápida
+  quadrant-2 Conversión generalista
+  quadrant-3 Inspiración pasiva
+  quadrant-4 Información cercana no accionable
+  Google Maps: [0.65, 0.78]
+  Tripadvisor: [0.45, 0.70]
+  Blogs turísticos: [0.25, 0.35]
+  Web municipal: [0.55, 0.42]
+  TuristSpain MVP: [0.86, 0.82]
+          </pre>
+        </div>
+        <p class="caption">La matriz es conceptual y sirve para explicar la tesis del producto: proximidad contextual más acción inmediata.</p>
+        <h3>19.3 Criterios de diferenciación defendibles</h3>
+        <div class="grid grid-2">
+          <div class="mini-card"><span class="emoji">📍</span><h4>Contexto geográfico como primer filtro</h4><p>La aplicación no empieza preguntando “qué destino quieres”, sino “qué hay cerca de ti que tenga sentido”. Ese cambio reduce fricción de entrada.</p></div>
+          <div class="mini-card"><span class="emoji">🧾</span><h4>Datos pensados para decidir</h4><p>No basta con una descripción bonita. El usuario necesita distancia, horario, teléfono, mapa y enlace útil.</p></div>
+          <div class="mini-card"><span class="emoji">🧑‍💼</span><h4>Lectura profesional</h4><p>El modo tabla tiene valor para agencias, recepciones de hotel, oficinas de turismo y gestores de rutas.</p></div>
+          <div class="mini-card"><span class="emoji">🏘️</span><h4>Long-tail turístico</h4><p>El diseño permite incorporar lugares menos conocidos sin que queden enterrados por rankings globales.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="anexo-backlog">
+      <h2><span class="icon">📋</span>20. Anexo B · Backlog funcional priorizado</h2>
+      <div class="card">
+        <p>El backlog convierte la visión en trabajo ejecutable. Para evitar dispersión, se clasifica cada elemento según su valor, urgencia y dependencia técnica. Esta sección ayuda a demostrar que el proyecto puede seguir creciendo de forma ordenada.</p>
+        <h3>20.1 Backlog MVP</h3>
+        <table>
+          <thead><tr><th>Épica</th><th>Historia de usuario</th><th>Prioridad</th><th>Dependencias</th><th>Criterio de finalización</th></tr></thead>
+          <tbody>
+            <tr><td>Geolocalización</td><td>Como turista quiero activar mi ubicación para ver lugares cercanos.</td><td>Must</td><td>Permisos navegador</td><td>La app obtiene coordenadas o informa del error.</td></tr>
+            <tr><td>Filtrado</td><td>Como usuario quiero ver solo lugares dentro de un radio útil.</td><td>Must</td><td>Coordenadas POI</td><td>Se ocultan resultados fuera de 75 km.</td></tr>
+            <tr><td>Categorías</td><td>Como usuario quiero filtrar por cultura, naturaleza, gastronomía o actividades.</td><td>Must</td><td>Campo category</td><td>El filtro actualiza resultados sin recargar.</td></tr>
+            <tr><td>Ficha POI</td><td>Como usuario quiero ver datos claros antes de decidir.</td><td>Must</td><td>Dataset completo</td><td>La ficha muestra nombre, distancia, horario, contacto y mapa.</td></tr>
+            <tr><td>Modo tabla</td><td>Como agente quiero comparar opciones rápidamente.</td><td>Should</td><td>Vista responsive</td><td>La tabla permite ordenar o escanear campos clave.</td></tr>
+            <tr><td>PWA</td><td>Como usuario frecuente quiero instalar la app.</td><td>Should</td><td>Manifest e iconos</td><td>El navegador ofrece instalación en dispositivos compatibles.</td></tr>
+            <tr><td>Mensajes vacíos</td><td>Como usuario quiero entender qué ocurre si no hay resultados.</td><td>Must</td><td>Estado UI</td><td>La app muestra explicación y sugerencias razonables.</td></tr>
+            <tr><td>Favoritos</td><td>Como usuario quiero guardar lugares para consultarlos después.</td><td>Could</td><td>LocalStorage o auth</td><td>El usuario puede marcar y recuperar favoritos.</td></tr>
+            <tr><td>Búsqueda manual</td><td>Como usuario sin GPS quiero buscar por municipio o provincia.</td><td>Should</td><td>Índice de municipios</td><td>La búsqueda devuelve resultados por zona.</td></tr>
+            <tr><td>Panel admin</td><td>Como gestor quiero crear y editar POIs.</td><td>Could</td><td>Auth y RLS</td><td>Usuarios autorizados pueden mantener datos.</td></tr>
+          </tbody>
+        </table>
+        <h3>20.2 Priorización MoSCoW</h3>
+        <div class="grid grid-4">
+          <div class="mini-card"><span class="emoji">🔴</span><h4>Must have</h4><p>GPS, carga de POIs, cálculo de distancia, filtro por categoría, ficha básica y acciones.</p></div>
+          <div class="mini-card"><span class="emoji">🟠</span><h4>Should have</h4><p>Modo tabla, PWA instalable, búsqueda manual y estados vacíos mejorados.</p></div>
+          <div class="mini-card"><span class="emoji">🟡</span><h4>Could have</h4><p>Favoritos, rutas, recomendaciones por hora del día y panel de administración.</p></div>
+          <div class="mini-card"><span class="emoji">⚪</span><h4>Won't now</h4><p>Pagos, reseñas propias, chat social, app nativa y recomendador complejo en fase inicial.</p></div>
+        </div>
+        <h3>20.3 Diagrama de dependencias</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+flowchart TD
+  A[Modelo de datos POI] --> B[Conexión Supabase]
+  B --> C[Renderizado de resultados]
+  C --> D[Filtros por categoría]
+  A --> E[Coordenadas válidas]
+  E --> F[Cálculo Haversine]
+  F --> G[Radio 75 km]
+  G --> C
+  C --> H[Vista lista]
+  C --> I[Vista tabla]
+  C --> J[Vista ficha]
+  J --> K[Acción mapa / llamada / reserva]
+  D --> L[UX final]
+  H --> L
+  I --> L
+  K --> L
+          </pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="anexo-qa">
+      <h2><span class="icon">🧪</span>21. Anexo C · Plan de pruebas y QA</h2>
+      <div class="card">
+        <p>Un MVP defendible necesita pruebas aunque sea académico. Esta matriz permite comprobar comportamiento esperado, errores comunes y casos límite. También sirve para documentar qué se ha validado y qué queda pendiente.</p>
+        <h3>21.1 Matriz de pruebas funcionales</h3>
+        <table>
+          <thead><tr><th>ID</th><th>Caso</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr></thead>
+          <tbody>
+            <tr><td>QA-01</td><td>Permiso GPS aceptado</td><td>Abrir app, aceptar ubicación.</td><td>Se muestran POIs cercanos ordenados por distancia.</td><td>Alta</td></tr>
+            <tr><td>QA-02</td><td>Permiso GPS rechazado</td><td>Abrir app, rechazar ubicación.</td><td>Mensaje claro explicando que la ubicación mejora resultados.</td><td>Alta</td></tr>
+            <tr><td>QA-03</td><td>Sin resultados en radio</td><td>Simular ubicación sin POIs próximos.</td><td>Estado vacío sin romper interfaz.</td><td>Alta</td></tr>
+            <tr><td>QA-04</td><td>Coordenada inválida</td><td>Insertar POI con latitud nula o texto.</td><td>El registro se descarta o se marca como inválido.</td><td>Alta</td></tr>
+            <tr><td>QA-05</td><td>Cambio de categoría</td><td>Seleccionar gastronomía, cultura y naturaleza.</td><td>Los resultados cambian correctamente.</td><td>Alta</td></tr>
+            <tr><td>QA-06</td><td>Cambio de vista</td><td>Alternar lista, tabla y ficha.</td><td>No se recargan datos ni se pierde el filtro activo.</td><td>Media</td></tr>
+            <tr><td>QA-07</td><td>Botón de mapa</td><td>Abrir ficha y pulsar mapa.</td><td>Se abre destino en aplicación o web de mapas.</td><td>Alta</td></tr>
+            <tr><td>QA-08</td><td>Botón llamada</td><td>Pulsar teléfono en móvil.</td><td>Se lanza protocolo tel: con número válido.</td><td>Media</td></tr>
+            <tr><td>QA-09</td><td>Imagen ausente</td><td>POI sin image_url.</td><td>Se muestra placeholder sin romper diseño.</td><td>Media</td></tr>
+            <tr><td>QA-10</td><td>Conexión Supabase caída</td><td>Simular error de red.</td><td>Mensaje de error comprensible y opción de reintento.</td><td>Alta</td></tr>
+            <tr><td>QA-11</td><td>Pantalla pequeña</td><td>Probar en ancho inferior a 375 px.</td><td>Botones y textos siguen siendo utilizables.</td><td>Media</td></tr>
+            <tr><td>QA-12</td><td>Carga con muchos POIs</td><td>Simular cientos o miles de registros.</td><td>La app mantiene respuesta aceptable o pagina resultados.</td><td>Media</td></tr>
+          </tbody>
+        </table>
+        <h3>21.2 Casos límite que deben contemplarse</h3>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">📵</span><h4>Sin conexión</h4><p>La app debe explicar que no puede cargar datos. En fase futura, cachear últimos resultados sería útil.</p></div>
+          <div class="mini-card"><span class="emoji">🕒</span><h4>Horario ambiguo</h4><p>Si el horario no está normalizado, conviene mostrarlo como texto y evitar afirmar si está abierto.</p></div>
+          <div class="mini-card"><span class="emoji">🛰️</span><h4>GPS impreciso</h4><p>En interiores o zonas rurales, la ubicación puede variar. La app debe evitar una precisión falsa.</p></div>
+          <div class="mini-card"><span class="emoji">🔗</span><h4>URL rota</h4><p>Si falla el enlace de reserva, deben existir acciones secundarias: teléfono, mapa o web oficial.</p></div>
+          <div class="mini-card"><span class="emoji">📍</span><h4>POI duplicado</h4><p>Registros repetidos confunden al usuario. Se requieren reglas de deduplicación por nombre y coordenadas.</p></div>
+          <div class="mini-card"><span class="emoji">🌐</span><h4>Idioma</h4><p>El MVP está en español, pero una fase turística real debería contemplar inglés, francés y otros idiomas.</p></div>
+        </div>
+        <h3>21.3 Checklist de revisión antes de entregar</h3>
+        <ul>
+          <li>La aplicación carga sin errores visibles en consola en la ruta principal.</li>
+          <li>Los botones principales son accesibles en móvil y no quedan fuera de pantalla.</li>
+          <li>Las claves públicas usadas en frontend son realmente públicas y no exponen permisos de escritura.</li>
+          <li>Los registros de Supabase tienen coordenadas válidas y categorías consistentes.</li>
+          <li>Los estados de error están redactados en lenguaje humano, no técnico.</li>
+          <li>La memoria diferencia con claridad lo construido, lo estimado y lo previsto en roadmap.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="anexo-sql">
+      <h2><span class="icon">🧬</span>22. Anexo D · Esquema SQL propuesto para Supabase</h2>
+      <div class="card">
+        <p>Este anexo añade una propuesta técnica concreta de base de datos. No sustituye la implementación real, pero sirve como referencia para desplegar el MVP con más rigor y explicar cómo se gobernarían permisos y calidad de datos.</p>
+        <h3>22.1 Tabla principal</h3>
+        <div class="prompt-box" data-label="SQL">
+create table if not exists public.pois (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  description text,
+  category text not null check (category in ('cultura','naturaleza','gastronomia','actividad','alojamiento','otro')),
+  latitude numeric(9,6) not null check (latitude between -90 and 90),
+  longitude numeric(9,6) not null check (longitude between -180 and 180),
+  schedule text,
+  phone text,
+  website_url text,
+  booking_url text,
+  image_url text,
+  municipality text,
+  province text,
+  autonomous_region text,
+  status text not null default 'active' check (status in ('active','draft','archived','needs_review')),
+  source_url text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists pois_category_idx on public.pois(category);
+create index if not exists pois_status_idx on public.pois(status);
+create index if not exists pois_location_idx on public.pois(latitude, longitude);
+        </div>
+        <h3>22.2 Políticas de seguridad recomendadas</h3>
+        <div class="prompt-box" data-label="RLS">
+alter table public.pois enable row level security;
+
+create policy "Public read active POIs"
+on public.pois
+for select
+using (status = 'active');
+
+create policy "Authenticated editors can insert"
+on public.pois
+for insert
+to authenticated
+with check (true);
+
+create policy "Authenticated editors can update"
+on public.pois
+for update
+to authenticated
+using (true)
+with check (true);
+        </div>
+        <div class="warning-box highlight-box">
+          <h4>Nota de seguridad</h4>
+          <p>En un producto real, la política de escritura no debería abrirse a cualquier usuario autenticado. Debería limitarse a un rol editor o administrador mediante claims, tabla de perfiles o funciones RPC.</p>
+        </div>
+        <h3>22.3 Función futura para distancia en base de datos</h3>
+        <p>En el MVP el cálculo puede vivir en cliente. Si el dataset crece, conviene mover el filtrado de distancia al servidor o usar PostGIS. Esto reduce transferencia de datos y mejora rendimiento.</p>
+        <div class="prompt-box" data-label="PostGIS futuro">
+-- Evolución recomendada si el volumen de POIs crece:
+-- 1. Activar extensión PostGIS.
+-- 2. Añadir columna geography(Point, 4326).
+-- 3. Indexar con GIST.
+-- 4. Consultar por ST_DWithin para devolver solo POIs cercanos.
+        </div>
+      </div>
+    </section>
+
+    <section id="anexo-operacion">
+      <h2><span class="icon">🧰</span>23. Anexo E · Manual operativo de mantenimiento</h2>
+      <div class="card">
+        <p>Una aplicación turística se degrada si nadie mantiene los datos. Este manual resume tareas operativas necesarias para que TuristSpain siga siendo fiable después de la entrega inicial.</p>
+        <h3>23.1 Flujo de alta de un nuevo POI</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+flowchart TD
+  A[Detectar nuevo POI] --> B[Comprobar fuente]
+  B --> C[Registrar datos mínimos]
+  C --> D[Validar coordenadas]
+  D --> E[Comprobar imagen y permisos]
+  E --> F[Revisar horario y contacto]
+  F --> G[Guardar como draft]
+  G --> H[Revisión humana]
+  H --> I{¿Correcto?}
+  I -- No --> C
+  I -- Sí --> J[Publicar active]
+  J --> K[Revisión periódica]
+          </pre>
+        </div>
+        <h3>23.2 Frecuencias de mantenimiento</h3>
+        <table>
+          <thead><tr><th>Tarea</th><th>Frecuencia</th><th>Responsable</th><th>Resultado esperado</th></tr></thead>
+          <tbody>
+            <tr><td>Revisar enlaces rotos</td><td>Mensual</td><td>Editor de datos</td><td>URLs corregidas o sustituidas por contacto alternativo.</td></tr>
+            <tr><td>Actualizar horarios</td><td>Trimestral o temporada alta</td><td>Editor / fuente oficial</td><td>Horarios coherentes y sin información caducada.</td></tr>
+            <tr><td>Revisar POIs populares</td><td>Mensual</td><td>Gestor de producto</td><td>Fichas prioritarias con mayor calidad visual y de datos.</td></tr>
+            <tr><td>Auditar coordenadas</td><td>Semestral</td><td>QA datos</td><td>Registros sin errores geográficos evidentes.</td></tr>
+            <tr><td>Revisar feedback de usuarios</td><td>Quincenal</td><td>Producto</td><td>Nuevas mejoras priorizadas en backlog.</td></tr>
+          </tbody>
+        </table>
+        <h3>23.3 Criterios editoriales</h3>
+        <ul>
+          <li>No publicar lugares sin nombre claro, coordenadas y categoría.</li>
+          <li>No inventar horarios. Si no se conocen, indicar “consultar web oficial”.</li>
+          <li>Preferir imágenes propias, oficiales o con permisos adecuados.</li>
+          <li>Evitar descripciones promocionales excesivas. Deben ser útiles y verificables.</li>
+          <li>Separar hechos de opiniones. La ficha debe informar, no exagerar.</li>
+          <li>Marcar como <code>needs_review</code> cualquier registro con duda razonable.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="anexo-accesibilidad">
+      <h2><span class="icon">♿</span>24. Anexo F · Accesibilidad, rendimiento y calidad visual</h2>
+      <div class="card">
+        <p>La presentación visual no es solo estética. En una PWA turística, la interfaz puede usarse en la calle, con sol, prisa, poca batería, mala conexión o por personas no habituadas a aplicaciones complejas. Por eso se documentan requisitos de accesibilidad y rendimiento.</p>
+        <h3>24.1 Requisitos de accesibilidad</h3>
+        <table>
+          <thead><tr><th>Elemento</th><th>Requisito</th><th>Motivo</th></tr></thead>
+          <tbody>
+            <tr><td>Contraste</td><td>Texto principal con contraste alto sobre fondo claro.</td><td>Uso en exterior y lectura por personas mayores.</td></tr>
+            <tr><td>Tamaño de texto</td><td>Evitar fuentes demasiado pequeñas en fichas y botones.</td><td>Facilita lectura rápida en móvil.</td></tr>
+            <tr><td>Botones</td><td>Áreas táctiles amplias y separadas.</td><td>Reduce errores de pulsación.</td></tr>
+            <tr><td>Iconos</td><td>Icono acompañado de texto cuando sea acción crítica.</td><td>No todos los usuarios interpretan iconos igual.</td></tr>
+            <tr><td>Estados</td><td>Carga, error y vacío deben ser visibles y comprensibles.</td><td>Evita abandono por incertidumbre.</td></tr>
+          </tbody>
+        </table>
+        <h3>24.2 Requisitos de rendimiento</h3>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">🖼️</span><h4>Imágenes optimizadas</h4><p>Usar formatos ligeros, dimensiones adecuadas y carga diferida para no penalizar datos móviles.</p></div>
+          <div class="mini-card"><span class="emoji">📦</span><h4>Menos dependencias</h4><p>Evitar librerías pesadas si el MVP puede resolverse con JavaScript simple.</p></div>
+          <div class="mini-card"><span class="emoji">🔄</span><h4>Estados de carga</h4><p>Mostrar skeleton o indicador mientras llegan datos, especialmente en redes lentas.</p></div>
+        </div>
+        <h3>24.3 Guía visual de iconos por categoría</h3>
+        <table>
+          <thead><tr><th>Categoría</th><th>Icono</th><th>Color sugerido</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td>Cultura</td><td>🏛️</td><td>Azul / violeta</td><td>Museos, monumentos, centros históricos.</td></tr>
+            <tr><td>Naturaleza</td><td>🌿</td><td>Verde</td><td>Parques, miradores, rutas, playas, espacios protegidos.</td></tr>
+            <tr><td>Gastronomía</td><td>🍽️</td><td>Naranja</td><td>Restaurantes, mercados, bodegas, experiencias culinarias.</td></tr>
+            <tr><td>Actividad</td><td>🚴</td><td>Rojo / coral</td><td>Excursiones, deporte, ocio activo y visitas guiadas.</td></tr>
+            <tr><td>Alojamiento</td><td>🏨</td><td>Azul oscuro</td><td>Hoteles, casas rurales, campings y alojamientos singulares.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="anexo-defensa">
+      <h2><span class="icon">🎤</span>25. Anexo G · Guion de defensa ejecutiva</h2>
+      <div class="card">
+        <p>Este guion permite presentar el proyecto en pocos minutos sin perder foco. La defensa debe evitar tecnicismos innecesarios al inicio y avanzar desde problema hasta solución, arquitectura, IA y resultados.</p>
+        <h3>25.1 Guion de 5 minutos</h3>
+        <div class="timeline">
+          <div class="timeline-item" data-num="1"><h4>Introducción · 30 segundos</h4><p>“TuristSpain es una PWA que ayuda a decidir qué visitar o dónde comer cerca de la ubicación actual, usando un radio de 75 km y datos estructurados.”</p></div>
+          <div class="timeline-item" data-num="2"><h4>Problema · 45 segundos</h4><p>“El turista tiene demasiadas fuentes. La búsqueda consume tiempo y empuja a elegir siempre los mismos lugares. El problema no es falta de información, sino falta de filtro.”</p></div>
+          <div class="timeline-item" data-num="3"><h4>Solución · 60 segundos</h4><p>“La aplicación obtiene ubicación, consulta POIs, calcula distancia, filtra por radio y muestra resultados en lista, tabla o ficha. Cada ficha incluye acciones directas.”</p></div>
+          <div class="timeline-item" data-num="4"><h4>Arquitectura · 60 segundos</h4><p>“Se ha construido como PWA con frontend ligero, Supabase como backend y Geolocation API. El cálculo inicial de distancia usa Haversine; en escalado se migraría a PostGIS.”</p></div>
+          <div class="timeline-item" data-num="5"><h4>IA · 45 segundos</h4><p>“El desarrollo se ha acelerado mediante vibe coding con IA. La IA ha apoyado código, prompts, QA y documentación, pero la validación de producto y decisiones son humanas.”</p></div>
+          <div class="timeline-item" data-num="6"><h4>Cierre · 40 segundos</h4><p>“El MVP demuestra una propuesta clara: convertir datos turísticos dispersos en decisiones rápidas, cercanas y accionables.”</p></div>
+        </div>
+        <h3>25.2 Preguntas difíciles y respuesta breve</h3>
+        <table>
+          <thead><tr><th>Pregunta</th><th>Respuesta sólida</th></tr></thead>
+          <tbody>
+            <tr><td>¿Por qué no usar simplemente Google Maps?</td><td>Google Maps es generalista. TuristSpain filtra por uso turístico, reduce ruido y normaliza acciones clave.</td></tr>
+            <tr><td>¿La IA ha hecho todo el trabajo?</td><td>No. La IA acelera generación e iteración. El valor está en definir bien el problema, validar, corregir y decidir alcance.</td></tr>
+            <tr><td>¿Cómo garantizas datos fiables?</td><td>Con reglas de calidad: fuente, coordenadas válidas, actualización, estado de revisión y publicación controlada.</td></tr>
+            <tr><td>¿Qué pasaría con miles de POIs?</td><td>Se movería el filtrado geográfico a base de datos con índices espaciales y paginación.</td></tr>
+            <tr><td>¿Es viable comercialmente?</td><td>Sí como herramienta B2B para agencias, municipios y conversión externa, pero primero debe validarse el uso del MVP.</td></tr>
+          </tbody>
+        </table>
+        <h3>25.3 Frases de cierre recomendadas</h3>
+        <div class="highlight-box">
+          <p>“TuristSpain no intenta reemplazar el ecosistema turístico actual. Lo ordena en el momento de decisión. Su valor está en reducir el ruido, acercar recursos locales al usuario y demostrar cómo la IA puede acelerar un MVP sin renunciar al criterio humano.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="anexo-conclusiones">
+      <h2><span class="icon">🏁</span>26. Conclusiones ampliadas</h2>
+      <div class="card">
+        <p class="section-lead">El proyecto TuristSpain es defendible porque parte de una necesidad real, se limita a un MVP razonable y documenta tanto la construcción como sus restricciones. La ampliación de esta memoria refuerza el informe al añadir estrategia, arquitectura, prompts, riesgos, calidad de datos, pruebas, accesibilidad y roadmap.</p>
+        <h3>26.1 Conclusión de producto</h3>
+        <p>TuristSpain resuelve una situación frecuente: decidir rápidamente qué hacer cerca. La solución es clara, fácil de entender y con una propuesta de valor directa. El enfoque de proximidad diferencia el producto frente a buscadores generalistas y plataformas con demasiadas opciones.</p>
+        <h3>26.2 Conclusión técnica</h3>
+        <p>La arquitectura elegida es adecuada para un MVP: PWA, Supabase y geolocalización del navegador. Es una combinación rápida de implementar, suficientemente robusta para validar y escalable si el proyecto crece. La principal recomendación técnica futura es mover cálculos geográficos al backend cuando aumente el volumen de datos.</p>
+        <h3>26.3 Conclusión sobre IA</h3>
+        <p>El uso de vibe coding con IA aporta velocidad, pero exige método. Los prompts elegidos funcionan como especificaciones: describen intención, restricciones y criterios de salida. La calidad final depende de revisar, probar y corregir. Este punto es importante para defender el proyecto: no se presenta la IA como magia, sino como herramienta de productividad controlada.</p>
+        <h3>26.4 Conclusión ejecutiva</h3>
+        <p>El proyecto tiene potencial si se valida con usuarios reales y se alimenta con datos fiables. La oportunidad más interesante está en el cruce entre turismo local, agencias, municipios y experiencias gastronómicas. El siguiente paso natural no es añadir funciones sin control, sino mejorar dataset, medir uso y construir un pequeño piloto con un territorio concreto.</p>
+        <div class="success-box highlight-box">
+          <h4>Resultado final del informe ampliado</h4>
+          <p>La memoria pasa de ser una descripción básica a una documentación completa de proyecto: explica el problema, justifica decisiones, muestra arquitectura, incluye prompts, añade diagramas, define riesgos, propone pruebas y prepara la defensa.</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section id="anexo-historias">
+      <h2><span class="icon">📚</span>27. Anexo H · Historias de usuario detalladas</h2>
+      <div class="card">
+        <p>Las historias de usuario permiten traducir funcionalidades en necesidades concretas. No son una lista decorativa: ayudan a priorizar, probar y justificar cada pantalla del MVP. En TuristSpain se han separado historias de turista, agencia, gestor de datos y administrador técnico.</p>
+        <h3>27.1 Historias del turista</h3>
+        <table>
+          <thead><tr><th>ID</th><th>Historia</th><th>Valor</th><th>Criterios de aceptación</th></tr></thead>
+          <tbody>
+            <tr><td>HU-T01</td><td>Como turista quiero ver lugares cercanos a mi ubicación para decidir sin buscar manualmente.</td><td>Reduce fricción inicial.</td><td>El sistema solicita ubicación, obtiene coordenadas y muestra resultados por distancia.</td></tr>
+            <tr><td>HU-T02</td><td>Como turista quiero filtrar por gastronomía para encontrar dónde comer cerca.</td><td>Resuelve una necesidad frecuente y urgente.</td><td>Al seleccionar gastronomía solo se muestran restaurantes, mercados, bodegas o experiencias culinarias.</td></tr>
+            <tr><td>HU-T03</td><td>Como turista quiero abrir el mapa de un lugar para llegar sin copiar direcciones.</td><td>Convierte descubrimiento en acción.</td><td>El botón de mapa abre una ruta o ubicación en aplicación compatible.</td></tr>
+            <tr><td>HU-T04</td><td>Como turista quiero llamar directamente a un negocio para preguntar disponibilidad.</td><td>Reduce pasos y aumenta utilidad móvil.</td><td>El botón de teléfono usa enlace tel: y solo aparece si hay número válido.</td></tr>
+            <tr><td>HU-T05</td><td>Como turista quiero entender por qué no hay resultados si estoy en una zona sin datos.</td><td>Evita abandono y confusión.</td><td>Se muestra un estado vacío claro, no una pantalla rota.</td></tr>
+            <tr><td>HU-T06</td><td>Como turista quiero reconocer rápido la categoría del lugar mediante iconos.</td><td>Mejora lectura en movilidad.</td><td>Cada categoría tiene icono y etiqueta textual.</td></tr>
+          </tbody>
+        </table>
+        <h3>27.2 Historias de agencia o profesional turístico</h3>
+        <table>
+          <thead><tr><th>ID</th><th>Historia</th><th>Valor</th><th>Criterios de aceptación</th></tr></thead>
+          <tbody>
+            <tr><td>HU-A01</td><td>Como agente quiero comparar varios lugares en tabla para recomendar opciones a un cliente.</td><td>Ahorra tiempo operativo.</td><td>La tabla muestra nombre, categoría, distancia, municipio, horario y contacto.</td></tr>
+            <tr><td>HU-A02</td><td>Como agente quiero identificar cierres o limitaciones horarias para evitar malas recomendaciones.</td><td>Reduce errores de servicio.</td><td>El campo horario está visible y no queda enterrado en la ficha.</td></tr>
+            <tr><td>HU-A03</td><td>Como agente quiero filtrar por zona y categoría para montar itinerarios.</td><td>Ayuda a crear propuestas personalizadas.</td><td>La combinación de filtros devuelve una lista manejable de recursos.</td></tr>
+            <tr><td>HU-A04</td><td>Como oficina de turismo quiero cargar recursos locales para aumentar su visibilidad.</td><td>Conecta digitalización territorial con uso real.</td><td>En una fase futura, el panel permite altas con revisión.</td></tr>
+          </tbody>
+        </table>
+        <h3>27.3 Historias del gestor de datos</h3>
+        <p>El gestor de datos es una figura clave si TuristSpain evoluciona. Su trabajo consiste en mantener la base fiable: revisar registros, corregir horarios, validar coordenadas, actualizar enlaces y controlar duplicados. Aunque el MVP pueda cargar datos de forma manual, el producto real necesita un proceso editorial.</p>
+        <table>
+          <thead><tr><th>ID</th><th>Historia</th><th>Valor</th><th>Criterios de aceptación</th></tr></thead>
+          <tbody>
+            <tr><td>HU-D01</td><td>Como editor quiero marcar un POI como pendiente de revisión si dudo de sus datos.</td><td>Evita publicar información insegura.</td><td>El estado cambia a needs_review y no aparece como activo.</td></tr>
+            <tr><td>HU-D02</td><td>Como editor quiero saber cuándo se actualizó una ficha por última vez.</td><td>Permite priorizar mantenimiento.</td><td>El campo updated_at se actualiza al modificar datos.</td></tr>
+            <tr><td>HU-D03</td><td>Como editor quiero registrar la fuente del dato.</td><td>Aporta trazabilidad.</td><td>Cada ficha tiene source_url o fuente textual.</td></tr>
+            <tr><td>HU-D04</td><td>Como editor quiero detectar duplicados por nombre y coordenadas cercanas.</td><td>Mejora calidad del catálogo.</td><td>El sistema avisa o genera informe de posibles duplicados.</td></tr>
+          </tbody>
+        </table>
+        <h3>27.4 Definición de “hecho”</h3>
+        <ul>
+          <li>La funcionalidad está implementada y no solo descrita en documentación.</li>
+          <li>Existe al menos una prueba manual o caso QA asociado.</li>
+          <li>La interfaz responde correctamente en móvil.</li>
+          <li>Los errores previsibles tienen mensaje claro.</li>
+          <li>La funcionalidad no rompe el flujo GPS → resultados → acción.</li>
+          <li>El código no introduce claves privadas ni permisos inseguros.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="anexo-diccionario">
+      <h2><span class="icon">📖</span>28. Anexo I · Diccionario de datos ampliado</h2>
+      <div class="card">
+        <p>El diccionario de datos ayuda a que el proyecto no dependa de interpretaciones informales. Cada campo debe tener una finalidad, un formato esperado y una regla de calidad. Esto reduce errores al alimentar Supabase y facilita que otra persona continúe el proyecto.</p>
+        <table>
+          <thead><tr><th>Campo</th><th>Formato recomendado</th><th>Obligatorio</th><th>Regla de calidad</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>name</td><td>Texto corto</td><td>Sí</td><td>No debe contener emojis ni frases promocionales excesivas.</td><td>Alcázar de Segovia</td></tr>
+            <tr><td>description</td><td>Texto medio</td><td>No</td><td>Debe explicar valor turístico sin inventar datos.</td><td>Fortaleza histórica situada en la ciudad de Segovia.</td></tr>
+            <tr><td>category</td><td>Enum</td><td>Sí</td><td>Debe pertenecer a lista controlada.</td><td>cultura</td></tr>
+            <tr><td>latitude</td><td>Decimal</td><td>Sí</td><td>Entre -90 y 90, con punto decimal.</td><td>40.9525</td></tr>
+            <tr><td>longitude</td><td>Decimal</td><td>Sí</td><td>Entre -180 y 180, con punto decimal.</td><td>-4.1328</td></tr>
+            <tr><td>schedule</td><td>Texto o JSON</td><td>No</td><td>No afirmar apertura si no está verificada.</td><td>Consultar web oficial</td></tr>
+            <tr><td>phone</td><td>Texto</td><td>No</td><td>Formato internacional si es posible.</td><td>+34 921 ...</td></tr>
+            <tr><td>website_url</td><td>URL</td><td>No</td><td>Debe abrir y no redirigir a contenido irrelevante.</td><td>https://...</td></tr>
+            <tr><td>booking_url</td><td>URL</td><td>No</td><td>Debe apuntar a reserva, entradas o ficha oficial.</td><td>https://...</td></tr>
+            <tr><td>image_url</td><td>URL imagen</td><td>No</td><td>Debe tener permiso de uso o proceder de fuente permitida.</td><td>https://...jpg</td></tr>
+            <tr><td>municipality</td><td>Texto normalizado</td><td>No</td><td>Usar nombre oficial cuando sea posible.</td><td>Segovia</td></tr>
+            <tr><td>province</td><td>Texto normalizado</td><td>No</td><td>Evitar abreviaturas inconsistentes.</td><td>Segovia</td></tr>
+            <tr><td>status</td><td>Enum</td><td>Sí</td><td>active, draft, archived o needs_review.</td><td>active</td></tr>
+            <tr><td>source_url</td><td>URL o texto</td><td>Recomendado</td><td>Debe permitir comprobar el origen del dato.</td><td>Web oficial turismo</td></tr>
+            <tr><td>updated_at</td><td>Timestamp</td><td>Sí</td><td>Debe cambiar al modificar la ficha.</td><td>2026-05-13</td></tr>
+          </tbody>
+        </table>
+        <h3>28.1 Reglas de normalización</h3>
+        <p>La normalización evita que el sistema tenga categorías como “restaurante”, “gastronomía”, “comida”, “dónde comer” y “food” para referirse a lo mismo. En un MVP, esa falta de consistencia puede parecer menor, pero rompe filtros y estadísticas.</p>
+        <div class="grid grid-2">
+          <div class="mini-card"><span class="emoji">🔤</span><h4>Nombres</h4><p>Usar nombres oficiales o comúnmente reconocidos. Evitar añadir ciudad si ya existe campo municipio.</p></div>
+          <div class="mini-card"><span class="emoji">🏷️</span><h4>Categorías</h4><p>Usar lista cerrada al inicio. Añadir categorías solo si hay suficientes registros para justificarlas.</p></div>
+          <div class="mini-card"><span class="emoji">📞</span><h4>Teléfonos</h4><p>Guardar como texto, no como número, para conservar prefijos, espacios y símbolos.</p></div>
+          <div class="mini-card"><span class="emoji">🔗</span><h4>URLs</h4><p>Validar que empiezan por http o https y evitar enlaces a páginas genéricas sin relación clara.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="anexo-evaluacion-academica">
+      <h2><span class="icon">🎓</span>29. Anexo J · Criterios de evaluación académica</h2>
+      <div class="card">
+        <p>Esta sección conecta el proyecto con criterios habituales de evaluación: claridad del problema, adecuación de la solución, calidad técnica, uso responsable de IA, documentación y defensa. Sirve para que el informe no parezca solo una presentación visual, sino una memoria evaluable.</p>
+        <table>
+          <thead><tr><th>Criterio</th><th>Cómo se cumple</th><th>Evidencia incluida</th><th>Mejora posible</th></tr></thead>
+          <tbody>
+            <tr><td>Definición del problema</td><td>Se identifica la fricción de búsqueda turística y la infoxicación.</td><td>Árbol del problema, perfiles y mapa de fricciones.</td><td>Añadir entrevistas reales a usuarios.</td></tr>
+            <tr><td>Solución coherente</td><td>La PWA responde directamente al problema planteado.</td><td>Propuesta de valor, user journey y casos de uso.</td><td>Validación con prototipo en campo.</td></tr>
+            <tr><td>Calidad técnica</td><td>Arquitectura simple y razonable para MVP.</td><td>Diagrama, modelo de datos, SQL y secuencia técnica.</td><td>Añadir repositorio con README técnico.</td></tr>
+            <tr><td>Uso de IA</td><td>Se documentan prompts, rol humano e iteraciones.</td><td>Sección de vibe coding y prompts elegidos.</td><td>Guardar historial de prompts y cambios generados.</td></tr>
+            <tr><td>Ética y privacidad</td><td>Se limita uso de ubicación y se evita almacenamiento innecesario.</td><td>Principios de privacidad y riesgos IA.</td><td>Redactar política de privacidad formal.</td></tr>
+            <tr><td>Evaluación</td><td>Se proponen métricas y matriz de QA.</td><td>KPI, pruebas funcionales y criterios de aceptación.</td><td>Ejecutar pruebas con muestra real documentada.</td></tr>
+            <tr><td>Presentación</td><td>Incluye iconos, diagramas, gráficos y modo defensa.</td><td>Slides integradas, Mermaid y tablas.</td><td>Convertir también a PDF o deck si se exige formato específico.</td></tr>
+          </tbody>
+        </table>
+        <h3>29.1 Rúbrica sugerida</h3>
+        <table>
+          <thead><tr><th>Bloque</th><th>Peso sugerido</th><th>Excelente</th><th>Suficiente</th></tr></thead>
+          <tbody>
+            <tr><td>Problema y oportunidad</td><td>20%</td><td>Problema claro, concreto y justificado con perfiles.</td><td>Problema descrito de forma general.</td></tr>
+            <tr><td>Solución y UX</td><td>20%</td><td>Flujo claro, simple y orientado a acción.</td><td>Interfaz comprensible pero poco diferenciada.</td></tr>
+            <tr><td>Arquitectura y datos</td><td>25%</td><td>Modelo técnico coherente, datos normalizados y riesgos reconocidos.</td><td>Componentes descritos sin detalle de calidad.</td></tr>
+            <tr><td>IA y metodología</td><td>15%</td><td>Prompts documentados, rol humano claro y control de alucinaciones.</td><td>Uso de IA mencionado sin trazabilidad.</td></tr>
+            <tr><td>Evaluación y roadmap</td><td>10%</td><td>Métricas, QA y evolución realista.</td><td>Roadmap genérico.</td></tr>
+            <tr><td>Comunicación</td><td>10%</td><td>Memoria clara, visual, defendible y bien estructurada.</td><td>Documento entendible pero escaso.</td></tr>
+          </tbody>
+        </table>
+        <h3>29.2 Conclusión de evaluación</h3>
+        <p>Con esta ampliación, TuristSpain queda presentado como un proyecto de desarrollo completo: no solo una aplicación, sino una propuesta con lógica de producto, decisiones técnicas, documentación de IA, análisis de riesgos y preparación para defensa. La memoria ya no depende de promesas vagas; muestra estructura, método y próximos pasos.</p>
+      </div>
+    </section>
+
+
+
+    <section id="anexo-kpis">
+      <h2><span class="icon">📈</span>30. Anexo K · Sistema de medición y analítica</h2>
+      <div class="card">
+        <p>Para que TuristSpain evolucione más allá del prototipo, debe medir comportamiento sin invadir la privacidad. La analítica debe responder a preguntas de producto: si el usuario encuentra resultados, si entiende las acciones, si las categorías tienen utilidad y si los datos cargados aportan valor real.</p>
+        <h3>30.1 Eventos recomendados</h3>
+        <table>
+          <thead><tr><th>Evento</th><th>Cuándo se registra</th><th>Propósito</th><th>Dato sensible</th></tr></thead>
+          <tbody>
+            <tr><td>app_open</td><td>Al abrir la PWA.</td><td>Medir uso general.</td><td>No.</td></tr>
+            <tr><td>location_permission_result</td><td>Cuando el usuario acepta o rechaza GPS.</td><td>Entender fricción de permisos.</td><td>No guardar coordenada exacta.</td></tr>
+            <tr><td>poi_results_loaded</td><td>Cuando se cargan resultados.</td><td>Medir cobertura del dataset.</td><td>No necesita identidad.</td></tr>
+            <tr><td>category_filter_used</td><td>Cuando se selecciona una categoría.</td><td>Saber qué categorías aportan más valor.</td><td>No.</td></tr>
+            <tr><td>view_mode_changed</td><td>Al cambiar lista, tabla o ficha.</td><td>Detectar usos por perfil.</td><td>No.</td></tr>
+            <tr><td>poi_action_clicked</td><td>Al pulsar mapa, teléfono o reserva.</td><td>Medir conversión funcional.</td><td>No guardar teléfono marcado.</td></tr>
+            <tr><td>empty_state_seen</td><td>Cuando no hay resultados.</td><td>Identificar zonas sin cobertura.</td><td>Solo zona aproximada si hay consentimiento.</td></tr>
+          </tbody>
+        </table>
+        <h3>30.2 KPIs de producto</h3>
+        <div class="grid grid-3">
+          <div class="mini-card"><span class="emoji">🎯</span><h4>Tasa de acción</h4><p>Porcentaje de sesiones que terminan en mapa, llamada o reserva. Es el indicador más directo de utilidad.</p></div>
+          <div class="mini-card"><span class="emoji">⏱️</span><h4>Tiempo a primer click útil</h4><p>Tiempo entre apertura y primera acción. Si crece demasiado, la interfaz o los datos no están ayudando.</p></div>
+          <div class="mini-card"><span class="emoji">🗺️</span><h4>Cobertura territorial</h4><p>Porcentaje de ubicaciones con al menos un resultado relevante dentro de 75 km.</p></div>
+          <div class="mini-card"><span class="emoji">🍽️</span><h4>CTR gastronómico</h4><p>Mide si la categoría gastronómica funciona como motor de uso rápido durante el viaje.</p></div>
+          <div class="mini-card"><span class="emoji">📵</span><h4>Tasa de GPS rechazado</h4><p>Permite ajustar el mensaje de permisos y priorizar búsqueda manual.</p></div>
+          <div class="mini-card"><span class="emoji">🧾</span><h4>Calidad percibida</h4><p>Feedback simple sobre si el resultado fue útil, incorrecto o insuficiente.</p></div>
+        </div>
+        <h3>30.3 Privacidad en la medición</h3>
+        <p>La analítica no debe almacenar rutas individuales ni coordenadas exactas si no son imprescindibles. Para el MVP basta con medir eventos agregados. Si se quiere estudiar cobertura territorial, se puede redondear ubicación a una zona amplia o registrar únicamente municipio aproximado cuando exista consentimiento. La regla es simple: medir lo necesario para mejorar el producto, no más.</p>
+      </div>
+    </section>
+
+    <section id="anexo-seguridad">
+      <h2><span class="icon">🔐</span>31. Anexo L · Seguridad, permisos y despliegue</h2>
+      <div class="card">
+        <p>El uso de Supabase y geolocalización hace necesario documentar seguridad mínima. Aunque el proyecto sea MVP, no debe normalizar malas prácticas como exponer claves privadas, permitir escrituras abiertas o almacenar datos de ubicación sin motivo.</p>
+        <h3>31.1 Principios de seguridad</h3>
+        <table>
+          <thead><tr><th>Principio</th><th>Aplicación en TuristSpain</th><th>Error que evita</th></tr></thead>
+          <tbody>
+            <tr><td>Mínimo privilegio</td><td>El frontend solo puede leer POIs activos.</td><td>Que cualquier usuario modifique datos.</td></tr>
+            <tr><td>Separación de claves</td><td>La service role key nunca se coloca en cliente.</td><td>Exposición total de la base de datos.</td></tr>
+            <tr><td>Validación de entrada</td><td>Coordenadas, URLs y categorías se validan antes de publicar.</td><td>Registros corruptos o inseguros.</td></tr>
+            <tr><td>Estados controlados</td><td>draft, active, archived y needs_review.</td><td>Publicar datos no revisados.</td></tr>
+            <tr><td>Sin rastreo innecesario</td><td>La ubicación se procesa para proximidad, no para perfiles invasivos.</td><td>Pérdida de confianza y riesgo legal.</td></tr>
+          </tbody>
+        </table>
+        <h3>31.2 Checklist de despliegue</h3>
+        <ul>
+          <li>Configurar variables de entorno y no subir claves sensibles al repositorio.</li>
+          <li>Activar RLS en tablas públicas y probar lectura anónima solo para registros activos.</li>
+          <li>Revisar que los buckets de imágenes no permitan escritura anónima si no está controlada.</li>
+          <li>Comprobar HTTPS, porque la geolocalización en navegador requiere contexto seguro.</li>
+          <li>Añadir política de privacidad básica explicando uso de ubicación.</li>
+          <li>Configurar caché de imágenes y compresión para mejorar carga móvil.</li>
+          <li>Verificar que el manifest PWA tiene nombre, iconos, theme color y start_url.</li>
+          <li>Probar en Chrome Android y Safari iOS, porque los permisos y la instalación PWA cambian según plataforma.</li>
+        </ul>
+        <h3>31.3 Pipeline recomendado</h3>
+        <div class="mermaid-wrap">
+          <pre class="mermaid">
+flowchart LR
+  A[Desarrollo local] --> B[Revisión de código]
+  B --> C[Variables de entorno]
+  C --> D[Deploy preview]
+  D --> E[QA móvil]
+  E --> F[Revisión seguridad Supabase]
+  F --> G[Publicación]
+  G --> H[Monitorización básica]
+          </pre>
+        </div>
+        <p>Este pipeline es suficiente para un MVP. Si el proyecto crece, habría que añadir pruebas automáticas, entornos separados, control de migraciones SQL y roles de administración más finos.</p>
+      </div>
+    </section>
+
+    <section id="anexo-cierre-extra">
+      <h2><span class="icon">🧠</span>32. Anexo M · Lecciones aprendidas</h2>
+      <div class="card">
+        <p>La principal lección del proyecto es que la IA permite avanzar rápido, pero no elimina la necesidad de pensar bien. Cuando el prompt es vago, la salida suele ser vistosa pero poco útil. Cuando el prompt contiene contexto, restricciones y criterios de aceptación, la IA produce material mucho más aprovechable.</p>
+        <h3>32.1 Aprendizajes técnicos</h3>
+        <ul>
+          <li>La geolocalización debe tratarse como una capacidad opcional: puede fallar, ser denegada o ser imprecisa.</li>
+          <li>La calidad de coordenadas es crítica. Un POI con coordenada errónea rompe la confianza en todo el sistema.</li>
+          <li>Supabase es adecuado para prototipos rápidos, pero requiere comprender RLS y permisos desde el principio.</li>
+          <li>Una interfaz bonita no compensa datos pobres. El orden correcto es: datos útiles, flujo claro, presentación visual.</li>
+          <li>Las vistas múltiples aumentan utilidad, pero deben compartir una misma fuente de estado para no generar inconsistencias.</li>
+        </ul>
+        <h3>32.2 Aprendizajes de producto</h3>
+        <ul>
+          <li>El caso “dónde comer cerca” es especialmente fuerte porque aparece durante el viaje y tiene intención inmediata.</li>
+          <li>El radio de 75 km funciona como decisión de producto: evita dispersión y permite escapadas cortas.</li>
+          <li>El modo tabla no es tan atractivo visualmente como una ficha, pero aporta mucho valor profesional.</li>
+          <li>El producto debe evitar prometer personalización avanzada hasta tener datos suficientes y consentimiento claro.</li>
+          <li>La defensa del proyecto mejora cuando se reconocen límites en lugar de ocultarlos.</li>
+        </ul>
+        <h3>32.3 Aprendizajes sobre documentación</h3>
+        <p>Una memoria ejecutiva pobre suele describir qué se ha hecho, pero no explica por qué. Esta versión ampliada incorpora la parte que faltaba: criterios de decisión, riesgos, prompts, arquitectura, datos, pruebas, seguridad, accesibilidad y evolución. Eso permite que el informe sea evaluable, mantenible y defendible.</p>
+      </div>
+    </section>
+
+
+
+    <section id="anexo-implementacion">
+      <h2><span class="icon">🧱</span>33. Anexo N · Plan de implementación por sprints</h2>
+      <div class="card">
+        <p>Este plan convierte la evolución del proyecto en ciclos concretos. La ventaja de trabajar por sprints es que cada bloque termina con algo verificable: una pantalla, una tabla, una prueba o una mejora medible. Así se evita que el proyecto crezca de forma caótica.</p>
+        <h3>33.1 Sprint 0 · Preparación</h3>
+        <p>El objetivo del sprint 0 es dejar listo el entorno: repositorio, estructura de carpetas, proyecto Supabase, claves públicas, variables de entorno, diseño visual base y primer dataset de prueba. También se fijan convenciones de nombres, categorías y criterios mínimos para publicar un POI. Sin esta preparación, las siguientes fases acumulan deuda técnica.</p>
+        <h3>33.2 Sprint 1 · Flujo principal</h3>
+        <p>Este sprint implementa el recorrido esencial: abrir aplicación, solicitar ubicación, cargar POIs, calcular distancia, filtrar por radio y mostrar resultados. Es el corazón del MVP. Si este flujo no funciona, cualquier mejora visual o de negocio es secundaria. El resultado debe poder probarse en móvil real.</p>
+        <h3>33.3 Sprint 2 · Experiencia visual</h3>
+        <p>Una vez validado el flujo, se mejoran tarjetas, iconos, etiquetas, botones y estados. También se añaden los tres modos: lista, tabla y ficha. La prioridad es que el usuario entienda la información sin leer instrucciones. La interfaz debe guiar, no decorar sin propósito.</p>
+        <h3>33.4 Sprint 3 · Calidad de datos y QA</h3>
+        <p>Este sprint limpia categorías, revisa coordenadas, comprueba enlaces y ejecuta la matriz de pruebas. También se documentan errores encontrados y decisiones tomadas. Es una fase poco visible, pero crítica: un prototipo con datos inconsistentes pierde credibilidad aunque el diseño sea atractivo.</p>
+        <h3>33.5 Sprint 4 · Defensa y empaquetado</h3>
+        <p>La última fase prepara la entrega: memoria final, diagramas, capturas, guion de defensa, modo presentación y checklist. El objetivo es que el proyecto pueda evaluarse sin depender de explicaciones improvisadas. Todo lo importante debe estar documentado y ser demostrable.</p>
+        <table>
+          <thead><tr><th>Sprint</th><th>Duración sugerida</th><th>Entregable</th><th>Riesgo principal</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>2-3 días</td><td>Entorno, Supabase y dataset semilla.</td><td>Empezar a programar sin estructura.</td></tr>
+            <tr><td>1</td><td>4-5 días</td><td>Flujo GPS + resultados cercanos.</td><td>Errores con permisos o coordenadas.</td></tr>
+            <tr><td>2</td><td>3-4 días</td><td>Interfaz móvil y vistas.</td><td>Diseño bonito pero poco usable.</td></tr>
+            <tr><td>3</td><td>3-5 días</td><td>QA, limpieza y validación de datos.</td><td>Subestimar datos erróneos.</td></tr>
+            <tr><td>4</td><td>2-3 días</td><td>Memoria, presentación y defensa.</td><td>Documentar tarde y mal.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="anexo-glosario">
+      <h2><span class="icon">🔤</span>34. Anexo O · Glosario técnico</h2>
+      <div class="card">
+        <p>El glosario facilita que la memoria sea comprensible para perfiles no técnicos. En una defensa, no conviene asumir que todos los evaluadores conocen los mismos conceptos.</p>
+        <table>
+          <thead><tr><th>Término</th><th>Definición aplicada al proyecto</th></tr></thead>
+          <tbody>
+            <tr><td>PWA</td><td>Aplicación web progresiva que puede comportarse como app móvil, instalarse y funcionar con características avanzadas del navegador.</td></tr>
+            <tr><td>Supabase</td><td>Plataforma backend basada en PostgreSQL que permite base de datos, API, autenticación y almacenamiento.</td></tr>
+            <tr><td>POI</td><td>Point of Interest. En TuristSpain representa un lugar turístico, gastronómico o de actividad.</td></tr>
+            <tr><td>Geolocation API</td><td>API del navegador que permite obtener la ubicación del usuario con permiso explícito.</td></tr>
+            <tr><td>Haversine</td><td>Fórmula usada para calcular distancia aproximada entre dos puntos geográficos mediante latitud y longitud.</td></tr>
+            <tr><td>RLS</td><td>Row Level Security. Sistema de permisos de Supabase/PostgreSQL para controlar qué filas puede leer o modificar cada usuario.</td></tr>
+            <tr><td>Vibe coding</td><td>Metodología de desarrollo asistida por IA donde el humano dirige mediante prompts, revisa salidas y consolida código válido.</td></tr>
+            <tr><td>MVP</td><td>Producto mínimo viable. Versión reducida que permite validar una hipótesis sin construir toda la plataforma final.</td></tr>
+            <tr><td>Long-tail turístico</td><td>Conjunto de destinos, recursos o negocios menos conocidos que tienen valor, pero poca visibilidad en canales masivos.</td></tr>
+            <tr><td>UX</td><td>Experiencia de usuario: facilidad, claridad y eficacia con la que una persona usa la aplicación.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+
+    <section id="anexo-limitaciones">
+      <h2><span class="icon">🧯</span>35. Anexo P · Limitaciones actuales y supuestos</h2>
+      <div class="card">
+        <p>Un proyecto serio debe separar lo que está construido, lo que está diseñado y lo que aún es hipótesis. Esta separación evita exagerar el alcance y facilita que el lector entienda el estado real del MVP.</p>
+        <h3>35.1 Limitaciones del MVP</h3>
+        <ul>
+          <li>La cobertura depende del dataset cargado. Si una zona no tiene POIs, la app no puede inventar recomendaciones.</li>
+          <li>El cálculo de distancia en cliente es suficiente para un prototipo, pero no es la mejor solución para una base de datos grande.</li>
+          <li>Los horarios pueden ser complejos: festivos, temporadas, cierres parciales o cambios de última hora requieren un modelo más avanzado.</li>
+          <li>La geolocalización depende del dispositivo, navegador, permisos y precisión disponible en ese momento.</li>
+          <li>El MVP no incorpora sistema propio de reservas, pagos ni reseñas; deriva al usuario a canales externos.</li>
+          <li>La personalización todavía no aprende del comportamiento del usuario, por privacidad y falta de volumen de datos.</li>
+        </ul>
+        <h3>35.2 Supuestos de trabajo</h3>
+        <p>El proyecto asume que el usuario está dispuesto a activar la ubicación si entiende el beneficio, que el radio de 75 km es útil para escapadas y rutas cortas, y que la categoría gastronómica tiene especial capacidad de conversión. También asume que una parte del valor puede venir de usuarios profesionales, no solo de turistas finales.</p>
+        <p>Estos supuestos son razonables para un MVP, pero deben validarse. La forma correcta de hacerlo es medir uso real: tasa de permiso GPS, tiempo hasta primera acción, clics en mapa, llamadas, reservas y feedback sobre calidad de resultados. Si los datos contradicen una hipótesis, el producto debe ajustarse. Por ejemplo, si muchos usuarios rechazan ubicación, la búsqueda manual debe subir de prioridad. Si la tabla la usan solo agencias, puede mantenerse como función profesional y simplificarse para turistas.</p>
+        <h3>35.3 Decisiones que no deben cambiarse sin evidencia</h3>
+        <p>No conviene ampliar categorías de forma impulsiva, añadir una red social, introducir pagos o crear recomendaciones opacas antes de validar el flujo básico. Cada función adicional aumenta mantenimiento, riesgo legal, complejidad de datos y carga cognitiva. La dirección recomendada es mejorar calidad, cobertura y confianza antes que acumular funcionalidades.</p>
+        <h3>35.4 Recomendación final de gestión</h3>
+        <p>La recomendación final es mantener el proyecto bajo una lógica de evidencia. Primero se comprueba que el usuario entiende la propuesta, encuentra resultados cercanos y pulsa una acción útil. Después se amplía cobertura territorial. Solo cuando exista uso repetido tiene sentido añadir automatizaciones, personalización o monetización. Este orden protege el proyecto de uno de los errores más comunes en productos digitales: construir muchas funciones antes de demostrar que el flujo principal resuelve un problema real. En TuristSpain, el flujo principal es claro y debe seguir siendo el centro: ubicación, resultados relevantes, comparación sencilla y acción inmediata.</p>
+        <p>También conviene conservar el historial de prompts, decisiones y cambios realizados con IA. Esa trazabilidad permite explicar qué se pidió, qué devolvió la herramienta, qué se aceptó, qué se rechazó y qué se corrigió manualmente. En un contexto académico o profesional, esta práctica aumenta la credibilidad del proyecto y demuestra que la IA se usó como apoyo metodológico, no como sustituto del criterio técnico.</p>
+        <p>Como cierre operativo, el proyecto debe revisarse con una demo real en móvil, una explicación breve del flujo y una muestra de datos suficientemente variada. La defensa será más convincente si se enseña el problema antes que la tecnología: primero la pérdida de tiempo del turista, después la solución de proximidad y finalmente la arquitectura que la hace posible.</p>
+        <p>Este enfoque mantiene la memoria alineada con una evaluación profesional: claridad del problema, evidencia del prototipo, límites reconocidos, metodología de IA documentada y próximos pasos realistas.</p>
+        <p>La prioridad inmediata es probar, medir, corregir y ampliar datos sin perder simplicidad.</p>
+        <p>Ese criterio debe mantenerse durante todo el desarrollo posterior.</p>
+      </div>
+    </section>
+
+    <div style="text-align:center; margin-top:5rem; padding-top:2.2rem; border-top:1px solid var(--border);">
+      <p style="font-weight:800; color:var(--text);">TuristSpain © 2026</p>
+      <p style="font-size:.95rem; color:var(--text-muted);">Proyecto desarrollado con metodología vibe coding y apoyo de IA generativa como Google Antigravity.</p>
+    </div>
+  </main>
+
+  <div id="presentation-overlay">
+    <div class="slide active"><div class="eyebrow">Defensa de proyecto</div><h2>TuristSpain</h2><p>Descubrimiento turístico de proximidad con PWA, Supabase e IA aplicada al desarrollo.</p><div style="margin-top:3rem; color:var(--text-muted); font-size:1.1rem;">Memoria ejecutiva ampliada · 2026</div></div>
+    <div class="slide"><h2>Problema</h2><p>El turista no necesita más información. Necesita menos ruido, más contexto y acciones claras.</p><div class="grid grid-3" style="margin-top:2rem;"><div class="mini-card"><span class="emoji">🧠</span><h4>Infoxicación</h4><p>Demasiadas fuentes.</p></div><div class="mini-card"><span class="emoji">⏱️</span><h4>Tiempo perdido</h4><p>Comparación lenta.</p></div><div class="mini-card"><span class="emoji">🏘️</span><h4>Locales invisibles</h4><p>Poca visibilidad.</p></div></div></div>
+    <div class="slide"><h2>Solución</h2><p>PWA que muestra POIs turísticos y gastronómicos cercanos en un radio útil de 75 km.</p><div class="hero-actions"><span class="pill">📍 Ubicación</span><span class="pill">🗂️ Datos Supabase</span><span class="pill">🔎 Filtros</span><span class="pill">📞 Acción directa</span></div></div>
+    <div class="slide"><h2>Usuarios</h2><p>Familias, viajeros culturales, agencias de viaje, municipios y negocios locales.</p><div class="grid grid-3" style="margin-top:2rem;"><div class="mini-card"><span class="emoji">👨‍👩‍👧‍👦</span><h4>Familias</h4></div><div class="mini-card"><span class="emoji">🧳</span><h4>Viajeros</h4></div><div class="mini-card"><span class="emoji">🧑‍💼</span><h4>Agencias</h4></div></div></div>
+    <div class="slide"><h2>Arquitectura</h2><p>Frontend PWA + Geolocation API + Supabase + cálculo de distancia Haversine.</p><div class="kpi-grid"><div class="kpi-card"><div class="value">PWA</div><p>Interfaz móvil</p></div><div class="kpi-card"><div class="value">SQL</div><p>Datos estructurados</p></div><div class="kpi-card"><div class="value">75km</div><p>Filtro radial</p></div></div></div>
+    <div class="slide"><h2>IA y vibe coding</h2><p>La IA acelera generación, depuración y documentación. La dirección técnica y validación siguen siendo humanas.</p><div class="prompt-box" style="text-align:left; max-width:850px; margin:2rem auto;" data-label="Prompt">“Crea una PWA turística con Supabase, filtro radial de 75 km y vistas lista, tabla y ficha...”</div></div>
+    <div class="slide"><h2>Prompts clave</h2><p>Producto, arquitectura, geolocalización, UX, datos, QA y memoria ejecutiva.</p><div class="hero-actions"><span class="pill">🧭 Producto</span><span class="pill">🏗️ Arquitectura</span><span class="pill">📍 GPS</span><span class="pill">🧪 QA</span></div></div>
+    <div class="slide"><h2>Métricas</h2><div class="kpi-grid"><div class="kpi-card"><div class="value">&lt;15s</div><p>Primer resultado útil</p></div><div class="kpi-card"><div class="value">≤3</div><p>Clicks hasta acción</p></div><div class="kpi-card"><div class="value">95%</div><p>Datos válidos objetivo</p></div></div></div>
+    <div class="slide"><h2>Riesgos</h2><p>Calidad de datos, GPS denegado, coordenadas erróneas y dependencia de enlaces externos.</p><div class="hero-actions"><span class="pill">🧾 Gobernanza</span><span class="pill">🔐 Privacidad</span><span class="pill">🧪 Pruebas</span></div></div>
+    <div class="slide"><h2>Roadmap</h2><p>Validar MVP → ampliar datos → añadir contexto → crear panel profesional B2B.</p><div class="hero-actions"><span class="pill">2026 MVP</span><span class="pill">2026 Datos</span><span class="pill">2027 Contexto</span><span class="pill">2027 B2B</span></div></div>
+    <div class="slide"><h2>Cierre</h2><p>TuristSpain convierte el descubrimiento turístico cercano en una experiencia rápida, accionable y escalable.</p><button class="btn btn-primary" onclick="togglePresentation()" style="margin-top:2.5rem;">Volver a la memoria</button></div>
+    <div class="presentation-controls"><button class="btn btn-secondary" onclick="prevSlide()">← Anterior</button><div id="slide-number" style="font-weight:800; min-width:70px;">1 / 11</div><button class="btn btn-primary" onclick="nextSlide()">Siguiente →</button></div>
+  </div>
+
+  <button class="fab" onclick="togglePresentation()" title="Activar modo presentación" aria-label="Activar modo presentación">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+  </button>
+
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+    }
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= (sectionTop - 220)) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+      });
+    });
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slideNumDisplay = document.getElementById('slide-number');
+    function togglePresentation() {
+      const overlay = document.getElementById('presentation-overlay');
+      const isVisible = overlay.style.display === 'flex';
+      overlay.style.display = isVisible ? 'none' : 'flex';
+      document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+      if (!isVisible) updateSlideDisplay();
+    }
+    function updateSlideDisplay() {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[currentSlide].classList.add('active');
+      slideNumDisplay.innerText = `${currentSlide + 1} / ${slides.length}`;
+    }
+    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateSlideDisplay(); }
+    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateSlideDisplay(); }
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('presentation-overlay').style.display === 'flex') {
+        if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'Escape') togglePresentation();
+      }
+    });
+  </script>
+</body>
+</html>
