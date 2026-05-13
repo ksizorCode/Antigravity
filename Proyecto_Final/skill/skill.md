@@ -1,313 +1,374 @@
 ---
-name: memoria-proyecto-ia
+name: memoria-de-proyecto
 description: >
   Genera el informe ejecutivo y memoria de proyecto completo de una App,
   Web o PWA para PYMES desarrollado con IA Vibe Coding a través de Google Antigravity, siguiendo
-  las fases del enunciado (problema, stakeholders, MVP, PoC, evaluación, riesgos, hoja de ruta).
+  las fases del enunciado: problema, stakeholders, MVP, PoC, evaluación, riesgos y hoja de ruta.
   Úsalo siempre que el alumno quiera redactar su memoria de proyecto, informe ejecutivo,
   documento de entrega final, o cuando mencione frases como "genera mi informe", "escribe
   la memoria", "necesito el PDF del proyecto", "redacta el documento final" o similares.
-  También actívalo si el alumno describe su proyecto y pide que se lo estructure o documente.
+  También actívalo si el alumno describe su proyecto y pide que se lo estructure, documente,
+  convierta en memoria académica o prepare para entrega.
 ---
 
-# Skill: Memoria de Proyecto IA (Informe Ejecutivo)
+# Skill: Memoria de Proyecto IA — Informe Ejecutivo
 
 ## Objetivo
 
-Generar una **Memoria de Proyecto + informe ejecutivo completo** (formato A4 vertical, 12-22 páginas equivalentes en Markdown)
-a partir de la información que el alumno proporcione sobre su proyecto.
+Generar una **Memoria de Proyecto + Informe Ejecutivo completo** que:
 
-El documento debe:
-- Cubrir las 9 fases del enunciado
-- Narrar el **proceso de trabajo real**: qué prompts usó, en qué se inspiró, qué herramientas empleó, qué decisiones tomó y por qué
-- Incluir ejemplos concretos (inputs/outputs reales del prototipo)
-- Ser comprensible para una persona no técnica
-- Ser entregable directamente como PDF o presentación
+- Cubra las 9 fases principales del enunciado.
+- Narre el proceso real: prompts usados, herramientas, decisiones e iteraciones.
+- Incluya ejemplos concretos de inputs y outputs del prototipo.
+- Sea comprensible para personas no técnicas.
+- Tenga una extensión de 12-20 páginas A4 (4.600–8.000 palabras).
+- Sea entregable como Markdown, HTML/CSS, DOCX, PDF o presentación.
+
+**No usar este skill** para: ideas iniciales, lluvia de ideas, ayuda puntual con código, bugs, diseño de pantallas aisladas o mejora de prompts individuales.
 
 ---
 
-## Paso 1 — Recopilar información del alumno
+# Paso 1 — Entrevista estructurada
 
-Antes de generar nada, obtén los datos del proyecto mediante una **entrevista estructurada**.
-Haz las preguntas en bloques, no todas a la vez. Adapta el tono: cercano, directo, sin jerga innecesaria.
+Haz las preguntas en bloques. Si el alumno ya compartió información, extráela directamente sin repetir. Solo pregunta lo que falte.
 
-### Bloque A — El problema y el contexto
-Pregunta:
-1. ¿Qué problema detectaste? ¿En qué tipo de empresa o entorno?
-2. ¿Es un caso real o ficticio? ¿Tiene nombre la empresa/entidad?
-3. ¿Cuándo y con qué frecuencia aparece ese problema?
-4. ¿A quién afecta más directamente?
+## Bloque A — Problema y contexto
+1. ¿Qué problema detectaste? ¿En qué empresa, entidad o entorno ocurre?
+2. ¿Es un caso real o ficticio? ¿Tiene nombre?
+3. ¿Cuándo aparece y con qué frecuencia? ¿A quién afecta más?
 
-### Bloque B — El proceso y el coste
-Pregunta:
-5. ¿Cuál es el proceso concreto que quisiste mejorar? (gestión de citas, respuesta a emails, fichas de producto…)
-6. ¿Tienes algún dato de cuánto tiempo o dinero consume ese proceso? (aunque sea estimado)
-7. ¿Qué pasaría si no se resuelve?
+## Bloque B — Proceso y coste
+4. ¿Qué proceso concreto quisiste mejorar? (citas, emails, fichas, presupuestos, atención al cliente…)
+5. ¿Tienes algún dato de tiempo o coste? Puede ser estimado.
+6. ¿Qué pasaría si no se resuelve?
 
-### Bloque C — La solución diseñada
-Pregunta:
-8. ¿Qué nombre le pusiste a tu solución o app?
-9. ¿Qué hace exactamente? ¿Qué introduce el usuario y qué recibe?
-10. ¿Usaste Google Antigravity? ¿Cómo se llama el prototipo / dónde está publicado?
-11. ¿Qué herramientas técnicas usaste? (HTML, JS, GitHub Pages, APIs…)
+## Bloque C — La solución
+7. ¿Qué nombre le pusiste? ¿Qué introduce el usuario y qué recibe como resultado?
+8. ¿Usaste Google Antigravity? ¿Dónde está publicado el prototipo?
+9. ¿Qué herramientas técnicas usaste? (HTML, CSS, JS, GitHub Pages, APIs, Firebase, Supabase…)
 
-### Bloque D — El proceso de trabajo (clave para la memoria)
-Pregunta:
-12. ¿Qué prompts usaste para construir la solución? (pide que pegue alguno o los resuma)
-13. ¿En qué te inspiraste? ¿Viste algún ejemplo, referencia o proyecto similar?
-14. ¿Qué fue lo más difícil? ¿Qué tuviste que cambiar o repetir?
-15. ¿Qué resultado obtuviste en las pruebas? (número de casos probados, aciertos, tiempo ahorrado…)
+## Bloque D — Proceso de trabajo *(bloque clave)*
+10. ¿Qué prompts usaste? Pide que pegue alguno o que los resuma.
+11. ¿En qué te inspiraste? ¿Viste algún ejemplo o referencia similar?
+12. ¿Qué fue lo más difícil? ¿Qué tuviste que cambiar o repetir?
+13. ¿Qué resultados obtuviste en las pruebas? (casos probados, aciertos, errores, tiempo ahorrado)
 
-### Bloque E — Riesgos y entrega
-Pregunta:
-16. ¿Qué riesgos identificaste al usar IA en este contexto?
-17. ¿Cómo entregas el prototipo? (enlace web, GitHub, vídeo, capturas…)
-18. ¿Qué harías si tuvieras más tiempo? (hoja de ruta)
+## Bloque E — Riesgos y entrega
+14. ¿Qué riesgos identificaste al usar IA en este contexto?
+15. ¿Cómo entregas el prototipo? (enlace web, GitHub, vídeo, capturas, ZIP…)
+16. ¿Qué harías si tuvieras más tiempo?
 
-### Bloque F — Estética y presentación
-Pregunta:
-17. ¿Quieres el documento en formato Markdonw o una web en HTML y css?
-18. En caso de queder una web ¿Qué estilo quieres que tenga: A. Claro Técnico y Formar, B. Moderno, Minimalista pero Divertido con un color para cada sección, C. Elegante, Corporativo y Lujoso, D. I Love Comis Sans?
-19. ¿Quires añadir elementos gráficos explicativos como gráficos como tablas, arbol de archivos, esquemas Mermaid, etc..?
+## Bloque F — Formato
+17. ¿Quieres el documento en Markdown o como web HTML+CSS?
+18. Si es web, ¿qué estilo prefieres?
+    - A. Claro, técnico y formal
+    - B. Moderno, minimalista y visual, con color por sección
+    - C. Elegante, corporativo y sobrio
+    - D. "I Love Comic Sans" — informal y deliberadamente poco serio
+19. ¿Quieres elementos gráficos? (tablas, diagramas Mermaid, cronograma, comparativas antes/después)
 
-
-> **Nota**: Si el alumno ya ha compartido parte de esta información en la conversación, extráela directamente sin volver a preguntar. Solo haz las preguntas que falten.
-
-## Paso 1.5 — Diagnóstico de suficiencia
-
-Antes de redactar el informe, clasifica la información recibida en:
-
-- Información suficiente
-- Información incompleta pero utilizable
-- Información crítica ausente
-
-No redactes el informe completo si faltan datos críticos:
-- problema concreto
-- usuario o stakeholder principal
-- solución propuesta
-- proceso mejorado
-- al menos un ejemplo de uso
-- forma de entrega del prototipo
-
-Si faltan datos no críticos, puedes avanzar usando estimaciones marcadas claramente.
-> **Nota** Si el alumno no tiene datos numéricos, propón estimaciones razonables y pide confirmación rápida. Ejemplo: "Si no tienes el dato exacto, puedo usar una estimación: 10 consultas semanales × 8 minutos por consulta × 15 €/hora. ¿Te encaja?". Cuando uses una estimación no confirmada, márcala como "estimación orientativa".
 ---
 
-## Paso 2 — Estructura del documento a generar
+# Paso 1.5 — Diagnóstico de suficiencia
 
-Una vez tengas los datos, genera el informe completo con esta estructura.
-Usa **Markdown limpio** (sin bullets anidados excesivos, sin negrita en cada frase).
-El tono es profesional pero claro. Nada de jerga que no se explique.
+Antes de redactar, verifica que existen estos **datos críticos**. Si falta alguno, no redactes el informe completo.
 
+| Dato | Nivel |
+|---|---|
+| Problema concreto | **Obligatorio** |
+| Empresa/sector/entorno | **Obligatorio** |
+| Usuario o stakeholder principal | **Obligatorio** |
+| Tarea o flujo que se mejora | **Obligatorio** |
+| Nombre y función de la app | **Obligatorio** |
+| Qué introduce el usuario y qué recibe | **Obligatorio** |
+| Ejemplo de input/output | **Obligatorio** |
+| Casos de prueba y resultados mínimos | **Obligatorio** |
+| Prompts reales o representativos | **Obligatorio** |
+| Riesgos principales del uso de IA | **Obligatorio** |
+| Enlace, capturas o descripción del prototipo | Recomendado |
+| Herramientas técnicas usadas | Recomendado |
+| Coste estimado del proceso actual | Recomendado |
+| Inspiraciones o referencias consultadas | Recomendado |
+| Mejoras futuras | Recomendado |
 
-## Evalucación del proyecto :Criterios de calidad académica
+Si faltan datos no críticos, avanza usando **estimaciones marcadas claramente**.
+
+> Ejemplo: "Si no tienes el dato exacto, puedo usar una estimación: 10 consultas semanales × 8 min × 15 €/hora. ¿Te encaja?"
+
+**Regla de honestidad documental:** Distingue siempre entre dato aportado, dato estimado, prompt real, prompt reconstruido y suposición razonable. Nunca inventes resultados, herramientas, enlaces, decisiones, datos económicos o funcionalidades que el prototipo no tiene.
+
+---
+
+# Paso 2 — Criterios de evaluación académica
 
 El informe debe demostrar:
-- identificación clara de un problema realista
-- relación lógica entre problema, solución y KPI
-- uso documentado de IA durante el desarrollo
-- evidencia de iteración, pruebas y mejora
-- conciencia de riesgos y límites
-- viabilidad mínima del prototipo
+
+- Identificación clara de un problema realista con KPI relacionado.
+- Uso documentado de IA durante el desarrollo (prompts, iteraciones, decisiones).
+- Evidencia de pruebas, ajustes y mejoras.
+- Conciencia de riesgos, límites y necesidad de supervisión humana.
+- Viabilidad mínima del prototipo.
+- Explicación comprensible para una persona no técnica.
 
 ---
 
-### ESTRUCTURA DEL INFORME EJECUTIVO
+# Paso 3 — Estructura del informe
 
-```
+Genera el informe completo una vez tengas datos suficientes. Tono: profesional, claro y accesible. Sin jerga técnica sin explicar.
+
+```md
 # [Nombre del proyecto]
 ## Informe Ejecutivo — Proyecto Final IA
 
-Alumno: [nombre]
-Fecha: [fecha]
-Herramientas: [lista]
-Enlace demo: [url si existe]
+Alumno: [nombre] | Fecha: [fecha] | Herramientas: [lista]
+Demo: [url] | Repositorio: [url]
 
 ---
 
 ## 1. Resumen ejecutivo
-[3-5 líneas: qué problema, qué solución, qué valor aporta]
+[3-5 líneas: qué problema aborda, qué solución propone, para quién y qué valor aporta.]
 
 ---
 
 ## 2. Descripción del problema
 
 ### 2.1 El problema
-[Qué ocurre, dónde, con qué frecuencia]
+[Qué ocurre, dónde, con qué frecuencia y por qué supone una fricción.]
 
-### 2.2 Contexto y stakeholders
-[Quién se ve afectado y cómo — tabla si hay varios perfiles]
+### 2.2 Stakeholders
 
-### 2.3 Evidencia de fricción
-[Datos concretos: tiempo, errores, volumen de tareas]
+| Stakeholder | Necesidad | Problema actual | Impacto |
+|---|---|---|---|
 
-### 2.4 Coste actual estimado
-[Tabla con cálculo: tiempo × coste hora = coste mensual/anual]
+### 2.3 Coste actual estimado
 
-### 2.5 Nuevos problemas que podría generar la solución
-[Tabla de riesgos secundarios honestos]
+| Concepto | Valor | Fuente |
+|---|---:|---|
+| Volumen mensual de tareas | | dato real / estimación |
+| Tiempo medio por tarea | | dato real / estimación |
+| Coste/hora estimado | | dato real / estimación |
+| Coste mensual | | cálculo |
+| Coste anual | | cálculo |
+
+### 2.4 Nuevos riesgos que podría generar la solución
+
+| Posible problema | Causa | Medida preventiva |
+|---|---|---|
 
 ---
 
-## 3. Definición del caso de uso y criterios de éxito
+## 3. Caso de uso y criterios de éxito
 
 ### 3.1 Caso de uso principal
-[Situación concreta de uso: quién, qué hace, qué obtiene]
+[Quién usa la herramienta, qué necesita hacer, qué introduce y qué obtiene.]
 
-### 3.2 Ejemplo de uso real
-[Input concreto que introduciría el usuario → output que genera la herramienta]
+### 3.2 Ejemplo de uso
 
-### 3.3 Criterios de éxito y KPIs
-[Tabla: KPI principal + KPIs secundarios con metas]
+**Input:** > [Ejemplo concreto]
+**Output:** > [Resultado real o representativo]
+
+### 3.3 KPIs
+
+| KPI | Situación inicial | Meta | Cómo se mide |
+|---|---:|---:|---|
 
 ---
 
-## 4. Diseño de la solución (MVP)
+## 4. Diseño de la solución — MVP
 
-### 4.1 Nombre y descripción
-[Qué es, qué hace, qué NO hace todavía]
+### 4.1 Descripción
+[Qué es, qué hace y qué no hace todavía.]
 
 ### 4.2 Flujo de la aplicación
-[Entrada → Proceso → Salida, con ejemplo real]
 
-### 4.3 Pantallas o secciones principales
-[Tabla o lista de las vistas de la app]
+```mermaid
+flowchart LR
+    A[Usuario introduce datos] --> B[La app procesa]
+    B --> C[La IA genera respuesta]
+    C --> D[El usuario revisa y usa el resultado]
+```
+
+### 4.3 Pantallas principales
+
+| Pantalla | Función | Usuario |
+|---|---|---|
 
 ### 4.4 Herramientas utilizadas
-[Lista: Google Antigravity, HTML, JS, API de IA, GitHub Pages…]
+[Lista explicada: Google Antigravity, HTML, CSS, JS, APIs, GitHub Pages…]
 
-### 4.5 Limitaciones del MVP
-[Qué no hace, qué requiere revisión humana, qué falta]
+### 4.5 Estructura del prototipo
+```txt
+/proyecto
+├── index.html
+├── style.css
+├── script.js
+└── README.md
+```
+
+### 4.6 Limitaciones del MVP
+[Qué no hace, qué requiere revisión humana, qué falta para producción.]
 
 ---
 
-## 5. Proceso de construcción (PoC)
+## 5. Proceso de construcción — PoC
 
 ### 5.1 Cómo se construyó
-[Narración del proceso real: qué pasos se dieron, en qué orden]
+[Narración del proceso real: pasos, orden, evolución de la solución.]
+
+> Ejemplo de tono: "Para construir el generador de fichas, se partió de un prompt base que pedía a la IA actuar como redactor cultural. El primer intento producía textos demasiado largos, por lo que se añadió la instrucción 'máximo 80 palabras'. La categorización automática se incorporó en una segunda iteración tras comprobar que el personal necesitaba etiquetar cada actividad manualmente."
 
 ### 5.2 Prompts utilizados
-[Ejemplos reales o representativos de los prompts clave usados con la IA]
 
-> Ejemplo de prompt usado:
-> "Actúa como asistente de una gestoría. Recibe este email de cliente y devuelve:
-> 1) tipo de consulta, 2) documentos necesarios, 3) respuesta sugerida en tono profesional."
+> [Prompt real o representativo]
+> *(Si no es literal: "Prompt representativo reconstruido a partir del proceso descrito.")*
 
 ### 5.3 Inspiración y referencias
-[En qué se inspiró el alumno, qué ejemplos vio, qué recursos consultó]
+[En qué se inspiró el alumno, qué ejemplos o recursos consultó.]
 
-### 5.4 Decisiones de diseño tomadas
-[Por qué se eligió ese enfoque, qué alternativas se descartaron y por qué]
-
-### 5.5 Dificultades encontradas y cómo se resolvieron
-[Qué no funcionó al principio, qué se tuvo que cambiar]
+### 5.4 Decisiones de diseño y dificultades
+[Qué alternativas se descartaron y por qué. Qué no funcionó y cómo se resolvió.]
 
 ---
 
 ## 6. Evaluación y resultados
 
 ### 6.1 Casos de prueba
-[Tabla con los casos probados y resultado esperado vs obtenido]
 
-### 6.2 Resultados obtenidos
-[Tabla resumen: fichas útiles, clasificaciones correctas, tiempo antes/después]
+| Caso | Input | Esperado | Obtenido | Valoración |
+|---|---|---|---|---|
+
+### 6.2 Resultados
+
+| Métrica | Antes | Después | Mejora |
+|---|---:|---:|---:|
+| Tiempo por tarea | | | |
+| Errores detectados | | | |
 
 ### 6.3 Evaluación del KPI principal
-[¿Se cumplió el objetivo? ¿En qué porcentaje?]
+[Si se cumplió el objetivo, en qué medida y con qué limitaciones.]
 
-### 6.4 Problemas detectados y ajustes realizados
-[Tabla: problema detectado → ajuste propuesto o realizado]
+### 6.4 Ajustes realizados
+
+| Problema detectado | Causa | Ajuste |
+|---|---|---|
 
 ---
 
 ## 7. Responsabilidad y uso responsable de la IA
 
-### 7.1 Riesgos identificados
-[Tabla: riesgo → impacto → medida de control]
+### 7.1 Riesgos
 
-### 7.2 Privacidad y datos
-[Qué datos maneja la herramienta, qué no debería introducirse]
+| Riesgo | Impacto | Medida de control |
+|---|---|---|
 
-### 7.3 Supervisión humana
-[Qué decisiones quedan siempre en manos de una persona]
+### 7.2 Privacidad, supervisión humana y transparencia
+[Qué datos maneja y cuáles no deben introducirse. Qué decisiones quedan siempre en manos humanas. Cómo se informa al usuario de que hay IA detrás.]
 
-### 7.4 Transparencia
-[Cómo se avisa al usuario de que hay IA detrás]
+### 7.3 Límites de la solución
+[Qué no debe hacer y en qué casos no debería usarse sin revisión.]
 
 ---
 
 ## 8. Plan de implantación y hoja de ruta
 
-### 8.1 Pasos para llevar la solución a un entorno real
-[Lista ordenada de acciones necesarias antes de producción]
+### 8.1 Pasos para llevar la solución a producción
+[Lista ordenada de acciones necesarias.]
 
 ### 8.2 Hoja de ruta
-[Tabla: semana/mes → acción → objetivo]
+
+| Fase | Acción | Objetivo |
+|---|---|---|
+| Semana 1 | | |
+| Mes 1 | | |
+| Mes 2 | | |
 
 ### 8.3 Mejoras futuras
-[Lista de funcionalidades que se añadirían en versiones posteriores]
+[Funcionalidades que se añadirían en versiones posteriores.]
 
 ---
 
 ## 9. Entrega
 
-### 9.1 Componentes entregados
-[Lista de archivos o elementos: código, README, capturas, vídeo, informe]
-
-### 9.2 Enlace al prototipo
-[URL de GitHub Pages u otra plataforma]
-
-### 9.3 Repositorio
-[URL del repositorio si existe]
+| Componente | Descripción |
+|---|---|
+| Prototipo | [URL GitHub Pages / Netlify / Vercel] |
+| Repositorio | [URL] |
+| Material complementario | [Capturas, vídeo demo, presentación, anexos] |
 
 ---
 
 ## Conclusión
-
-[3-5 líneas: qué demuestra el proyecto, qué valor tiene, qué aprendió el alumno]
+[3-5 líneas: qué demuestra el proyecto, qué valor tiene, qué aprendió el alumno y cuál es el siguiente paso lógico.]
 ```
 
 ---
 
-## Paso 3 — Reglas de calidad del documento
+# Paso 4 — Anexos opcionales
 
-Aplica siempre estas reglas al generar el informe:
+Incluye los que aporten valor real.
 
-**Contenido**
-- Cada sección debe tener información real y específica del proyecto del alumno. Nunca rellenes con frases genéricas del tipo "la IA puede ayudar a mejorar la eficiencia".
-- Los ejemplos de prompts deben ser concretos. Si el alumno no los recuerda exactamente, reconstruye uno plausible basado en su descripción y márcalo como "(ejemplo representativo)".
-- El coste actual debe calcularse siempre con una tabla aunque los datos sean estimados. Indica si son estimaciones.
-- Los KPIs deben tener metas numéricas cuando sea posible.
-
-**Tono y formato**
-- Tono profesional pero accesible. Sin jerga técnica sin explicar.
-- Tablas para comparaciones, costes, stakeholders y riesgos.
-- Prosa fluida para narrar el proceso de trabajo (sección 5).
-- Nada de bullets donde una frase corra mejor.
-- El documento debe poder leerse de corrido por alguien que no sabe de IA.
-
-**Proceso de trabajo (sección 5) — es la sección más diferenciadora**
-Esta sección convierte el informe en una memoria real de proceso, no solo en un formulario rellenado.
-Debe narrar:
-- El orden en que se construyó la solución
-- Los prompts reales o representativos usados
-- Las referencias o inspiraciones del alumno
-- Las decisiones que se tomaron y por qué
-- Lo que no funcionó y cómo se resolvió
-
-Ejemplo de cómo debería sonar:
-
-> "Para construir el generador de fichas, se partió de un prompt base que pedía a la IA actuar como redactor cultural del ayuntamiento. El primer intento producía textos demasiado largos, por lo que se añadió la instrucción 'responde en un máximo de 80 palabras'. La categorización automática se añadió en una segunda iteración tras comprobar que el personal necesitaba etiquetar cada actividad manualmente. La inspiración principal fue el ejemplo de gestoría contable del enunciado del proyecto."
+```md
+## Anexo A — Prompts utilizados
+## Anexo B — Capturas del prototipo
+## Anexo C — Casos de prueba detallados
+## Anexo D — Código o estructura del repositorio
+## Anexo E — Decisiones de diseño
+## Anexo F — Glosario
+```
 
 ---
 
-## Paso 4 — Formato de salida
+# Paso 5 — Formato de salida
 
-- Genera el documento en **Markdown** o **Web** según se haya expecificado. Con las características estéticas solicitadas.
-- Indica al alumno que puede copiarlo a Google Docs o Word para exportarlo a PDF, o reconvertir el Markdown a HTML o el HTML a Markdown para añadir contenido en caso de necesidad.
-- Si el entorno lo permite, ofrece también generarlo como archivo `.md`, `.pdf`, `.zip`(con html + css), `.docx` o `.ppdx`.
-- Extensión orientativa: equivalente a 12-20 páginas A4 (aprox. 4.600- 8.000 palabras).
-- Genera un `.md` llamado `resumen.md` con las respuestas y resumen para que en caso de volver a ejecutar el skill o workflow, no tener que volver a repetir toda la secuencia o hacerlo de forma más rapida.
+| Formato | Características |
+|---|---|
+| **Markdown** | `.md` limpio con títulos, tablas, bloques de cita y diagramas Mermaid |
+| **HTML/CSS** | Web completa, responsive, navegación por secciones, estilo según opción A/B/C/D |
+| **DOCX** | Portada, índice, títulos jerárquicos, tablas limpias, saltos de página, anexos |
+| **PDF** | Desde DOCX o HTML; portada, márgenes A4, tablas sin partir |
+| **Presentación** | Solo si se pide expresamente; 8-12 diapositivas con las 9 secciones |
+
 ---
 
+# Paso 6 — Archivo de resumen reutilizable
 
+Genera siempre un archivo `resumen.md` con:
+
+```md
+# Resumen del proyecto
+
+- Nombre: | Alumno: | Contexto: | Tipo: | Herramientas: | Demo: | Repo:
+
+## Problema | Stakeholders | Solución | Proceso mejorado
+## Prompts usados | Pruebas | Riesgos | Hoja de ruta
+## Decisiones pendientes (datos que faltan o hay que confirmar)
+```
+
+---
+
+# Paso 7 — Checklist final
+
+Antes de entregar, verifica:
+
+- [ ] Problema explicado en términos concretos
+- [ ] Stakeholders identificados
+- [ ] Proceso que se mejora claro
+- [ ] Cálculo de coste actual (aunque sea estimado)
+- [ ] KPIs medibles con metas numéricas
+- [ ] Ejemplo real o representativo de uso
+- [ ] Proceso de construcción narrado (no solo el resultado)
+- [ ] Prompts reales o representativos incluidos
+- [ ] Casos de prueba documentados
+- [ ] Hechos, estimaciones y propuestas diferenciados
+- [ ] Riesgos y límites reconocidos
+- [ ] Hoja de ruta realista
+- [ ] Sin promesas exageradas sobre la IA
+- [ ] Comprensible para una persona no técnica
+- [ ] Formato coincide con lo pedido
+- [ ] `resumen.md` generado
+
+---
+
+# Paso 8 — Instrucción final al alumno
+
+Al entregar, indica brevemente: formato generado, qué datos se usaron como estimación, qué partes conviene revisar antes de entregar y qué archivos se incluyen. Sin extenderse: el foco está en el documento final.
