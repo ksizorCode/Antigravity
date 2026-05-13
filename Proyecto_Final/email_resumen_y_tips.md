@@ -16,22 +16,22 @@ Hola. Voy a aprovechar este e-mail para recordaros lo que tenéis que entregar c
 |🐙 | Repo del curso    | https://github.com/ksizorCode/Antigravity             |
 |👨🏻‍🏫 | Pizarra Figma Jam | https://www.figma.com/board/QdYj5wGkp6peNTQCM6G6GL/EOI---Antigravity?node-id=0-1&p=f  |
 
-## Desgloso la partes que componen la entrega:
+## Desgloso las partes que componen la entrega:
 
 ### 🅰️ A. Solución creada con Google Antigravity.
 - Demostración desarrollo; una o varias de estas opciones:
     - URL pública a WebApp/PWA/Web funcional desplegada e interactuable:
-        - GitHub Pages
-        - Vercel
-        - Netlify
-        - Infinity free
-            - Plataforma de Pruebas CDMON (no olvides usuario y contraseña de visualización)
-        - Servidor real
+        - GitHub Pages (free, requiere github publico)
+        - Vercel (free, requiere github o gitlab publico o privado)
+        - Netlify (free, requiere github o gitlab publico o privado)
+        - Infinity free (free, via FPT. no requiere github)
+            - Plataforma de Pruebas CDMON (no olvides usuario y contraseña de visualización) (free, no requiere github)
+        - Servidor real (no es free)
         - Repositorio público en GitHub/Gitlab/etc.
         - Subida de todo el proyecto a Moodle en un .zip (con instrucciones de instalación, si fuese complicado)
-        - VIDEO captura de pantalla, navegando por la aplicación mostrando su funcionamiento o solución desarrollada
+        - VIDEO captura de pantalla, navegando por la aplicación mostrando su funcionamiento o solución desarrollada. (😕 es válido pero más rollo. Comprime el archivo en .mp4 y no superes los 100MB junto con la memoria)
 
-> ⚠️ Mi recomendación: GitHub + GitHub Pages + .zip con todo
+> ⚠️ Mi recomendación: repo GitHub + GitHub Pages ó Vercel ó Netlify + .zip con todo para tener una copia del repo por si las moscas.
 
 ### 🅱️ B. Memoria/resumen ejecutivo del proyecto.
 
