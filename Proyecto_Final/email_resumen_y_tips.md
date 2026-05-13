@@ -31,7 +31,7 @@ Hola. Voy a aprovechar este e-mail para recordaros lo que tenéis que entregar c
         - Subida de todo el proyecto a Moodle en un .zip (con instrucciones de instalación, si fuese complicado)
         - VIDEO captura de pantalla, navegando por la aplicación mostrando su funcionamiento o solución desarrollada. (😕 es válido pero más rollo. Comprime el archivo en .mp4 y no superes los 100MB junto con la memoria)
 
-> ⚠️ Mi recomendación: repo GitHub + GitHub Pages ó Vercel ó Netlify + .zip con todo para tener una copia del repo por si las moscas 🪰🪰🪰.
+> ⚠️ Mi recomendación: repo GitHub + GitHub Pages ó Vercel ó Netlify + .zip con todo para tener una copia del repo por si las 🪰🪰🪰.
 
 ### 🅱️ B. Memoria/resumen ejecutivo del proyecto.
 
