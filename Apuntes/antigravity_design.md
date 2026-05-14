@@ -6,3 +6,4 @@ Podemos obtener esas referencias en herramiengas como Google Stich u otros como 
 
 Ver video explicativo en Google: https://www.youtube.com/watch?v=W1gWIQp9k1Y
 Ver proyecto en Github: https://github.com/google-labs-code/design.md
+Artículo: https://uxplanet.org/what-is-design-md-and-how-to-use-it-70532359b311
